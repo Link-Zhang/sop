@@ -1,0 +1,78 @@
+ext {
+    isWin = org.gradle.internal.os.OperatingSystem.current().isWindows()
+}
+
+tasks.register('install', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'pnpm', 'install'] : ['pnpm', 'install']
+    workingDir project.projectDir
+
+    inputs.file('package.json')
+    outputs.dir('node_modules')
+
+    description = 'Frontend: pnpm install'
+    group = 'install'
+
+    ignoreExitValue = false
+}
+
+tasks.register('dev', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'pnpm', 'run', 'dev'] : ['pnpm', 'run', 'dev']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    description = 'Frontend: next dev --turbopack'
+    group = 'application'
+
+    ignoreExitValue = true
+}
+
+tasks.register('build', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'pnpm', 'run', 'build'] : ['pnpm', 'run', 'build']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    description = 'Frontend: next build --turbopack'
+    group = 'build'
+
+    ignoreExitValue = false
+}
+
+tasks.register('start', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'pnpm', 'run', 'start'] : ['pnpm', 'run', 'start']
+    workingDir project.projectDir
+
+    dependsOn build
+
+    description = 'Frontend: next start'
+    group = 'application'
+
+    ignoreExitValue = false
+}
+
+tasks.register('lint', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'pnpm', 'run', 'lint'] : ['pnpm', 'run', 'lint']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    description = 'Frontend: biome check'
+    group = 'verification'
+
+    ignoreExitValue = false
+}
+
+tasks.register('format', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'pnpm', 'run', 'format'] : ['pnpm', 'run', 'format']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    description = 'Frontend: biome format --write'
+    group = 'verification'
+
+    ignoreExitValue = false
+}
+
+println "Frontend module configured"

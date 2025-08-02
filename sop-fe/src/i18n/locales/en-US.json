@@ -1,0 +1,43 @@
+{
+  "layout": {
+    "header-text": "Swift Omega Prototype",
+    "nav-texts": {
+      "todo": "Client",
+      "todos": "Server"
+    },
+    "footer-text": "Copyright"
+  },
+  "todo-error": {
+    "text": "Something wrong, please refresh"
+  },
+  "todo-title": {
+    "text": "Todo List"
+  },
+  "todo-form": {
+    "button-text": "Add",
+    "create": {
+      "error": "Failed to create, please retry",
+      "success": "Create successfully"
+    },
+    "input-placeholder": "Enter a todo...",
+    "validation": {
+      "required": "Todo cannot be empty"
+    }
+  },
+  "todo-list": {
+    "empty-text": "No item, Add one...",
+    "read": {
+      "error": "Failed to read, please retry",
+      "success": "Read successfully"
+    },
+    "update": {
+      "error": "Failed to update, please retry",
+      "success": "Update successfully"
+    },
+    "delete": {
+      "confirm": "Are you sure to delete the item?",
+      "error": "Failed to delete, please retry",
+      "success": "Delete successfully"
+    }
+  }
+}

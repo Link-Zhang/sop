@@ -1,0 +1,9 @@
+rootProject.name = "sop"
+
+include "sop-be", "sop-fe"
+
+rootProject.children.each {
+    project -> project.buildFileName = "${project.name.replace("${rootProject.name}-", "")}.gradle"
+}
+
+println "Initializing project: ${rootProject.name}"
