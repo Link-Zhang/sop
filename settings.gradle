@@ -1,0 +1,8 @@
+include "sop-backend", "sop-frontend"
+
+rootProject.name = "sop"
+
+println "Initializing project: ${rootProject.name}"
+
+rootProject.children.each { project -> project.buildFileName = "${project.name.replace("${rootProject.name}-", "")}.gradle"
+}

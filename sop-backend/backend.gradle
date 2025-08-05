@@ -1,0 +1,13 @@
+plugins {
+    id "java"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+}
+
+println "Backend module configured"

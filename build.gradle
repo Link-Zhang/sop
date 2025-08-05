@@ -1,0 +1,10 @@
+allprojects {
+    group = "cn.sh.lz"
+    version = "0.0.1-SNAPSHOT"
+}
+
+ext {
+    commonsLang3Version = "3.18.0"
+}
+
+println "Root project configured (group: ${group}, version: ${version})"
