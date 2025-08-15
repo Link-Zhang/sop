@@ -1,1 +1,72 @@
+ext {
+    isWin = org.gradle.internal.os.OperatingSystem.current().isWindows()
+}
+
+tasks.register('install', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'npm', 'ci'] : ['npm', 'ci']
+    workingDir project.projectDir
+
+    inputs.file('package.json')
+    outputs.dir('node_modules')
+
+    description = 'Frontend: npm install'
+    group = 'install'
+
+    ignoreExitValue false
+}
+
+tasks.register('dev', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'npm', 'run', 'dev'] : ['npm', 'run', 'dev']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    description = 'Frontend: next dev --turbopack'
+    group = 'application'
+
+    ignoreExitValue true
+}
+
+tasks.register('build', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'npm', 'run', 'build'] : ['npm', 'run', 'build']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    description = 'Frontend: next build'
+    group = 'build'
+
+    ignoreExitValue false
+}
+
+tasks.register('start', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'npm', 'run', 'start'] : ['npm', 'run', 'start']
+    workingDir project.projectDir
+
+    dependsOn build
+
+    description = 'Frontend: next start'
+    group = 'application'
+
+    ignoreExitValue false
+}
+
+tasks.register('lint', Exec) {
+    commandLine isWin ? ['cmd', '/c', 'npm', 'run', 'lint'] : ['npm', 'run', 'lint']
+    workingDir project.projectDir
+
+    dependsOn install
+
+    logging.captureStandardOutput LogLevel.LIFECYCLE
+
+    doLast {
+        logger.lifecycle("Lint Check Done: ${project.projectDir}/eslint-report.html")
+    }
+
+    description = 'Frontend: next lint'
+    group = 'verification'
+
+    ignoreExitValue false
+}
+
 println "Frontend module configured"
