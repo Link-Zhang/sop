@@ -1,0 +1,6 @@
+allprojects {
+    group = "cn.sh.lz"
+    version = "0.1.0"
+}
+
+println "Root configured: [group = ${group}, version = ${version}]"
