@@ -20,7 +20,6 @@
 # gradle
 .gradle/
 build/
-gradle/
 !gradle/wrapper/
 !gradlew
 !gradlew.bat
