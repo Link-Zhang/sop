@@ -1,12 +1,10 @@
-"use client";
-
 import React, { useState } from "react";
 
-interface TodoInputProps {
+export default function TodoInput({
+  onAddTodo,
+}: {
   onAddTodo: (title: string) => void;
-}
-
-export default function TodoInput({ onAddTodo }: TodoInputProps) {
+}) {
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -20,6 +18,7 @@ export default function TodoInput({ onAddTodo }: TodoInputProps) {
     <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
       <input
         type="text"
+        id="input-todo"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Input Todo item..."
