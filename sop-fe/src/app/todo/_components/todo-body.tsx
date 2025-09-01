@@ -1,10 +1,10 @@
 "use client";
 
-import TodoInput from "@/app/todo/_components/todo-input";
-import TodoTable from "@/app/todo/_components/todo-table";
-import React, { useState } from "react";
-import { Todo } from "@/app/todo/_lib/todo";
+import { useState } from "react";
+import { TodoInput } from "@/app/todo/_components/todo-input";
+import { TodoTable } from "@/app/todo/_components/todo-table";
 import { format } from "@/app/todo/_lib/format";
+import type { Todo } from "@/app/todo/_lib/todo";
 
 export function TodoBody() {
   const [todos, setTodos] = useState<Todo[]>([
@@ -28,7 +28,7 @@ export function TodoBody() {
     },
   ]);
 
-  const addTodo = (title: string) => {
+  const addTodoAction = (title: string) => {
     const newTodo: Todo = {
       id: Date.now().toString(),
       title,
@@ -38,7 +38,7 @@ export function TodoBody() {
     setTodos([...todos, newTodo]);
   };
 
-  const toggleTodo = (id: string) => {
+  const toggleTodoAction = (id: string) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo,
@@ -48,11 +48,11 @@ export function TodoBody() {
 
   return (
     <div>
-      <TodoInput onAddTodo={addTodo} />
+      <TodoInput onAddTodoAction={addTodoAction} />
       {todos?.length === 0 ? (
         <div className="text-center text-gray-500">No item, Add one...</div>
       ) : (
-        <TodoTable todos={todos} onToggleTodo={toggleTodo} />
+        <TodoTable todos={todos} onToggleTodoAction={toggleTodoAction} />
       )}
     </div>
   );

@@ -1,6 +1,5 @@
-import React from "react";
-import TodoTitle from "@/app/todo/_components/todo-title";
 import { TodoBody } from "@/app/todo/_components/todo-body";
+import { TodoTitle } from "@/app/todo/_components/todo-title";
 
 export default function TodoPage() {
   return (

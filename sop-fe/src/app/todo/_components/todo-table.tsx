@@ -1,12 +1,11 @@
-import React from "react";
-import { Todo } from "@/app/todo/_lib/todo";
+import type { Todo } from "@/app/todo/_lib/todo";
 
-export default function TodoTable({
+export function TodoTable({
   todos,
-  onToggleTodo,
+  onToggleTodoAction,
 }: {
   todos: Todo[];
-  onToggleTodo: (id: string) => void;
+  onToggleTodoAction: (id: string) => void;
 }) {
   return (
     <ul className="space-y-3">
@@ -24,7 +23,7 @@ export default function TodoTable({
               id={todo.id}
               type="checkbox"
               checked={todo.completed}
-              onChange={() => onToggleTodo(todo.id)}
+              onChange={() => onToggleTodoAction(todo.id)}
               className="w-5 h-5 accent-blue-500"
             />
             <div>{todo.title}</div>

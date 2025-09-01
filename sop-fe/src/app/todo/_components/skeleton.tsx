@@ -1,5 +1,4 @@
 import { HoverPrefetchLink } from "@/app/_components/hover-prefetch-link";
-import React from "react";
 
 export function TodoPageSkeleton() {
   return (
@@ -18,7 +17,7 @@ export function TodoPageSkeleton() {
       <div className="space-y-3">
         {[...Array(3)].map((_: undefined, index: number) => (
           <div
-            key={index}
+            key={`todo-page-skeleton-${index}-${Date.now()}`}
             className="flex items-center justify-between p-4 border bg-gray-100 rounded-md animate-pulse"
           >
             <div className="flex items-center gap-3">

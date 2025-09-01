@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import React from "react";
+import "@/app/globals.css";
+import type React from "react";
 import { HoverPrefetchLink } from "@/app/_components/hover-prefetch-link";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={ "antialiased min-h-screen flex flex-col" }>
+      <body className={"antialiased min-h-screen flex flex-col"}>
         <header className="border-b border-gray-300 ">
           <div className="container mx-auto p-4 flex justify-between items-center">
             <div className="text-xl font-bold">SOP-FE</div>
@@ -26,10 +26,10 @@ export default function RootLayout({
           </div>
         </header>
         <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
-          { children }
+          {children}
         </main>
         <footer className="container mx-auto p-4 text-center text-gray-600">
-          <div> Copyright © { new Date().getFullYear() } Link-Zhang</div>
+          <div> Copyright © {new Date().getFullYear()} Link-Zhang</div>
         </footer>
       </body>
     </html>

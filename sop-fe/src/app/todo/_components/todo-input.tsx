@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+"use client";
 
-export default function TodoInput({
-  onAddTodo,
+import type React from "react";
+import { useState } from "react";
+
+export function TodoInput({
+  onAddTodoAction,
 }: {
-  onAddTodo: (title: string) => void;
+  onAddTodoAction: (title: string) => void;
 }) {
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
-    onAddTodo(title);
+    onAddTodoAction(title);
     setTitle("");
   };
 
