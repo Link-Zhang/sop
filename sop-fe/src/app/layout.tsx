@@ -25,9 +25,7 @@ export default function RootLayout({
             </nav>
           </div>
         </header>
-        <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
-          {children}
-        </main>
+        <main className="flex-grow">{children}</main>
         <footer className="container mx-auto p-4 text-center text-gray-600">
           <div> Copyright © {new Date().getFullYear()} Link-Zhang</div>
         </footer>
