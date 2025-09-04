@@ -1,22 +1,22 @@
 {
   "todos": [
     {
-      "id": 1,
-      "content": "Study React",
+      "id": "c46f809e-321c-4fd8-82e2-6dd0a83edc26",
+      "content": "Learn React",
       "status": false,
-      "date": "2025-08-27"
+      "date": "2025/9/4"
     },
     {
-      "id": 2,
-      "content": "Study Next.js",
+      "id": "e96a4405-c14d-4a0f-ab4b-2dd364083155",
+      "content": "Learn Next.js",
       "status": false,
-      "date": "2025-08-28"
+      "date": "2025/9/4"
     },
     {
-      "id": 3,
-      "content": "Develop Project SOP",
+      "id": "b492bb39-29cf-40d5-88fc-0577cad19600",
+      "content": "Learn React",
       "status": false,
-      "date": "2025-08-29"
+      "date": "2025/9/4"
     }
   ]
 }

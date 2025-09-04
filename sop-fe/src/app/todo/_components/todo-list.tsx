@@ -1,56 +1,61 @@
 "use client";
 
-import useSWR from "swr";
-import { TodoListSkeleton } from "@/app/todo/_components/skeletons";
-import type { Todo } from "@/app/todo/_lib/todo";
+import { TodoListSkeleton } from "@/app/todo/_components/todo-skeletons";
+import { useTodos } from "@/app/todo/_hooks/useTodos";
 import TodoError from "@/app/todo/error";
 
-const url: string = "http://localhost:3001/todos/";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
-
 export function TodoList() {
-  const { data: todos, error, isLoading } = useSWR(url, fetcher);
+  const { todos, isLoading, error, updateTodo, deleteTodo } = useTodos();
 
   if (isLoading) return <TodoListSkeleton />;
-
   if (error) return <TodoError error={error} />;
 
-  return todos?.length === 0 ? (
-    <ul className="space-y-4 max-w-2xl mx-auto mb-4" id="todo-list">
-      <li className="text-center text-gray-500" id="todo-list-item">
-        No item, Add one...
-      </li>
-    </ul>
-  ) : (
-    <ul className="space-y-4 max-w-2xl mx-auto mb-4" id="todo-list">
-      {todos?.map((todo: Todo) => (
+  const handleToggle = async (id: string, completed: boolean) => {
+    await updateTodo(id, { status: !completed });
+  };
+
+  const confirmDelete = async (id: string) => {
+    if (window.confirm("确定要删除此项吗？")) {
+      await deleteTodo(id);
+    }
+  };
+
+  if (!todos?.length) {
+    return (
+      <ul className="space-y-4 max-w-2xl mx-auto mb-4">
+        <li className="text-center text-gray-500">暂无事项，添加一个...</li>
+      </ul>
+    );
+  }
+
+  return (
+    <ul className="space-y-4 max-w-2xl mx-auto mb-4">
+      {todos.map((todo) => (
         <li
           key={todo.id}
-          className={`flex items-center justify-between p-4 border rounded-md ${
-            todo.status ? "bg-gray-50 line-through text-gray-500" : "bg-white"
+          className={`flex items-center justify-between p-4 border rounded-md transition-colors ${
+            todo.status
+              ? "bg-gray-50 line-through text-gray-500"
+              : "bg-white hover:bg-gray-50"
           }`}
-          id={`todo-list-item-${todo.id}`}
         >
-          <div
-            className="flex items-center gap-4"
-            id={`todo-list-item-${todo.id}-left`}
-          >
+          <div className="flex items-center gap-4 flex-1">
             <input
               type="checkbox"
               checked={todo.status}
-              onChange={() => null}
-              className="w-6 h-6 accent-blue-500"
-              id={`todo-list-item-${todo.id}-left-checkbox`}
+              onChange={() => handleToggle(todo.id, todo.status)}
+              className="w-6 h-6 accent-blue-500 cursor-pointer"
             />
-            <div id={`todo-list-item-${todo.id}-text`}>{todo.content}</div>
+            <span className="break-words flex-1">{todo.content}</span>
           </div>
-          <div
-            className="text-xs text-gray-400"
-            id={`todo-list-item-${todo.id}-right`}
+          <button
+            type="button"
+            className="text-xs text-red-400 hover:text-red-600 transition-colors shrink-0 ml-4"
+            onClick={() => confirmDelete(todo.id)}
+            title="删除此项"
           >
             {todo.date}
-          </div>
+          </button>
         </li>
       ))}
     </ul>

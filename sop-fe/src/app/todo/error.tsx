@@ -1,23 +1,22 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import toast from "react-hot-toast";
 
-export default function TodoError({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+interface TodoErrorProps {
+  error?: Error;
+}
+
+export default function TodoError({ error }: TodoErrorProps) {
+  const hasShownToast = useRef(false);
+
   useEffect(() => {
-    console.error(error);
+    if (error && !hasShownToast.current) {
+      console.error("Todo Error Details:", error);
+      toast.error("发生错误，请刷新重试");
+      hasShownToast.current = true;
+    }
   }, [error]);
 
-  return (
-    <div
-      className="flex h-full flex-col items-center justify-center"
-      id="todo-error"
-    >
-      <h2 className="text-center">{error.message}</h2>
-      <h2 className="text-center">Retrying...</h2>
-    </div>
-  );
+  return null;
 }
