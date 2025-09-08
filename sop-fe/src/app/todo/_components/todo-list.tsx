@@ -7,6 +7,13 @@ import TodoError from "@/app/todo/error";
 export function TodoList() {
   const { todos, isLoading, error, updateTodo, deleteTodo } = useTodos();
 
+  if (!todos?.length) {
+    return (
+      <ul className="space-y-4 max-w-2xl mx-auto mb-4">
+        <li className="text-center text-gray-500">暂无事项，添加一个...</li>
+      </ul>
+    );
+  }
   if (isLoading) return <TodoListSkeleton />;
   if (error) return <TodoError error={error} />;
 
@@ -19,14 +26,6 @@ export function TodoList() {
       await deleteTodo(id);
     }
   };
-
-  if (!todos?.length) {
-    return (
-      <ul className="space-y-4 max-w-2xl mx-auto mb-4">
-        <li className="text-center text-gray-500">暂无事项，添加一个...</li>
-      </ul>
-    );
-  }
 
   return (
     <ul className="space-y-4 max-w-2xl mx-auto mb-4">

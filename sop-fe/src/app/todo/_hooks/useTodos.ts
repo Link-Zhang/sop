@@ -4,8 +4,10 @@ import { v4 as uuid } from "uuid";
 import { fetcher } from "@/app/_lib/fetchers";
 import type { Todo } from "@/app/_types/todo";
 
-const URL = "http://localhost:3001/todos";
 const DATE_LOCALE = "zh-CN";
+const URL = "http://localhost:3001/todos";
+
+const getCurrentDate = () => new Date().toLocaleDateString(DATE_LOCALE);
 
 const handleError = (error: unknown, defaultMessage: string): string => {
   if (error instanceof Error) return error.message;
@@ -13,11 +15,7 @@ const handleError = (error: unknown, defaultMessage: string): string => {
   return defaultMessage;
 };
 
-const getCurrentDate = () => new Date().toLocaleDateString(DATE_LOCALE);
-
 export function useTodos() {
-  const { data, error, isLoading, mutate } = useSWR<Todo[]>(URL, fetcher.get);
-
   const createTodo = async (content: string) => {
     const newTodo: Todo = {
       id: uuid(),
@@ -42,6 +40,8 @@ export function useTodos() {
       toast.error(`添加失败: ${handleError(err, "请稍后重试")}`);
     }
   };
+
+  const { data, error, isLoading, mutate } = useSWR<Todo[]>(URL, fetcher.get);
 
   const updateTodo = async (id: string, updates: Partial<Todo>) => {
     try {

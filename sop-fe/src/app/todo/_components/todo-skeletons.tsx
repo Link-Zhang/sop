@@ -15,9 +15,9 @@ export function TodoFormSkeleton() {
 
 export function TodoListSkeleton() {
   const skeletonItems = [
-    { id: "skeleton-1" },
-    { id: "skeleton-2" },
-    { id: "skeleton-3" },
+    { id: "todo-list-skeleton-1" },
+    { id: "todo-list-skeleton-2" },
+    { id: "todo-list-skeleton-3" },
   ];
 
   return (
