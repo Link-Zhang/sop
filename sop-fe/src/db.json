@@ -2,15 +2,21 @@
   "todos": [
     {
       "id": "c46f809e-321c-4fd8-82e2-6dd0a83edc26",
-      "content": "Learn React",
+      "content": "i18n",
       "status": false,
-      "date": "2025/9/4"
+      "date": "2025-09-04"
     },
     {
       "id": "e96a4405-c14d-4a0f-ab4b-2dd364083155",
-      "content": "Learn Next.js",
+      "content": "dark theme",
       "status": false,
-      "date": "2025/9/4"
+      "date": "2025-09-05"
+    },
+    {
+      "id": "355516ae-8983-4e32-acca-8b30f5de27bb",
+      "content": "update client todo",
+      "status": false,
+      "date": "2025-09-12"
     }
   ]
 }

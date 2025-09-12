@@ -1,6 +1,6 @@
 "use client";
 
-import { TodoListSkeleton } from "@/app/todo/_components/todo-skeletons";
+import { TodoListSkeleton } from "@/app/_components/todo-skeletons";
 import { useTodos } from "@/app/todo/_hooks/useTodos";
 import TodoError from "@/app/todo/error";
 

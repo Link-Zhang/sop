@@ -1,0 +1,44 @@
+{
+  "layout": {
+    "header-text": "雨燕号ΩΡ",
+    "nav-texts": {
+      "todo": "客户端",
+      "todos": "服务器"
+    },
+    "footer-text": "版权所有"
+  },
+  "todo-error": {
+    "text": "未知错误，请刷新重试"
+  },
+  "todo-title": {
+    "text": "待办事项"
+  },
+  "todo-form": {
+    "button-text": "创建",
+    "create": {
+      "error": "创建失败，请稍后重试",
+      "success": "创建成功"
+    },
+    "input-placeholder": "输入待办事项...",
+    "validation": {
+      "required": "待办事项不能为空"
+    }
+  },
+  "todo-list": {
+    "empty-text": "暂无事项，创建一个...",
+    "read": {
+      "error": "读取失败，请稍后重试",
+      "success": "读取成功"
+    },
+    "update": {
+      "error": "更新失败，请稍后重试",
+      "validation": "更新失败，无此待办事项",
+      "success": "更新成功"
+    },
+    "delete": {
+      "confirm": "确定删除此项？",
+      "error": "删除失败，请稍后重试",
+      "success": "删除成功"
+    }
+  }
+}

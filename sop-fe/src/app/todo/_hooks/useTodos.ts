@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
 import useSWR from "swr";
 import { v4 as uuid } from "uuid";
-import { fetcher } from "@/app/_lib/fetchers";
-import type { Todo } from "@/app/_types/todo";
+import type { Todo } from "@/app/_libs/_types/todo";
+import { clientFetcher } from "@/app/_libs/client-fetcher";
 
 const DATE_LOCALE = "zh-CN";
 const URL = "http://localhost:3001/todos";
@@ -27,7 +27,7 @@ export function useTodos() {
     try {
       await mutate(
         async (currentTodos = []) => {
-          const createdTodo = await fetcher.post<Todo>(URL, newTodo);
+          const createdTodo = await clientFetcher.post<Todo>(URL, newTodo);
           return [...currentTodos, createdTodo];
         },
         {
@@ -41,13 +41,16 @@ export function useTodos() {
     }
   };
 
-  const { data, error, isLoading, mutate } = useSWR<Todo[]>(URL, fetcher.get);
+  const { data, error, isLoading, mutate } = useSWR<Todo[]>(
+    URL,
+    clientFetcher.get,
+  );
 
   const updateTodo = async (id: string, updates: Partial<Todo>) => {
     try {
       await mutate(
         async (currentTodos = []) => {
-          const updatedTodo = await fetcher.patch<Todo>(
+          const updatedTodo = await clientFetcher.patch<Todo>(
             `${URL}/${id}`,
             updates,
           );
@@ -73,7 +76,7 @@ export function useTodos() {
     try {
       await mutate(
         async (currentTodos = []) => {
-          await fetcher.delete(`${URL}/${id}`);
+          await clientFetcher.delete(`${URL}/${id}`);
           return currentTodos.filter((todo) => todo.id !== id);
         },
         {

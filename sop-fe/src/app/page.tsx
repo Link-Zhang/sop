@@ -1,5 +1,13 @@
-import { RootSkeleton } from "@/app/_components/skeletons";
+import Image from "next/image";
 
 export default function RootPage() {
-  return <RootSkeleton />;
+  return (
+    <Image
+      alt="Swift Omega Prototype"
+      height="1635"
+      priority={true}
+      src="/sop.webp"
+      width="3840"
+    />
+  );
 }
