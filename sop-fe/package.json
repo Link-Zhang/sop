@@ -4,16 +4,16 @@
   "private": true,
   "scripts": {
     "build": "next build --turbopack",
-    "dev": "concurrently \"next dev --turbopack -p 3000\" \"wait-on http://localhost:3000 && /usr/bin/chromium --no-sandbox --test-type http://localhost:3000\"",
+    "dev": "concurrently \"next dev --turbopack -p 80\" \"wait-on http://localhost:80 && /usr/bin/chromium --no-sandbox --test-type http://localhost:80\"",
     "format": "biome format --write",
     "lint": "biome check --write",
-    "server": "/opt/node/node-v22.19.0-linux-arm64/bin/json-server src/db.json --port 3001 --delay 1000",
+    "server": "/opt/node/node-v22.19.0-linux-arm64/bin/json-server src/db.json --delay 1000 --host 0.0.0.0 --port 6901",
     "start": "next start"
   },
   "dependencies": {
-    "axios": "1.12.1",
+    "axios": "1.12.2",
     "next": "15.5.3",
-    "next-intl": "4.3.8",
+    "next-intl": "4.3.9",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-hook-form": "7.62.0",
@@ -24,13 +24,13 @@
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
     "@tailwindcss/postcss": "4.1.13",
-    "@types/node": "24.3.1",
-    "@types/react": "19.1.12",
+    "@types/node": "24.5.2",
+    "@types/react": "19.1.13",
     "@types/react-dom": "19.1.9",
     "concurrently": "9.2.1",
     "postcss": "8.5.6",
     "tailwindcss": "4.1.13",
     "typescript": "5.9.2",
-    "wait-on": "8.0.4"
+    "wait-on": "9.0.0"
   }
 }

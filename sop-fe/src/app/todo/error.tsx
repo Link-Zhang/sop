@@ -1,22 +1,25 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
-
-interface TodoErrorProps {
-  error?: Error;
-}
+import type { TodoErrorProps } from "@/app/_libs/todo.types";
 
 export default function TodoError({ error }: TodoErrorProps) {
+  const t = useTranslations("todo-error");
   const hasShownToast = useRef(false);
 
   useEffect(() => {
     if (error && !hasShownToast.current) {
-      console.error("Todo Error Details:", error);
-      toast.error("发生错误，请刷新重试");
+      toast.error(error.message || t("text"));
       hasShownToast.current = true;
     }
-  }, [error]);
+    return () => {
+      if (!error) {
+        hasShownToast.current = false;
+      }
+    };
+  }, [error, t]);
 
   return null;
 }

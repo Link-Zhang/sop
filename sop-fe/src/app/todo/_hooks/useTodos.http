@@ -1,9 +1,9 @@
 ### GET
-GET http://localhost:3001/todos
+GET http://localhost:6901/todos
 Accept: application/json
 
 ### POST
-POST http://localhost:3001/todos
+POST http://localhost:6901/todos
 Content-Type: application/json
 
 {
@@ -13,8 +13,14 @@ Content-Type: application/json
   "date": "2025-08-30"
 }
 
+### POST
+POST http://localhost/todos
+Content-Type: application/json
+
+["test"]
+
 ### PATCH
-PATCH http://localhost:3001/todos/4
+PATCH http://localhost:6901/todos/4
 Content-Type: application/json
 
 {
@@ -23,5 +29,5 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE http://localhost:3001/todos/4
+DELETE http://localhost:6901/todos/4
 Accept: application/json

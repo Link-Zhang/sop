@@ -1,4 +1,4 @@
-import apiClient from "@/app/_libs/api-client";
+import apiClient from "@/app/_libs/apiClient";
 
 export const clientFetcher = {
   get: <T>(url: string) => apiClient.get<T>(url).then((res) => res.data),

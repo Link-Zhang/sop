@@ -1,6 +1,6 @@
 export function TodoTitleSkeleton() {
   return (
-    <div className="animate-pulse bg-gray-300  font-bold h-10 mb-4 mx-auto rounded-md text-3xl text-center w-36" />
+    <div className="animate-pulse bg-gray-300 font-bold h-10 mb-4 mx-auto rounded-md text-3xl text-center w-36" />
   );
 }
 

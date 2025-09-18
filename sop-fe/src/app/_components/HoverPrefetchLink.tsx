@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type React from "react";
+import type { ReactNode } from "react";
 import { useState } from "react";
 
 export function HoverPrefetchLink({
@@ -9,7 +9,7 @@ export function HoverPrefetchLink({
   children,
 }: {
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [active, setActive] = useState(false);
 

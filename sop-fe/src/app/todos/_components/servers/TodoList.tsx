@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import type { Todo } from "@/app/_libs/_types/todo";
-import { TodoListItem } from "@/app/todos/_components/clients/todo-list-item";
-import { readTodoAction } from "@/app/todos/_libs/todo-actions";
+import type { Todo } from "@/app/_libs/todo.types";
+import { TodoListItem } from "@/app/todos/_components/clients/TodoListItem";
+import { readTodoAction } from "@/app/todos/_libs/todoActions";
 
 export async function TodoList() {
   const t = await getTranslations("todo-list");

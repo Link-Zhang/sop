@@ -3,11 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
-import type { Todo } from "@/app/_libs/_types/todo";
+import type { Todo } from "@/app/_libs/todo.types";
 import {
   deleteTodoAction,
   updateTodoAction,
-} from "@/app/todos/_libs/todo-actions";
+} from "@/app/todos/_libs/todoActions";
 
 export function TodoListItem({ todo }: { todo: Todo }) {
   const t = useTranslations("todo-list");
@@ -40,7 +40,7 @@ export function TodoListItem({ todo }: { todo: Todo }) {
       <div className="flex flex-1 gap-4 items-center min-w-0">
         <input
           checked={todo.status}
-          className="accent-blue-500 h-5 shrink-0 w-5"
+          className="accent-coreground h-5 shrink-0 w-5"
           id={todo.id}
           onChange={() => handleToggle(todo.id, !todo.status)}
           type="checkbox"
@@ -54,7 +54,7 @@ export function TodoListItem({ todo }: { todo: Todo }) {
         </span>
       </div>
       <button onClick={() => handleClick(todo.id)} type="button">
-        <time className="shrink-0 text-blue-500 text-xs" dateTime={todo.date}>
+        <time className="shrink-0 text-coreground text-xs" dateTime={todo.date}>
           {todo.date}
         </time>
       </button>

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { createTodoAction } from "@/app/todos/_libs/todo-actions";
+import { createTodoAction } from "@/app/todos/_libs/todoActions";
 
 export function TodoForm() {
   const router = useRouter();
@@ -42,14 +42,14 @@ export function TodoForm() {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <input
-        className="border flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2 rounded-md"
+        className="border flex-1 focus:outline-none focus:ring-2 focus:ring-coreground px-4 py-2 rounded-md"
         id="todo-form-input"
         placeholder={t("input-placeholder")}
         type="text"
         {...register("content", { required: t("validation.required") })}
       />
       <button
-        className="bg-blue-500 px-4 py-2 rounded-md text-white disabled:animate-pulse"
+        className="bg-coreground px-4 py-2 rounded-md text-middground disabled:animate-pulse"
         disabled={isSubmitting}
         type="submit"
       >

@@ -1,30 +1,28 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { NextIntlClientProvider, useTranslations } from "next-intl";
-import type React from "react";
+import type { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
-import { HoverPrefetchLink } from "@/app/_components/hover-prefetch-link";
+import { HoverPrefetchLink } from "@/app/_components/HoverPrefetchLink";
+import { getCurrentYear } from "@/app/_libs/date.utils";
 
 export const metadata: Metadata = {
   title: "SOP",
   description: "Swift Omega Prototype Front End",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const currentYear = new Date().getFullYear();
+export default function RootLayout({ children }: { children: ReactNode }) {
   const t = useTranslations("layout");
 
   return (
-    <html data-theme="light" lang="zh-CN">
-      <body className="antialiased flex flex-col min-h-screen dark:bg-black">
+    <html lang="zh-CN">
+      <body className="antialiased flex flex-col min-h-screen">
         <NextIntlClientProvider>
           <Toaster position="bottom-right" reverseOrder={false} />
-          <header className="border-b flex items-center justify-between px-4 py-3 sticky top-0">
-            <div className="font-bold text-xl">{t("header-text")}</div>
+          <header className="bg-middground border-b dark:bg-middground flex items-center justify-between px-4 py-3 sticky top-0">
+            <div className="font-semibold text-xl">
+              <HoverPrefetchLink href="/">{t("header-text")}</HoverPrefetchLink>
+            </div>
             <nav className="space-x-4">
               <HoverPrefetchLink href="/todo">
                 {t("nav-texts.todo")}
@@ -36,7 +34,7 @@ export default function RootLayout({
           </header>
           <main className="flex-grow px-4 py-3 ">{children}</main>
           <footer className="px-4 py-3 text-center text-sm">
-            {t("footer-text")} © {currentYear} Link-Zhang
+            {t("footer-text")} © {getCurrentYear()} Link-Zhang
           </footer>
         </NextIntlClientProvider>
       </body>

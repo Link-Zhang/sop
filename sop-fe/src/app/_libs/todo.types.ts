@@ -4,3 +4,7 @@ export interface Todo {
   status: boolean;
   date: string;
 }
+
+export interface TodoErrorProps {
+  error?: Error;
+}
