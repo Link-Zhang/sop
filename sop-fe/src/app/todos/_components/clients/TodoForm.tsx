@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { createTodoAction } from "@/app/todos/_libs/todoActions";
+import { createTodo } from "@/app/todos/_libs/todoActions";
 
 export function TodoForm() {
   const router = useRouter();
@@ -26,7 +26,7 @@ export function TodoForm() {
 
   const handleFormSubmit: SubmitHandler<{ content: string }> = async (data) => {
     try {
-      await createTodoAction(data.content);
+      await createTodo(data.content);
       toast.success(t("create.success"));
       reset();
       router.refresh();

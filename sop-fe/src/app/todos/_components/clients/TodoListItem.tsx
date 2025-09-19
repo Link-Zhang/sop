@@ -4,34 +4,31 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 import type { Todo } from "@/app/_libs/todo.types";
-import {
-  deleteTodoAction,
-  updateTodoAction,
-} from "@/app/todos/_libs/todoActions";
+import { deleteTodo, updateTodo } from "@/app/todos/_libs/todoActions";
 
 export function TodoListItem({ todo }: { todo: Todo }) {
   const t = useTranslations("todo-list");
   const router = useRouter();
 
-  const handleToggle = async (id: string, status: boolean) => {
-    try {
-      await updateTodoAction({ id, status });
-      toast.success(t("update.success"));
-      router.refresh();
-    } catch (error) {
-      toast.error((error as Error).message);
-    }
-  };
-
   const handleClick = async (id: string) => {
     if (window.confirm(t("delete.confirm"))) {
       try {
-        await deleteTodoAction(id);
+        await deleteTodo(id);
         toast.success(t("delete.success"));
         router.refresh();
       } catch (error) {
         toast.error((error as Error).message);
       }
+    }
+  };
+
+  const handleToggle = async (id: string, status: boolean) => {
+    try {
+      await updateTodo({ id, status });
+      toast.success(t("update.success"));
+      router.refresh();
+    } catch (error) {
+      toast.error((error as Error).message);
     }
   };
 

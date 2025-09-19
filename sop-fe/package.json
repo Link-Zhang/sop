@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "build": "next build --turbopack",
-    "dev": "concurrently \"next dev --turbopack -p 80\" \"wait-on http://localhost:80 && /usr/bin/chromium --no-sandbox --test-type http://localhost:80\"",
+    "dev": "next dev --turbopack -p 80 --experimental-https --experimental-https-key /home/link/.certs/localhost.key --experimental-https-cert /home/link/.certs/localhost.crt",
     "format": "biome format --write",
     "lint": "biome check --write",
-    "server": "/opt/node/node-v22.19.0-linux-arm64/bin/json-server src/db.json --delay 1000 --host 0.0.0.0 --port 6901",
+    "server": "concurrently \"/opt/node/node-v22.19.0-linux-arm64/bin/json-server src/db.json --port 6900\" \"/opt/node/node-v22.19.0-linux-arm64/bin/local-ssl-proxy --key /home/link/.certs/localhost.key --cert /home/link/.certs/localhost.crt --source 6901 --target 6900\"",
     "start": "next start"
   },
   "dependencies": {

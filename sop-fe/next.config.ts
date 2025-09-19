@@ -2,11 +2,12 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
+  allowedDevOrigins: ["17521270049.kmdns.net", "*"],
   images: {
     unoptimized: true,
   },
+  output: "export",
+  trailingSlash: true,
 };
 
 const withNextIntl = createNextIntlPlugin();

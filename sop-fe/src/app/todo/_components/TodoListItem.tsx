@@ -6,7 +6,7 @@ export function TodoListItem({ todo }: { todo: Todo }) {
   const { updateTodo, deleteTodo } = useTodoActions();
   const t = useTranslations("todo-list");
 
-  const confirmDelete = async (id: string) => {
+  const handleClick = async (id: string) => {
     if (window.confirm(t("delete.confirm"))) {
       await deleteTodo(id);
     }
@@ -34,7 +34,7 @@ export function TodoListItem({ todo }: { todo: Todo }) {
           {todo.content}
         </span>
       </div>
-      <button onClick={() => confirmDelete(todo.id)} type="button">
+      <button onClick={() => handleClick(todo.id)} type="button">
         <time className="shrink-0 text-coreground text-xs" dateTime={todo.date}>
           {todo.date}
         </time>
