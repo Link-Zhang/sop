@@ -2,8 +2,7 @@
   "layout": {
     "header-text": "Swift Omega Prototype",
     "nav-texts": {
-      "todo": "Client",
-      "todos": "Server"
+      "todo": "TodoList"
     },
     "footer-text": "Copyright"
   },

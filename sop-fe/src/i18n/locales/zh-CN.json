@@ -2,8 +2,7 @@
   "layout": {
     "header-text": "雨燕号-ΩΡ",
     "nav-texts": {
-      "todo": "客户端",
-      "todos": "服务器"
+      "todo": "待办事项"
     },
     "footer-text": "版权所有"
   },
