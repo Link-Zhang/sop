@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 import { HoverPrefetchLink } from "@/app/_components/HoverPrefetchLink";
 import { getCurrentYear } from "@/app/_libs/date.utils";
+import { Jetbrains_Mono } from "@/app/fonts";
 
 export const metadata: Metadata = {
   title: "SOP",
@@ -15,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const t = useTranslations("layout");
 
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" className={Jetbrains_Mono.variable}>
       <body className="antialiased flex flex-col min-h-screen">
         <NextIntlClientProvider>
           <Toaster position="bottom-right" reverseOrder={false} />

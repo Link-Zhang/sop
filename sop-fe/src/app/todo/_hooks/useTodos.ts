@@ -5,11 +5,11 @@ import type { Todo } from "@/app/_libs/todo.types";
 const API_URL = "https://17521270049.kmdns.net:31569/todos";
 
 export function useTodos() {
+  // noinspection JSUnusedGlobalSymbols
   const { data, error, isLoading, mutate } = useSWR<Todo[]>(
     API_URL,
     clientFetcher.get,
     {
-      dedupingInterval: 1000,
       onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
         if (error.status === 404 || error.status === 400) return;
         if (retryCount >= 3) return;
