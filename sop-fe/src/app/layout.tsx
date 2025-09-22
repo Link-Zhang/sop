@@ -27,9 +27,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <HoverPrefetchLink href="/todo">
                 {t("nav-texts.todo")}
               </HoverPrefetchLink>
-              <HoverPrefetchLink href="/todos">
-                {t("nav-texts.todos")}
-              </HoverPrefetchLink>
             </nav>
           </header>
           <main className="flex-grow px-4 py-3 ">{children}</main>

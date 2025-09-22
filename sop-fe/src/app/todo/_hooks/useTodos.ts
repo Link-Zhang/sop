@@ -9,7 +9,7 @@ export function useTodos() {
     API_URL,
     clientFetcher.get,
     {
-      dedupingInterval: 2000,
+      dedupingInterval: 1000,
       onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
         if (error.status === 404 || error.status === 400) return;
         if (retryCount >= 3) return;

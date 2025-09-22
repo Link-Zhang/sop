@@ -4,7 +4,7 @@ import { TodoList } from "@/app/todo/_components/TodoList";
 import { TodoTitle } from "@/app/todo/_components/TodoTitle";
 
 export default async function TodoPage() {
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return (
     <React.Fragment>
