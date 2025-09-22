@@ -1,0 +1,27 @@
+### GET
+GET http://localhost:3001/todos
+Accept: application/json
+
+### POST
+POST http://localhost:3001/todos
+Content-Type: application/json
+
+{
+  "id": 4,
+  "content": "Study SWR",
+  "status": false,
+  "date": "2025-08-30"
+}
+
+### PATCH
+PATCH http://localhost:3001/todos/4
+Content-Type: application/json
+
+{
+  "content": "SWR Done",
+  "status": true
+}
+
+### DELETE
+DELETE http://localhost:3001/todos/4
+Accept: application/json

@@ -1,39 +1,41 @@
-import type { Metadata } from "next";
 import "@/app/globals.css";
-import { NextIntlClientProvider, useTranslations } from "next-intl";
+import { clsx } from "clsx";
+import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
-import { Toaster } from "react-hot-toast";
-import { HoverPrefetchLink } from "@/app/_components/HoverPrefetchLink";
-import { getCurrentYear } from "@/app/_libs/date.utils";
+import I18nextProviderWrapper from "@/app/components/ui/I18nextProviderWrapper";
+import LayoutHeader from "@/app/components/ui/LayoutHeader";
+import ToasterWrapper from "@/app/components/ui/ToasterWrapper";
+import { Jetbrains_Mono } from "@/app/fonts";
+import { DEFAULT_LANGUAGE } from "@/app/lib/i18n/i18n";
+import { getCurrentYear } from "@/app/lib/utils";
+import { TooltipProvider } from "@/shadcn/components/ui/tooltip";
 
-export const metadata: Metadata = {
-  title: "SOP",
-  description: "Swift Omega Prototype Front End",
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
-  const t = useTranslations("layout");
-
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="zh-CN">
-      <body className="antialiased flex flex-col min-h-screen">
-        <NextIntlClientProvider>
-          <Toaster position="bottom-right" reverseOrder={false} />
-          <header className="bg-middground border-b dark:bg-middground flex items-center justify-between px-4 py-3 sticky top-0">
-            <div className="font-semibold text-xl">
-              <HoverPrefetchLink href="/">{t("header-text")}</HoverPrefetchLink>
-            </div>
-            <nav className="space-x-4">
-              <HoverPrefetchLink href="/todo">
-                {t("nav-texts.todo")}
-              </HoverPrefetchLink>
-            </nav>
-          </header>
-          <main className="flex-grow px-4 py-3 ">{children}</main>
-          <footer className="px-4 py-3 text-center text-sm">
-            {t("footer-text")} © {getCurrentYear()} Link-Zhang
-          </footer>
-        </NextIntlClientProvider>
+    <html lang={DEFAULT_LANGUAGE} suppressHydrationWarning>
+      <body
+        className={clsx(
+          "antialiased flex flex-col min-h-screen",
+          Jetbrains_Mono.variable,
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <I18nextProviderWrapper>
+            <TooltipProvider>
+              <LayoutHeader />
+              <main className="flex-grow px-4 py-3">{children}</main>
+              <footer className="px-4 py-3 text-center text-sm">
+                CopyRight © {getCurrentYear()} Link-Zhang
+              </footer>
+              <ToasterWrapper />
+            </TooltipProvider>
+          </I18nextProviderWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );
