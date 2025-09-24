@@ -5,12 +5,10 @@ const httpsAgent = new https.Agent({
   rejectUnauthorized: false,
 });
 
-const apiClient = axios.create({
-  timeout: 10000,
+export const apiClient = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
   httpsAgent: httpsAgent,
+  timeout: 10000,
 });
-
-export default apiClient;

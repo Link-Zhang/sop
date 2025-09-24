@@ -1,9 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { TodoListSkeleton } from "@/app/_components/TodoSkeletons";
 import type { Todo } from "@/app/_libs/todo.types";
 import { TodoListItem } from "@/app/todo/_components/TodoListItem";
+import { TodoListSkeleton } from "@/app/todo/_components/TodoSkeletons";
 import { useTodos } from "@/app/todo/_hooks/useTodos";
 import TodoError from "@/app/todo/error";
 

@@ -1,25 +1,25 @@
 "use client";
 
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import { NavLink } from "@/app/_components/NavLink";
 
 export function HoverPrefetchLink({
-  href,
   children,
+  href,
 }: {
-  href: string;
   children: ReactNode;
+  href: string;
 }) {
   const [active, setActive] = useState(false);
 
   return (
-    <Link
+    <NavLink
       href={href}
-      prefetch={active ? null : false}
       onMouseEnter={() => setActive(true)}
+      prefetch={active ? null : false}
     >
       {children}
-    </Link>
+    </NavLink>
   );
 }

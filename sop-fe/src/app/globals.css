@@ -2,25 +2,25 @@
 
 :root {
   --background: #f8fafc;
-  --coreground: #3b82f6;
-  --font-jetbrains-mono: "JetBrains Mono", monospace;
   --foreground: #1e293b;
-  --middground: #eff2f6;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
+  --primary: #3b82f6;
+  --on-primary: #eff2f6;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-coreground: var(--coreground);
   --color-foreground: var(--foreground);
-  --color-middground: var(--middground);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0f172a;
-    --coreground: #60a5fa;
     --foreground: #f1f5f9;
-    --middground: #1e293b;
+    --primary: #60a5fa;
+    --on-primary: #1e293b;
   }
 }
 

@@ -20,11 +20,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased flex flex-col min-h-screen">
         <NextIntlClientProvider>
           <Toaster position="bottom-right" reverseOrder={false} />
-          <header className="bg-middground border-b dark:bg-middground flex items-center justify-between px-4 py-3 sticky top-0">
-            <div className="font-semibold text-xl">
-              <HoverPrefetchLink href="/">{t("header-text")}</HoverPrefetchLink>
-            </div>
-            <nav className="space-x-4">
+          <header className="bg-on-primary dark:bg-on-primary flex items-center justify-between px-4 py-3 sticky top-0">
+            <nav className="space-x-4 text-xl">
+              <HoverPrefetchLink href="/">
+                {t("nav-texts.home")}
+              </HoverPrefetchLink>
               <HoverPrefetchLink href="/todo">
                 {t("nav-texts.todo")}
               </HoverPrefetchLink>

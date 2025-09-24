@@ -2,7 +2,8 @@
   "layout": {
     "header-text": "Swift Omega Prototype",
     "nav-texts": {
-      "todo": "TodoList"
+      "home": "Home",
+      "todo": "Todo"
     },
     "footer-text": "Copyright"
   },
@@ -19,9 +20,7 @@
       "success": "Create successfully"
     },
     "input-placeholder": "Enter a todo...",
-    "validation": {
-      "required": "Todo cannot be empty"
-    }
+    "input-validation": "Todo cannot be empty"
   },
   "todo-list": {
     "empty-text": "No item, Add one...",

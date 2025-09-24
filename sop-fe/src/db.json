@@ -1,12 +1,6 @@
 {
   "todos": [
     {
-      "id": "019956bb-cfd2-7618-a1c1-93492a1014af",
-      "content": "i18n",
-      "status": true,
-      "date": "2025-09-17"
-    },
-    {
       "id": "01995c16-5e6b-7029-a558-b991b7789bbc",
       "content": "dark theme",
       "status": true,
@@ -25,10 +19,22 @@
       "date": "2025-09-22"
     },
     {
-      "id": "019970bd-7b43-76bc-845d-e3f21afdc15c",
-      "content": "nextjs",
+      "id": "019974b5-26fa-752c-8b1e-eea0cbb4efb3",
+      "content": "certs",
+      "status": true,
+      "date": "2025-09-23"
+    },
+    {
+      "id": "019976fc-2d9b-75ba-b4f4-dd414d6c14fe",
+      "content": "i18n",
       "status": false,
-      "date": "2025-09-22"
+      "date": "2025-09-23"
+    },
+    {
+      "id": "01997ad8-fb6a-706e-9168-d7f47db62305",
+      "content": "shadcn/ui",
+      "status": false,
+      "date": "2025-09-24"
     }
   ]
 }

@@ -9,7 +9,7 @@ export function TodoForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { createTodo } = useTodoActions();
+  const { createTodoAction } = useTodoActions();
   const t = useTranslations("todo-form");
 
   const handleSubmit = async (e: FormEvent) => {
@@ -17,12 +17,12 @@ export function TodoForm() {
     if (isSubmitting) return;
     const trimmedContent = content.trim();
     if (!trimmedContent) {
-      toast.error(t("validation.required"));
+      toast.error(t("input-validation"));
       inputRef.current?.focus();
       return;
     }
     setIsSubmitting(true);
-    await createTodo(trimmedContent);
+    await createTodoAction(trimmedContent);
     setContent("");
     setIsSubmitting(false);
   };
@@ -34,7 +34,7 @@ export function TodoForm() {
       onSubmit={handleSubmit}
     >
       <input
-        className="border flex-1 focus:outline-none focus:ring-2 focus:ring-coreground px-4 py-2 rounded-md"
+        className="border flex-1 focus:outline-none focus:ring-2 focus:ring-primary px-4 py-2 rounded-md"
         disabled={isSubmitting}
         id="todo-form-input"
         onChange={(e) => setContent(e.target.value)}
@@ -44,7 +44,7 @@ export function TodoForm() {
         value={content}
       />
       <button
-        className="bg-coreground disabled:animate-pulse px-4 py-2 rounded-md text-middground"
+        className="bg-primary disabled:animate-pulse px-4 py-2 rounded-md text-on-primary"
         disabled={isSubmitting}
         type="submit"
       >

@@ -15,7 +15,7 @@ export function useTodoActions() {
   const { mutate } = useSWRConfig();
   const t = useTranslations();
 
-  const createTodo = useCallback(
+  const createTodoAction = useCallback(
     async (content: string) => {
       const newTodo: Todo = {
         id: uuid(),
@@ -56,7 +56,7 @@ export function useTodoActions() {
     [mutate, t],
   );
 
-  const updateTodo = useCallback(
+  const updateTodoAction = useCallback(
     async (id: string, updates: Partial<Todo>) => {
       let previousTodo: Todo | undefined;
       try {
@@ -104,7 +104,7 @@ export function useTodoActions() {
     [mutate, t],
   );
 
-  const deleteTodo = useCallback(
+  const deleteTodoAction = useCallback(
     async (id: string) => {
       let previousTodo: Todo | undefined;
       try {
@@ -144,8 +144,8 @@ export function useTodoActions() {
   );
 
   return {
-    createTodo,
-    updateTodo,
-    deleteTodo,
+    createTodoAction,
+    updateTodoAction,
+    deleteTodoAction,
   };
 }

@@ -2,7 +2,8 @@
   "layout": {
     "header-text": "雨燕号-ΩΡ",
     "nav-texts": {
-      "todo": "待办事项"
+      "home": "首页",
+      "todo": "待办"
     },
     "footer-text": "版权所有"
   },
@@ -19,9 +20,7 @@
       "success": "创建成功"
     },
     "input-placeholder": "输入待办事项...",
-    "validation": {
-      "required": "待办事项不能为空"
-    }
+    "input-validation": "待办事项不能为空"
   },
   "todo-list": {
     "empty-text": "暂无事项，创建一个...",
@@ -31,7 +30,6 @@
     },
     "update": {
       "error": "更新失败，请稍后重试",
-      "validation": "更新失败，无此待办事项",
       "success": "更新成功"
     },
     "delete": {
