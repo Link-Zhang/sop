@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { clientFetcher } from "@/app/_libs/clientFetcher";
 import type { Todo } from "@/app/_libs/todo.types";
 
-const API_URL = "https://17521270049.kmdns.net:31569/todos";
+const API_URL = "https://17521270049.kmdns.net:31540/todos";
 
 export function useTodos() {
   // noinspection JSUnusedGlobalSymbols
