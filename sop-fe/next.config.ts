@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
@@ -19,9 +18,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   output: "export",
+  reactCompiler: true,
   trailingSlash: true,
 };
 
-const withNextIntl = createNextIntlPlugin();
-
-export default withNextIntl(nextConfig);
+export default nextConfig;

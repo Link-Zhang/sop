@@ -1,0 +1,25 @@
+{
+  "error": "Something wrong, please refresh",
+  "formButtonText": "Add",
+  "formInputPlaceholder": "Enter a todo...",
+  "formInputValidation": "Todo cannot be empty",
+  "listEmptyText": "No item, Add one...",
+  "title": "Todo List",
+  "create": {
+    "error": "Failed to create, please retry",
+    "success": "Create successfully"
+  },
+  "read": {
+    "error": "Failed to read, please retry",
+    "success": "Read successfully"
+  },
+  "update": {
+    "error": "Failed to update, please retry",
+    "success": "Update successfully"
+  },
+  "delete": {
+    "confirm": "Are you sure to delete the item?",
+    "error": "Failed to delete, please retry",
+    "success": "Delete successfully"
+  }
+}

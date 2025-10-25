@@ -1,13 +1,16 @@
-import Image from "next/image";
+"use client";
 
-export default function RootPage() {
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
+export default function Page() {
+  const { t } = useTranslation("home");
+
   return (
-    <Image
-      alt="Swift Omega Prototype"
-      height="1635"
-      priority={true}
-      src="/sop.webp"
-      width="3840"
-    />
+    <>
+      <h1>{t("welcome")}</h1>
+      <p>{t("content")}</p>
+      <Link href="/second">{t("secondPage")} →</Link>
+    </>
   );
 }

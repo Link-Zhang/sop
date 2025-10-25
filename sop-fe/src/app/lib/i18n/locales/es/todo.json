@@ -1,0 +1,25 @@
+{
+  "error": "Algo salió mal, por favor actualiza",
+  "formButtonText": "Agregar",
+  "formInputPlaceholder": "Ingresa una tarea...",
+  "formInputValidation": "La tarea no puede estar vacía",
+  "listEmptyText": "No hay elementos, agrega uno...",
+  "title": "Lista de Tareas",
+  "create": {
+    "error": "Error al crear, por favor reintenta",
+    "success": "Creado exitosamente"
+  },
+  "read": {
+    "error": "Error al leer, por favor reintenta",
+    "success": "Leído exitosamente"
+  },
+  "update": {
+    "error": "Error al actualizar, por favor reintenta",
+    "success": "Actualizado exitosamente"
+  },
+  "delete": {
+    "confirm": "¿Estás seguro de eliminar el elemento?",
+    "error": "Error al eliminar, por favor reintenta",
+    "success": "Eliminado exitosamente"
+  }
+}

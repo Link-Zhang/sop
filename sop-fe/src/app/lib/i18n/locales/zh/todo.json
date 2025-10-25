@@ -1,0 +1,25 @@
+{
+  "error": "未知错误，请刷新重试",
+  "formButtonText": "创建",
+  "formInputPlaceholder": "输入待办事项...",
+  "formInputValidation": "待办事项不能为空",
+  "listEmptyText": "暂无事项，创建一个...",
+  "title": "待办事项",
+  "create": {
+    "error": "创建失败，请稍后重试",
+    "success": "创建成功"
+  },
+  "read": {
+    "error": "读取失败，请稍后重试",
+    "success": "读取成功"
+  },
+  "update": {
+    "error": "更新失败，请稍后重试",
+    "success": "更新成功"
+  },
+  "delete": {
+    "confirm": "确定删除此项？",
+    "error": "删除失败，请稍后重试",
+    "success": "删除成功"
+  }
+}
