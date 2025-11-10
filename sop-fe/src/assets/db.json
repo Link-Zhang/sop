@@ -1,28 +1,3 @@
 {
-  "todos": [
-    {
-      "id": "019a1ab7-d0c1-77bf-8e4a-5a32165de968",
-      "content": "弹出框修复",
-      "status": false,
-      "date": "2025-10-25"
-    },
-    {
-      "id": "019a1ab8-0a5c-76ae-949c-b78d976dddec",
-      "content": "Network Error修复",
-      "status": false,
-      "date": "2025-10-25"
-    },
-    {
-      "id": "019a1acc-b24d-765e-b5e6-421eb4b54125",
-      "content": "文本输入框白色问题",
-      "status": false,
-      "date": "2025-10-25"
-    },
-    {
-      "id": "019a1acc-d0ca-75be-907f-0252914d9ff7",
-      "content": "toast白色问题",
-      "status": false,
-      "date": "2025-10-25"
-    }
-  ]
+  "todos": []
 }

@@ -1,27 +1,25 @@
 export function TodoTitleSkeleton() {
   return (
-    <div className="animate-pulse bg-gray-300 font-bold h-10 mb-4 mx-auto rounded-md text-3xl text-center w-36" />
+    <div className="animate-pulse bg-gray-300 h-10 mb-4 mx-auto rounded-md w-48" />
   );
 }
 
 export function TodoFormSkeleton() {
   return (
-    <div className="flex gap-2 max-w-2xl mb-4 mx-auto text-center">
-      <div className="animate-pulse bg-gray-300 flex-1 h-12 rounded-md"></div>
-      <div className="animate-pulse bg-gray-300 h-12 rounded-md w-16"></div>
+    <div className="flex gap-4 max-w-2xl mb-4 mx-auto">
+      <div className="animate-pulse bg-gray-300 flex-1 h-9 rounded" />
+      <div className="animate-pulse bg-gray-300 h-9 rounded w-16" />
     </div>
   );
 }
 
 export function TodoListItemSkeleton() {
   return (
-    <li className="border flex items-center justify-between p-4 rounded-md transition-colors">
-      <div className="flex flex-1 gap-4 items-center min-w-0">
-        <div className="animate-pulse bg-gray-300 h-5 rounded shrink-0 w-5"></div>
-        <div className="animate-pulse bg-gray-300 h-5 rounded w-36"></div>
-      </div>
-      <div className="animate-pulse bg-gray-300 h-4 rounded shrink-0 w-16"></div>
-    </li>
+    <div className="border flex gap-4 p-3 rounded-md">
+      <div className="animate-pulse bg-gray-300 h-8 rounded w-8" />
+      <div className="animate-pulse bg-gray-300 flex-1 h-8 rounded" />
+      <div className="animate-pulse bg-gray-300 h-8 rounded w-24" />
+    </div>
   );
 }
 
@@ -31,11 +29,11 @@ export function TodoListSkeleton() {
   }));
 
   return (
-    <ul className="max-w-2xl mb-4 mx-auto space-y-4">
+    <div className="max-w-2xl mb-4 mx-auto space-y-4">
       {skeletonItems.map((item) => (
         <TodoListItemSkeleton key={item.id} />
       ))}
-    </ul>
+    </div>
   );
 }
 

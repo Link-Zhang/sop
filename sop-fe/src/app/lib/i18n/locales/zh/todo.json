@@ -1,10 +1,10 @@
 {
-  "error": "未知错误，请刷新重试",
-  "formButtonText": "创建",
+  "error": "出错了，请刷新页面",
+  "formButtonText": "添加",
   "formInputPlaceholder": "输入待办事项...",
   "formInputValidation": "待办事项不能为空",
-  "listEmptyText": "暂无事项，创建一个...",
-  "title": "待办事项",
+  "listEmptyText": "暂无事项，添加一个...",
+  "title": "待办列表",
   "create": {
     "error": "创建失败，请稍后重试",
     "success": "创建成功"
@@ -18,8 +18,11 @@
     "success": "更新成功"
   },
   "delete": {
-    "confirm": "确定删除此项？",
+    "cancel": "取消",
+    "continue": "继续",
+    "description": "此操作无法撤销，且数据将被永久删除。",
     "error": "删除失败，请稍后重试",
-    "success": "删除成功"
+    "success": "删除成功",
+    "title": "您确定要删除此项目吗？"
   }
 }

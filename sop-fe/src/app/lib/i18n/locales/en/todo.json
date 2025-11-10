@@ -18,8 +18,11 @@
     "success": "Update successfully"
   },
   "delete": {
-    "confirm": "Are you sure to delete the item?",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "description": "This action cannot be undone. And this will permanently delete the data.",
     "error": "Failed to delete, please retry",
-    "success": "Delete successfully"
+    "success": "Delete successfully",
+    "title": "Are you absolutely sure to delete the item?"
   }
 }

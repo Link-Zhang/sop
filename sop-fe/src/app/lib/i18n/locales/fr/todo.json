@@ -18,8 +18,11 @@
     "success": "Mis à jour avec succès"
   },
   "delete": {
-    "confirm": "Êtes-vous sûr de vouloir supprimer l'élément ?",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "description": "Cette action est irréversible. Les données seront définitivement supprimées.",
     "error": "Échec de la suppression, veuillez réessayer",
-    "success": "Supprimé avec succès"
+    "success": "Supprimé avec succès",
+    "title": "Êtes-vous absolument sûr de vouloir supprimer cet élément ?"
   }
 }

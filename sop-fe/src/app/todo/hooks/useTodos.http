@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ### PATCH
-PATCH http://localhost:3001/todos/1
+PATCH http://localhost:3001/todos/4
 Content-Type: application/json
 
 {
@@ -23,5 +23,5 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE http://localhost:3001/todos/1
+DELETE http://localhost:3001/todos/4
 Accept: application/json

@@ -19,6 +19,7 @@ const SYNC_KEY = `${LOCAL_STORAGE_KEY}Sync`;
 export default function useLanguage() {
   const [currentLanguage, setCurrentLanguage] =
     useState<SupportedLanguages>(DEFAULT_LANGUAGE);
+
   const [isReady, setIsReady] = useState(false);
 
   const changeLanguage = async (lng: SupportedLanguages) => {

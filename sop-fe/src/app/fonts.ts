@@ -11,13 +11,13 @@ export const Jetbrains_Mono = localFont({
     },
     {
       // can't use @
-      path: "./lib//fonts/JetBrainsMonoNLNerdFontMono-BoldItalic.woff2",
+      path: "./lib/fonts/JetBrainsMonoNLNerdFontMono-BoldItalic.woff2",
       weight: "700",
       style: "italic",
     },
     {
       // can't use @
-      path: "./lib//fonts/JetBrainsMonoNLNerdFontMono-Regular.woff2",
+      path: "./lib/fonts/JetBrainsMonoNLNerdFontMono-Regular.woff2",
       weight: "400",
       style: "normal",
     },

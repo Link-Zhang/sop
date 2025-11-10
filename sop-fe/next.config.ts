@@ -3,9 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
     "localhost",
-    "17521270049.kmdns.net",
-    "54dada.com",
-    "*.54dada.com",
+    "linkzhang.duckdns.org",
+    "*.duckdns.org",
     "linkzhang.com",
     "*.linkzhang.com",
     "10.0.0.254",

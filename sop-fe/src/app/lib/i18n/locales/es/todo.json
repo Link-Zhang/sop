@@ -18,8 +18,11 @@
     "success": "Actualizado exitosamente"
   },
   "delete": {
-    "confirm": "¿Estás seguro de eliminar el elemento?",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "description": "Esta acción no se puede deshacer y eliminará los datos de forma permanente.",
     "error": "Error al eliminar, por favor reintenta",
-    "success": "Eliminado exitosamente"
+    "success": "Eliminado exitosamente",
+    "title": "¿Estás absolutamente seguro de eliminar este elemento?"
   }
 }

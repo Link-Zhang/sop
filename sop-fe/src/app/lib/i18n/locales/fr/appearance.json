@@ -1,5 +1,6 @@
 {
+  "auto": "Auto",
   "dark": "Sombre",
   "light": "Clair",
-  "system": "Système"
+  "tip": "Apparence"
 }
