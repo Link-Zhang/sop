@@ -2,7 +2,6 @@
   "compilerOptions": {
     "allowJs": true,
     "esModuleInterop": true,
-    //    "jsx": "preserve",
     "jsx": "react-jsx",
     "incremental": true,
     "isolatedModules": true,
