@@ -17,7 +17,7 @@ import {
   TooltipTrigger,
 } from "@/shadcn/components/ui/tooltip";
 
-export default function AppearanceSwitcher() {
+export function AppearanceSwitcher() {
   const { theme, setTheme } = useTheme();
 
   const { t } = useTranslation("appearance");

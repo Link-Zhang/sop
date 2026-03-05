@@ -3,11 +3,11 @@ import { clsx } from "clsx";
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 import I18nextProviderWrapper from "@/app/components/ui/I18nextProviderWrapper";
+import LayoutFooter from "@/app/components/ui/LayoutFooter";
 import LayoutHeader from "@/app/components/ui/LayoutHeader";
 import ToasterWrapper from "@/app/components/ui/ToasterWrapper";
 import { Jetbrains_Mono } from "@/app/fonts";
 import { DEFAULT_LANGUAGE } from "@/app/lib/i18n/i18n";
-import { getCurrentYear } from "@/app/lib/utils";
 import { TooltipProvider } from "@/shadcn/components/ui/tooltip";
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -29,9 +29,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <TooltipProvider>
               <LayoutHeader />
               <main className="flex-grow px-4 py-3">{children}</main>
-              <footer className="px-4 py-3 text-center text-sm">
-                CopyRight © {getCurrentYear()} Link-Zhang
-              </footer>
+              <LayoutFooter />
               <ToasterWrapper />
             </TooltipProvider>
           </I18nextProviderWrapper>

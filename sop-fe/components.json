@@ -8,9 +8,12 @@
     "utils": "@/shadcn/lib/utils"
   },
   "iconLibrary": "lucide",
+  "menuColor": "default",
+  "menuAccent": "bold",
   "registries": {},
   "rsc": true,
-  "style": "new-york",
+  "rtl": true,
+  "style": "radix-vega",
   "tailwind": {
     "baseColor": "neutral",
     "config": "",

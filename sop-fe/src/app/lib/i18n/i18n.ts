@@ -11,9 +11,7 @@ export const SUPPORTED_LANGUAGES = [
 export const SUPPORTED_NAMESPACES = [
   "appearance",
   "default",
-  "home",
   "language",
-  "second",
   "todo",
 ] as const;
 

@@ -6,7 +6,7 @@ First, run the development server:
 
 ```bash
 # option:
-npm install -g pnpm
+npm install -g concurrently json-server@0.17.4 local-ssl-proxy pnpm
 # then:
 pnpm install
 # then:
