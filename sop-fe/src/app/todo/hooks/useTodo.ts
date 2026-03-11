@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import useSWR from "swr";
 import { v7 as uuid } from "uuid";
-import type { Todo } from "@/app/lib/types";
+import { TODO_API_URL } from "@/app/lib/apis";
 import { fetcher, getCurrentDate } from "@/app/lib/utils";
-
-const API_URL = "https://linkzhang.duckdns.org:31540/todos";
+import type { Todo } from "@/app/todo/lib/types";
 
 export default function useTodo() {
   const { data, error, isLoading, mutate } = useSWR<Todo[]>(
-    API_URL,
+    TODO_API_URL,
     fetcher.get,
     {
       onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
@@ -35,7 +34,7 @@ export default function useTodo() {
     const optimisticData = data ? [...data, newTodo] : [newTodo];
     try {
       await mutate(optimisticData, false);
-      const result = await fetcher.post<Todo>(API_URL, newTodo);
+      const result = await fetcher.post<Todo>(TODO_API_URL, newTodo);
       await mutate();
       toast.success(t("create.success"));
       return result;
@@ -52,7 +51,10 @@ export default function useTodo() {
       [];
     try {
       await mutate(optimisticData, false);
-      const result = await fetcher.patch<Todo>(`${API_URL}/${id}`, updates);
+      const result = await fetcher.patch<Todo>(
+        `${TODO_API_URL}/${id}`,
+        updates,
+      );
       await mutate();
       toast.success(t("update.success"));
       return result;
@@ -67,7 +69,7 @@ export default function useTodo() {
     const optimisticData = data?.filter((todo) => todo.id !== id) || [];
     try {
       await mutate(optimisticData, false);
-      const result = await fetcher.delete(`${API_URL}/${id}`);
+      const result = await fetcher.delete(`${TODO_API_URL}/${id}`);
       await mutate();
       toast.success(t("delete.success"));
       return result;

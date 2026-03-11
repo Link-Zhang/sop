@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import type { TodoErrorProps } from "@/app/lib/types";
+import type { TodoErrorProps } from "@/app/todo/lib/types";
 
 export default function TodoError({ error }: TodoErrorProps) {
   const { t } = useTranslation("todo");

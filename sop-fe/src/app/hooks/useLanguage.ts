@@ -8,26 +8,15 @@ import { initReactI18next } from "react-i18next";
 import {
   DEFAULT_LANGUAGE,
   LOCAL_STORAGE_KEY,
+  LOCAL_STORAGE_SYNC_KEY,
   SUPPORTED_LNGS,
   SUPPORTED_NAMESPACES,
   type SupportedLanguages,
   type SupportedNamespaces,
 } from "@/app/lib/i18n/i18n";
 
-const SYNC_KEY = `${LOCAL_STORAGE_KEY}Sync`;
-
 export default function useLanguage() {
-  const [currentLanguage, setCurrentLanguage] =
-    useState<SupportedLanguages>(DEFAULT_LANGUAGE);
-
   const [isReady, setIsReady] = useState(false);
-
-  const changeLanguage = async (lng: SupportedLanguages) => {
-    await i18n.changeLanguage(lng);
-    document.documentElement.lang = lng;
-    setCurrentLanguage(lng);
-    localStorage.setItem(SYNC_KEY, Date.now().toString());
-  };
 
   useEffect(() => {
     const initializeLanguage = async () => {
@@ -50,6 +39,7 @@ export default function useLanguage() {
             ),
           )
           .init({
+            debug: false,
             detection: {
               caches: ["localStorage"],
               convertDetectedLanguage: (lng) => {
@@ -68,31 +58,31 @@ export default function useLanguage() {
             react: {
               useSuspense: true,
             },
+            showSupportNotice: false,
             supportedLngs: SUPPORTED_LNGS,
           });
       }
     };
     initializeLanguage().then(() => {
       document.documentElement.lang = i18n.language;
-      setCurrentLanguage(i18n.language as SupportedLanguages);
       setIsReady(true);
     });
   }, []);
 
   useEffect(() => {
     const handleStorageChange = async (event: StorageEvent) => {
-      if (event.key === SYNC_KEY && event.newValue) {
+      if (event.key === LOCAL_STORAGE_SYNC_KEY && event.newValue) {
         const detectedLng = localStorage.getItem(
           LOCAL_STORAGE_KEY,
         ) as SupportedLanguages;
         if (
           detectedLng &&
-          detectedLng !== currentLanguage &&
+          detectedLng !== i18n.language &&
           SUPPORTED_LNGS.includes(detectedLng)
         ) {
-          await i18n.changeLanguage(detectedLng);
-          document.documentElement.lang = detectedLng;
-          setCurrentLanguage(detectedLng);
+          i18n.changeLanguage(detectedLng).then(() => {
+            document.documentElement.lang = detectedLng;
+          });
         }
       }
     };
@@ -102,11 +92,9 @@ export default function useLanguage() {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, [currentLanguage]);
+  }, []);
 
   return {
-    changeLanguage,
-    currentLanguage,
     i18n,
     isReady,
   };

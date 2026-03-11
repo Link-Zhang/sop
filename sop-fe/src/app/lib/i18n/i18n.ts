@@ -1,5 +1,7 @@
 export const LOCAL_STORAGE_KEY = "i18nextLng" as const;
 
+export const LOCAL_STORAGE_SYNC_KEY = `${LOCAL_STORAGE_KEY}Sync`;
+
 export const SUPPORTED_LANGUAGES = [
   { code: "en", name: "English", nativeName: "English", countryCode: "us" },
   { code: "es", name: "Spanish", nativeName: "Español", countryCode: "es" },
@@ -15,7 +17,7 @@ export const SUPPORTED_NAMESPACES = [
   "todo",
 ] as const;
 
-export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES[1].code;
+export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES[0]?.code ?? "en";
 
 export const SUPPORTED_LNGS = SUPPORTED_LANGUAGES.map((lang) => lang.code);
 

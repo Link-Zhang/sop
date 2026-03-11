@@ -1,8 +1,8 @@
 "use client";
 
 import { Moon, Sun, SunMoon } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useTranslation } from "react-i18next";
+import type { ReactNode } from "react";
+import type { AppearanceSwitcherUIProps } from "@/app/lib/types";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   DropdownMenu,
@@ -17,15 +17,18 @@ import {
   TooltipTrigger,
 } from "@/shadcn/components/ui/tooltip";
 
-export function AppearanceSwitcher() {
-  const { theme, setTheme } = useTheme();
+const valueToIcon: Record<string, ReactNode> = {
+  dark: <Moon className="mr-2 h-4 w-4" />,
+  light: <Sun className="mr-2 h-4 w-4" />,
+  system: <SunMoon className="mr-2 h-4 w-4" />,
+};
 
-  const { t } = useTranslation("appearance");
-
-  const handleValueChange = (value: string) => {
-    setTheme(value);
-  };
-
+export default function AppearanceSwitcherUI({
+  onValueChange,
+  options,
+  tooltipText,
+  value,
+}: AppearanceSwitcherUIProps) {
   return (
     <DropdownMenu>
       <Tooltip>
@@ -37,22 +40,16 @@ export function AppearanceSwitcher() {
             </Button>
           </DropdownMenuTrigger>
         </TooltipTrigger>
-        <TooltipContent> {t("tip")}</TooltipContent>
+        <TooltipContent>{tooltipText}</TooltipContent>
       </Tooltip>
-      <DropdownMenuContent>
-        <DropdownMenuRadioGroup value={theme} onValueChange={handleValueChange}>
-          <DropdownMenuRadioItem value="system">
-            <SunMoon />
-            {t("auto")}
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">
-            <Moon />
-            {t("dark")}
-          </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="light">
-            <Sun />
-            {t("light")}
-          </DropdownMenuRadioItem>
+      <DropdownMenuContent className={"w-40"}>
+        <DropdownMenuRadioGroup value={value} onValueChange={onValueChange}>
+          {options.map((option) => (
+            <DropdownMenuRadioItem key={option.value} value={option.value}>
+              {valueToIcon[option.value]}
+              {option.label}
+            </DropdownMenuRadioItem>
+          ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

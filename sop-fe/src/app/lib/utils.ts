@@ -1,7 +1,15 @@
 import https from "node:https";
 import axios from "axios";
 
-const DATE_LOCALE = "lt-LT";
+export const SUPPORTED_LOCALES = [
+  { code: "en", locale: "en-US" },
+  { code: "es", locale: "es-ES" },
+  { code: "fr", locale: "fr-FR" },
+  { code: "ru", locale: "ru-RU" },
+  { code: "zh", locale: "zh-CN" },
+] as const;
+
+export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0]?.locale ?? "en-US";
 
 export const client = axios.create({
   headers: {
@@ -24,6 +32,6 @@ export const fetcher = {
   delete: <T>(url: string) => client.delete<T>(url).then((res) => res.data),
 };
 
-export const getCurrentDate = () => new Date().toLocaleDateString(DATE_LOCALE);
+export const getCurrentDate = () => new Date().toISOString().slice(0, 10);
 
 export const getCurrentYear = () => new Date().getFullYear();
