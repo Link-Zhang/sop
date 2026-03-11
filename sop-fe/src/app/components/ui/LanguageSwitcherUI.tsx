@@ -1,13 +1,9 @@
 "use client";
 
 import { Languages } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import Flag from "react-world-flags";
-import useLanguage from "@/app/hooks/useLanguage";
-import {
-  SUPPORTED_LANGUAGES,
-  type SupportedLanguages,
-} from "@/app/lib/i18n/i18n";
+import { SUPPORTED_LANGUAGES } from "@/app/lib/i18n/i18n";
+import type { LanguageSwitcherUIProps } from "@/app/lib/types";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   DropdownMenu,
@@ -22,32 +18,26 @@ import {
   TooltipTrigger,
 } from "@/shadcn/components/ui/tooltip";
 
-export default function LanguageSwitcher() {
-  const { changeLanguage, currentLanguage, isReady } = useLanguage();
-
-  const { t } = useTranslation("language");
-
-  const handleValueChange = (value: string) => {
-    changeLanguage(value as SupportedLanguages).then();
-  };
-
+export default function LanguageSwitcherUI({
+  disabled,
+  onValueChange,
+  tooltipText,
+  value,
+}: LanguageSwitcherUIProps) {
   return (
     <DropdownMenu>
       <Tooltip>
         <TooltipTrigger asChild>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" disabled={!isReady}>
+            <Button variant="outline" size="icon" disabled={disabled}>
               <Languages />
             </Button>
           </DropdownMenuTrigger>
         </TooltipTrigger>
-        <TooltipContent> {t("tip")}</TooltipContent>
+        <TooltipContent>{tooltipText}</TooltipContent>
       </Tooltip>
-      <DropdownMenuContent>
-        <DropdownMenuRadioGroup
-          value={currentLanguage}
-          onValueChange={handleValueChange}
-        >
+      <DropdownMenuContent className={"w-36"}>
+        <DropdownMenuRadioGroup value={value} onValueChange={onValueChange}>
           {SUPPORTED_LANGUAGES.map((lang) => (
             <DropdownMenuRadioItem key={lang.code} value={lang.code}>
               <Flag className="h-4 w-6" code={lang.countryCode} />

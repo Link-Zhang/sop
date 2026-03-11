@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     "*.linkzhang.com",
     "10.0.0.254",
     "127.0.0.1",
-    "192.168.0.254 ",
+    "192.168.0.254",
     "*",
   ],
   crossOrigin: "anonymous",

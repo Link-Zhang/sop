@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import type { Todo } from "@/app/lib/types";
 import TodoListItem from "@/app/todo/components/TodoListItem";
-import { TodoListSkeleton } from "@/app/todo/components/TodoSkeletons";
+import { TodoListSkeleton } from "@/app/todo/components/ui/TodoSkeletons";
 import TodoError from "@/app/todo/error";
 import useTodo from "@/app/todo/hooks/useTodo";
+import type { Todo } from "@/app/todo/lib/types";
 
 export default function TodoList() {
   const { todos, isLoading, error } = useTodo();
