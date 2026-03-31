@@ -4,9 +4,9 @@ export const LOCAL_STORAGE_SYNC_KEY = `${LOCAL_STORAGE_KEY}Sync`;
 
 export const SUPPORTED_LANGUAGES = [
   { code: "en", name: "English", nativeName: "English", countryCode: "us" },
-  { code: "es", name: "Spanish", nativeName: "Español", countryCode: "es" },
-  { code: "fr", name: "French", nativeName: "Français", countryCode: "fr" },
-  { code: "ru", name: "Russian", nativeName: "Русский", countryCode: "ru" },
+  // { code: "es", name: "Spanish", nativeName: "Español", countryCode: "es" },
+  // { code: "fr", name: "French", nativeName: "Français", countryCode: "fr" },
+  // { code: "ru", name: "Russian", nativeName: "Русский", countryCode: "ru" },
   { code: "zh", name: "Chinese", nativeName: "中文", countryCode: "cn" },
 ] as const;
 

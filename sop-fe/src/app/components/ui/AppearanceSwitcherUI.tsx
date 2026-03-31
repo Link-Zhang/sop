@@ -42,7 +42,7 @@ export default function AppearanceSwitcherUI({
         </TooltipTrigger>
         <TooltipContent>{tooltipText}</TooltipContent>
       </Tooltip>
-      <DropdownMenuContent className={"w-40"}>
+      <DropdownMenuContent className="w-fit min-w-fit">
         <DropdownMenuRadioGroup value={value} onValueChange={onValueChange}>
           {options.map((option) => (
             <DropdownMenuRadioItem key={option.value} value={option.value}>

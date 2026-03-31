@@ -58,7 +58,6 @@ export default function useLanguage() {
             react: {
               useSuspense: true,
             },
-            showSupportNotice: false,
             supportedLngs: SUPPORTED_LNGS,
           });
       }

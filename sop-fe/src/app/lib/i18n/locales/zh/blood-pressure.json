@@ -1,0 +1,84 @@
+{
+  "bloodPressureLevels": {
+    "low": "低血压",
+    "normal": "理想血压",
+    "elevated": "正常高值",
+    "high": "1级高血压(轻度)",
+    "veryHigh": "2级高血压(中度)",
+    "severe": "3级高血压(重度)",
+    "ish": "单纯收缩期高血压",
+    "idh": "单纯舒张期高血压"
+  },
+  "error": "数据错误",
+  "fields": {
+    "systolicBloodPressure": "收缩压",
+    "diastolicBloodPressure": "舒张压",
+    "heartRate": "心率"
+  },
+  "filter": {
+    "clear": "清除",
+    "empty": "未找到结果",
+    "reset": "重置",
+    "summary": "已选{{count}}项"
+  },
+  "heartRateLevels": {
+    "low": "过缓",
+    "normal": "理想",
+    "elevated": "正常高值",
+    "high": "过速"
+  },
+  "hider": "列设置",
+  "impressionBloodPressure": "血压",
+  "impressionHeartRate": "心率",
+  "title": "血压",
+  "titles": {
+    "diastolicBloodPressure": "舒张压",
+    "heartRate": "心率",
+    "impression": "诊断",
+    "measuredAt": "测量时间",
+    "systolicBloodPressure": "收缩压"
+  },
+  "validation": {
+    "diastolicMustBeLessThanSystolic": "舒张压必须小于收缩压",
+    "max": "{{field}}不能高于{{max}}",
+    "min": "{{field}}不能低于{{min}}",
+    "invalidInput": "数据不合法：{{message}}",
+    "required": "{{field}}为必填项"
+  },
+  "create": {
+    "error": "创建失败，请稍后重试",
+    "success": "创建成功",
+    "form": {
+      "cancel": "取消",
+      "description": "记录血压和心率。",
+      "submit": "提交",
+      "text": "添加",
+      "title": "添加记录"
+    }
+  },
+  "read": {
+    "error": "读取失败，请稍后重试",
+    "success": "读取成功"
+  },
+  "update": {
+    "error": "更新失败，请稍后重试",
+    "success": "更新成功",
+    "form": {
+      "cancel": "取消",
+      "description": "更新血压和心率。",
+      "submit": "提交",
+      "text": "更新",
+      "title": "更新记录"
+    }
+  },
+  "delete": {
+    "dialog": {
+      "cancel": "取消",
+      "continue": "继续",
+      "description": "此操作无法撤销，且数据将被永久删除。",
+      "title": "您确定要删除此项吗?"
+    },
+    "error": "删除失败，请稍后重试",
+    "success": "删除成功"
+  }
+}

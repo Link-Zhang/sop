@@ -9,7 +9,12 @@ import LayoutHeaderUI from "@/app/components/ui/LayoutHeaderUI";
 export default function LayoutHeader() {
   const { t } = useTranslation("default");
 
-  const leftNav = <NavLink href="/todo">{t("todo")}</NavLink>;
+  const leftNav = (
+    <>
+      <NavLink href="/todo">{t("todo")}</NavLink>
+      <NavLink href="/blood-pressure">{t("bloodPressure")}</NavLink>
+    </>
+  );
 
   const rightNav = (
     <>

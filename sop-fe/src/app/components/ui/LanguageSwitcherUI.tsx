@@ -35,7 +35,7 @@ export default function LanguageSwitcherUI({
         </TooltipTrigger>
         <TooltipContent>{tooltipText}</TooltipContent>
       </Tooltip>
-      <DropdownMenuContent className={"w-36"}>
+      <DropdownMenuContent className="w-fit min-w-fit">
         <DropdownMenuRadioGroup value={value} onValueChange={onValueChange}>
           {SUPPORTED_LANGUAGES.map((lang) => (
             <DropdownMenuRadioItem key={lang.code} value={lang.code}>

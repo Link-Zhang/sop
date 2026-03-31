@@ -16,6 +16,7 @@ export default function NavLinkUI({
         isActive ? "border-b-foreground font-bold" : "hover:border-b-gray-300",
         className,
       )}
+      prefetch={false}
       {...rest}
     >
       {children}

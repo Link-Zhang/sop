@@ -18,6 +18,7 @@ export default function TodoFormUI({
   return (
     <form
       className={cn("flex gap-4 items-start max-w-2xl mb-4 mx-auto", className)}
+      id="todo-form"
       onSubmit={onSubmit}
     >
       <Controller
@@ -42,7 +43,9 @@ export default function TodoFormUI({
           </Field>
         )}
       />
-      <Button type="submit">{buttonText}</Button>
+      <Button form="todo-form" type="submit">
+        {buttonText}
+      </Button>
     </form>
   );
 }

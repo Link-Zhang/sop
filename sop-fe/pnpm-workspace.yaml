@@ -1,0 +1,5 @@
+allowBuilds:
+  msw: false
+  sharp: false
+minimumReleaseAgeExclude:
+  - i18next@26.3.1
