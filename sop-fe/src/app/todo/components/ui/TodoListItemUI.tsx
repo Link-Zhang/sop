@@ -1,86 +1,51 @@
-"use client";
-
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/app/lib/utils";
+import DeleteDialogUI from "@/app/components/ui/DeleteDialogUI";
 import type { TodoListItemUIProps } from "@/app/todo/lib/types";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/shadcn/components/ui/alert-dialog";
 import { Button } from "@/shadcn/components/ui/button";
 import { Checkbox } from "@/shadcn/components/ui/checkbox";
 import { Label } from "@/shadcn/components/ui/label";
 import { cn } from "@/shadcn/lib/utils";
 
 export default function TodoListItemUI({
-  checkboxClassName,
-  currentLanguage,
-  deleteCancel,
-  deleteContinue,
-  deleteDescription,
-  deleteTitle,
-  labelClassName,
-  liClassName,
+  content,
+  deleteLabels,
+  deleteOpen,
+  id,
+  localeDate,
   onCheckedChange,
-  onClick,
-  todo,
+  onDeleteOpenChange,
+  onDeleteConfirm,
+  status,
 }: TodoListItemUIProps) {
-  const { id, content, status, date } = todo;
-
-  const locale =
-    SUPPORTED_LOCALES.find((item) => item.code === currentLanguage)?.locale ??
-    DEFAULT_LOCALE;
-
-  const localeDate = new Intl.DateTimeFormat(locale).format(new Date(date));
-
   return (
-    <li
-      className={cn(
-        "border flex gap-4 hover:bg-muted/50 items-center justify-between p-3 rounded-md transition-colors",
-        liClassName,
-      )}
-    >
+    <li className="border flex gap-4 hover:bg-muted/50 items-center justify-between p-3 rounded-md transition-colors">
       <Checkbox
         checked={status}
-        className={cn("h-6 shrink-0 w-6", checkboxClassName)}
+        className="h-6 shrink-0 w-6"
         id={id}
-        onCheckedChange={() => onCheckedChange(id, !status)}
+        onCheckedChange={(checked) => onCheckedChange(Boolean(checked))}
       />
       <Label
         className={cn(
           "flex-1 min-w-0 truncate",
           status && "italic line-through text-muted-foreground",
-          labelClassName,
         )}
         htmlFor={id}
       >
         {content}
       </Label>
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button className="shrink-0 text-primary text-xs" variant="ghost">
-            {localeDate}
-          </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{deleteTitle}</AlertDialogTitle>
-            <AlertDialogDescription>{deleteDescription}</AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{deleteCancel}</AlertDialogCancel>
-            <AlertDialogAction onClick={() => onClick(id)}>
-              {deleteContinue}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <Button
+        className="shrink-0 text-destructive text-xs"
+        onClick={() => onDeleteOpenChange(true)}
+        variant="ghost"
+      >
+        {localeDate}
+      </Button>
+      <DeleteDialogUI
+        labels={deleteLabels}
+        onConfirm={onDeleteConfirm}
+        onOpenChange={onDeleteOpenChange}
+        open={deleteOpen}
+      />
     </li>
   );
 }

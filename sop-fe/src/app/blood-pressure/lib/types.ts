@@ -14,17 +14,3 @@ export interface ColumnHeaderProps {
   canSort?: boolean;
   id: string;
 }
-
-export interface DeleteDialogUIProps {
-  onConfirm: () => void;
-  onOpenChange: (open: boolean) => void;
-  open: boolean;
-  texts: DeleteDialogUITexts;
-}
-
-interface DeleteDialogUITexts {
-  cancel: string;
-  continue: string;
-  description: string;
-  title: string;
-}

@@ -1,16 +1,25 @@
 import type Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-interface ThemeOption {
-  label: string;
-  value: string;
-}
-
 export interface AppearanceSwitcherUIProps {
   onValueChange: (value: string) => void;
   options: readonly ThemeOption[];
   tooltipText: string;
   value: string;
+}
+
+export interface DeleteDialogUILabels {
+  cancel: string;
+  confirm: string;
+  description: string;
+  title: string;
+}
+
+export interface DeleteDialogUIProps {
+  labels: DeleteDialogUILabels;
+  onConfirm: () => void;
+  onOpenChange: (open: boolean) => void;
+  open: boolean;
 }
 
 export interface LanguageSwitcherUIProps {
@@ -34,4 +43,23 @@ export interface LayoutHeaderUIProps {
 
 export interface NavLinkUIProps extends ComponentProps<typeof Link> {
   isActive: boolean;
+}
+
+export type OptimisticUpdate<T> = (
+  data: T[] | undefined,
+) => OptimisticUpdateResult<T>;
+
+export type OptimisticUpdateResult<T> = {
+  data: T[];
+  replace: ReplaceUpdater<T>;
+  rollback: RollbackUpdater<T>;
+};
+
+export type ReplaceUpdater<T> = (serverData: T, currentData?: T[]) => T[];
+
+export type RollbackUpdater<T> = (data: T[] | undefined) => T[];
+
+interface ThemeOption {
+  label: string;
+  value: string;
 }

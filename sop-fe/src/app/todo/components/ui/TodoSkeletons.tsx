@@ -37,7 +37,7 @@ export function TodoListSkeleton() {
   );
 }
 
-export function TodoPageSkeleton() {
+export default function TodoPageSkeleton() {
   return (
     <>
       <TodoTitleSkeleton />

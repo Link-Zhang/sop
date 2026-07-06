@@ -2,8 +2,10 @@ import type { Row } from "@tanstack/react-table";
 import { Copy, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import RowUpdate from "@/app/blood-pressure/components/RowUpdate";
 import useBloodPressure from "@/app/blood-pressure/hooks/useBloodPressure";
 import type { BloodPressure } from "@/app/blood-pressure/lib/types";
+import DeleteDialogUI from "@/app/components/ui/DeleteDialogUI";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   DropdownMenu,
@@ -12,8 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
-import DeleteDialogUI from "./ui/DeleteDialogUI";
-import RowUpdate from "@/app/blood-pressure/components/RowUpdate";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -36,10 +36,10 @@ export default function RowOtherActions<TData>({
     setDeleteOpen(false);
   };
 
-  const deleteTexts = useMemo(
+  const deleteLabels = useMemo(
     () => ({
       cancel: t("delete.dialog.cancel"),
-      continue: t("delete.dialog.continue"),
+      confirm: t("delete.dialog.confirm"),
       description: t("delete.dialog.description"),
       title: t("delete.dialog.title"),
     }),
@@ -84,7 +84,7 @@ export default function RowOtherActions<TData>({
         onConfirm={handleDeleteConfirm}
         onOpenChange={setDeleteOpen}
         open={deleteOpen}
-        texts={deleteTexts}
+        labels={deleteLabels}
       />
     </>
   );

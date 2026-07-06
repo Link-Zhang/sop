@@ -1,15 +1,7 @@
 import https from "node:https";
 import axios from "axios";
 
-export const SUPPORTED_LOCALES = [
-  { code: "en", locale: "en-US" },
-  { code: "es", locale: "es-ES" },
-  { code: "fr", locale: "fr-FR" },
-  { code: "ru", locale: "ru-RU" },
-  { code: "zh", locale: "zh-CN" },
-] as const;
-
-export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0]?.locale ?? "en-US";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/app/lib/i18n/i18n";
 
 export const client = axios.create({
   headers: {
@@ -32,6 +24,12 @@ export const fetcher = {
   delete: <T>(url: string) => client.delete<T>(url).then((res) => res.data),
 };
 
-export const getCurrentDate = () => new Date().toISOString().slice(0, 10);
+export const formatDate = (date: string | Date, language: string): string => {
+  const locale =
+    SUPPORTED_LOCALES.find((item) => item.code === language)?.locale ??
+    DEFAULT_LOCALE;
+
+  return new Intl.DateTimeFormat(locale).format(new Date(date));
+};
 
 export const getCurrentYear = () => new Date().getFullYear();

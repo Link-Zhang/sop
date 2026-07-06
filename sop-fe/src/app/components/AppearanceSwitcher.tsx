@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
-import AppearanceSwitcherUI from "./ui/AppearanceSwitcherUI";
+import AppearanceSwitcherUI from "@/app/components/ui/AppearanceSwitcherUI";
 
 export function AppearanceSwitcher() {
   const { theme, setTheme } = useTheme();

@@ -1,39 +1,47 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import z from "zod";
 import TodoFormUI from "@/app/todo/components/ui/TodoFormUI";
-import useTodo from "@/app/todo/hooks/useTodo";
+import useTodoCUD from "@/app/todo/hooks/useTodoCUD";
+import {
+  type CreateTodo,
+  createTodoSchema,
+  type TodoFormUILabels,
+} from "@/app/todo/lib/types";
 
 export default function TodoForm() {
-  const { createTodo } = useTodo();
-
-  const { t } = useTranslation("todo");
-
-  const formSchema = z.object({
-    content: z.string().min(1, t("formInputValidation")),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<CreateTodo>({
     defaultValues: { content: "" },
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(createTodoSchema),
   });
+  const { createTodo } = useTodoCUD();
+  const { t } = useTranslation("todo");
+  const labels: TodoFormUILabels = useMemo(
+    () => ({
+      placeholder: t("create.form.placeholder", {
+        field: t("fields.content"),
+      }),
+      required: t("validation.required", {
+        field: t("fields.content"),
+      }),
+      submit: t("create.form.submit"),
+    }),
+    [t],
+  );
 
-  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
-    const result = await createTodo(data.content.trim());
+  const handleSubmit = (data: CreateTodo) => {
     form.reset();
-    return result;
+    createTodo({ content: data.content });
   };
 
   return (
     <TodoFormUI
-      buttonText={t("formButtonText")}
       control={form.control}
+      labels={labels}
       onSubmit={form.handleSubmit(handleSubmit)}
-      placeholder={t("formInputPlaceholder")}
-      validation={t("formInputValidation")}
     />
   );
 }

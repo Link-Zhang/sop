@@ -1,12 +1,22 @@
 {
+  "empty": "暂无数据，添加一个...",
   "error": "出错了，请刷新页面",
-  "formButtonText": "添加",
-  "formInputPlaceholder": "输入待办事项...",
-  "formInputValidation": "待办事项不能为空",
-  "listEmptyText": "暂无事项，添加一个...",
+  "fields": {
+    "id": "待办序号",
+    "content": "待办事项",
+    "status": "待办状态",
+    "date": "待办日期"
+  },
   "title": "待办列表",
+  "validation": {
+    "required": "{{field}}为必填项"
+  },
   "create": {
     "error": "创建失败，请稍后重试",
+    "form": {
+      "placeholder": "请输入{{field}}...",
+      "submit": "添加"
+    },
     "success": "创建成功"
   },
   "read": {
@@ -18,11 +28,13 @@
     "success": "更新成功"
   },
   "delete": {
-    "cancel": "取消",
-    "continue": "继续",
-    "description": "此操作无法撤销，且数据将被永久删除。",
+    "dialog": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "description": "此操作无法撤销，且数据将被永久删除。",
+      "title": "您确定要删除此项吗?"
+    },
     "error": "删除失败，请稍后重试",
-    "success": "删除成功",
-    "title": "您确定要删除此项目吗？"
+    "success": "删除成功"
   }
 }

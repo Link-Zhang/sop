@@ -1,44 +1,41 @@
-import type React from "react";
+import type { ComponentProps } from "react";
 import type { Control } from "react-hook-form";
+import z from "zod";
+import type { DeleteDialogUILabels } from "@/app/lib/types";
 
-export interface Todo {
-  id: string;
-  content: string;
-  status: boolean;
-  date: string;
-}
+export const todoSchema = z.object({
+  id: z.uuidv7(),
+  content: z.string().trim().min(1),
+  status: z.boolean(),
+  date: z.iso.datetime(),
+});
 
-export interface TodoErrorProps {
-  error?: Error;
+export const createTodoSchema = todoSchema.pick({ content: true });
+
+export type Todo = z.infer<typeof todoSchema>;
+
+export type CreateTodo = z.infer<typeof createTodoSchema>;
+
+export interface TodoFormUILabels {
+  placeholder: string;
+  required: string;
+  submit: string;
 }
 
 export interface TodoFormUIProps {
-  buttonText: string;
-  className?: string;
-  control: Control<{ content: string }>;
-  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  placeholder: string;
-  validation: string;
+  control: Control<CreateTodo>;
+  labels: TodoFormUILabels;
+  onSubmit: ComponentProps<"form">["onSubmit"];
 }
 
 export interface TodoListItemUIProps {
-  checkboxClassName?: string;
-  currentLanguage: string;
-  deleteCancel: string;
-  deleteContinue: string;
-  deleteDescription: string;
-  deleteTitle: string;
-  labelClassName?: string;
-  liClassName?: string;
-  onCheckedChange: (
-    id: string,
-    completed: boolean,
-  ) => Promise<Todo | undefined>;
-  onClick: (id: string) => Promise<unknown>;
-  todo: Todo;
-}
-
-export interface TodoTitleUIProps {
-  className?: string;
-  title: string;
+  content: string;
+  deleteLabels: DeleteDialogUILabels;
+  deleteOpen: boolean;
+  id: string;
+  localeDate: string;
+  onCheckedChange: (checked: boolean) => void;
+  onDeleteOpenChange: (open: boolean) => void;
+  onDeleteConfirm: () => void;
+  status: boolean;
 }

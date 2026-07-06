@@ -18,7 +18,7 @@ export default function useBloodPressure() {
     {
       onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
         if (error && typeof error === "object" && "status" in error) {
-          if (error.status === 404 || error.status === 400) return;
+          if (error.status === 400 || error.status === 404) return;
         }
         if (retryCount >= 3) return;
         const timeout = Math.min(1000 * 2 ** retryCount, 8000);

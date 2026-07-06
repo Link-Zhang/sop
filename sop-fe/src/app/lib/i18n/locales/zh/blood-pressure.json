@@ -74,7 +74,7 @@
   "delete": {
     "dialog": {
       "cancel": "取消",
-      "continue": "继续",
+      "confirm": "确认",
       "description": "此操作无法撤销，且数据将被永久删除。",
       "title": "您确定要删除此项吗?"
     },
