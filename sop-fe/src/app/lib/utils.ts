@@ -1,5 +1,5 @@
 import https from "node:https";
-import axios from "axios";
+import axios, { type AxiosError } from "axios";
 
 import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/app/lib/i18n/i18n";
 
@@ -19,8 +19,8 @@ export const fetcher = {
   get: <T>(url: string) => client.get<T>(url).then((res) => res.data),
   patch: <T, D = unknown>(url: string, data?: D) =>
     client.patch<T>(url, data).then((res) => res.data),
-  put: <T, D = unknown>(url: string, data?: D) =>
-    client.put<T>(url, data).then((res) => res.data),
+  // put: <T, D = unknown>(url: string, data?: D) =>
+  //   client.put<T>(url, data).then((res) => res.data),
   delete: <T>(url: string) => client.delete<T>(url).then((res) => res.data),
 };
 
@@ -33,3 +33,9 @@ export const formatDate = (date: string | Date, language: string): string => {
 };
 
 export const getCurrentYear = () => new Date().getFullYear();
+
+export const retryHandler = (failureCount: number, error: unknown) => {
+  const status = (error as AxiosError).response?.status;
+  if (status && 400 <= status && status < 500) return false;
+  return failureCount <= 2;
+};

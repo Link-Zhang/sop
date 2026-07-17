@@ -63,3 +63,8 @@ interface ThemeOption {
   label: string;
   value: string;
 }
+
+export interface TitleUIProps {
+  onClick: () => void;
+  title: string;
+}

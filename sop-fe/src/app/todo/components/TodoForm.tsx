@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import TodoFormUI from "@/app/todo/components/ui/TodoFormUI";
-import useTodoCUD from "@/app/todo/hooks/useTodoCUD";
+import useTodo from "@/app/todo/hooks/useTodo";
 import {
   type CreateTodo,
   createTodoSchema,
@@ -17,7 +17,7 @@ export default function TodoForm() {
     defaultValues: { content: "" },
     resolver: zodResolver(createTodoSchema),
   });
-  const { createTodo } = useTodoCUD();
+  const { createTodo } = useTodo();
   const { t } = useTranslation("todo");
   const labels: TodoFormUILabels = useMemo(
     () => ({

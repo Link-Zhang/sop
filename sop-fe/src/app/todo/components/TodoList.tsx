@@ -1,16 +1,15 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
+import useGetQuery from "@/app/hooks/useGetQuery";
 import { TODO_API_URL } from "@/app/lib/apis";
 import TodoListItem from "@/app/todo/components/TodoListItem";
 import { TodoListSkeleton } from "@/app/todo/components/ui/TodoSkeletons";
 import TodoError from "@/app/todo/error";
-import useFetchQuery from "@/app/todo/hooks/useFetchQuery";
 import type { Todo } from "@/app/todo/lib/types";
 
 export default function TodoList() {
-  const { data = [], error, isPending } = useFetchQuery<Todo[]>(TODO_API_URL);
-
+  const { data = [], error, isPending } = useGetQuery<Todo[]>(TODO_API_URL);
   const { t } = useTranslation("todo");
 
   if (error) return <TodoError error={error} />;
