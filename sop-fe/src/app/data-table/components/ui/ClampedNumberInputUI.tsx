@@ -4,9 +4,8 @@ import type { ClampedNumberInputUIProps } from "@/app/data-table/lib/types";
 import { Input } from "@/shadcn/components/ui/input";
 
 export default function ClampedNumberInputUI({
-  onBlur,
-  onChange,
-  onKeyDown,
+  onCommit,
+  onValueChange,
   size,
   value,
 }: ClampedNumberInputUIProps) {
@@ -15,9 +14,14 @@ export default function ClampedNumberInputUI({
       className="text-center"
       id="clampedNumberInputUI"
       inputMode="numeric"
-      onBlur={onBlur}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
+      onBlur={onCommit}
+      onChange={(e) => onValueChange(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          onCommit();
+        }
+      }}
       size={size}
       style={{ width: "auto" }}
       type="text"

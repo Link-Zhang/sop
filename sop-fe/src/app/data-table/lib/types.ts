@@ -1,4 +1,5 @@
 import type {
+  ColumnDef,
   ColumnFiltersState,
   OnChangeFn,
   PaginationState,
@@ -6,42 +7,53 @@ import type {
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table";
-import type { LucideProps } from "lucide-react";
-import type {
-  ChangeEvent,
-  ForwardRefExoticComponent,
-  KeyboardEvent,
-  RefAttributes,
-} from "react";
+import type { TFunction } from "i18next";
+import type { ArrowDown, ArrowUp, ArrowUpDown, LucideIcon } from "lucide-react";
+import type React from "react";
 
 export interface ClampedNumberInputProps {
-  max: number;
+  max?: number;
+  min?: number;
   onChange: (value: number) => void;
   value: number;
 }
 
 export interface ClampedNumberInputUIProps {
-  onBlur: () => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onCommit: () => void;
+  onValueChange: (value: string) => void;
   size: number;
   value: string;
 }
 
-export interface DataTableFilterProps<TData> {
-  ids: string[];
-  onReset: () => void;
-  rows: Row<TData>[];
+export interface ColumnHeaderProps {
+  canSort?: boolean;
+  id: string;
+  label: string;
 }
 
-export interface DataTableFilterUIProps<TData> {
+export interface ColumnHeaderUIProps {
+  canSort: boolean;
+  label: string;
+  onClick?: () => void;
+  priority?: number;
+  sortIcon?: typeof ArrowUp | typeof ArrowDown | typeof ArrowUpDown;
+}
+
+export interface ColumnHiderItem {
+  header: string;
+  id: string;
+  visible: boolean;
+}
+
+export interface DataTableColumnHiderProps {
   ids: string[];
-  onClear: (id: string) => void;
-  onReset: () => void;
-  onToggle: (id: string, range: [number, number]) => void;
-  rows: Row<TData>[];
-  show: boolean;
-  text: string;
+  t: TFunction;
+}
+
+export interface DataTableColumnHiderUIProps {
+  columns: ColumnHiderItem[];
+  label: string;
+  onToggle: (id: string) => void;
 }
 
 export interface DataTablePaginationProps {
@@ -50,67 +62,86 @@ export interface DataTablePaginationProps {
 }
 
 export interface DataTablePaginationUIProps {
-  onPageIndexChange: (pageIndex: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  currentPage: number;
   pageCount: number;
-  pageIndex: number;
   pageSize: number;
-  rowCount: number;
+  pageSizeOptions: number[];
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (size: number) => void;
+  rowRangeText: string;
 }
 
-// getLevelOptions
-export interface FacetedFilterOption {
+export interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  rangeFilterMap: DataTableRangeFilterMap;
+  t: TFunction;
+}
+
+export type DataTableRangeFilterMap = Record<
+  string,
+  DataTableRangeFilterOption[]
+>;
+
+interface DataTableRangeFilterOption {
   color: string;
-  icon: ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-  >;
+  icon: LucideIcon;
   label: string;
   range: [number, number];
   text: string;
 }
 
-export interface FacetedFilterProps<TData> {
-  id: string;
-  onClear: (id: string) => void;
-  onToggle: (id: string, range: [number, number]) => void;
+export interface DataTableRangeFilterProps<TData> {
+  ids: string[];
+  map: DataTableRangeFilterMap;
   rows: Row<TData>[];
+  t: TFunction;
 }
 
-export interface FacetedFilterUIOption extends FacetedFilterOption {
+export interface DataTableRangeFilterUIProps {
+  filters: React.ReactNode[];
+  label: string;
+  onReset: () => void;
+  showReset: boolean;
+}
+
+export interface FacetedRangeFilterProps<TData> {
+  id: string;
+  options: DataTableRangeFilterOption[];
+  rows: Row<TData>[];
+  t: TFunction;
+}
+
+interface FacetedRangeFilterUILabels {
+  clear: string;
+  empty: string;
+  header: string;
+  summary: string;
+}
+
+interface FacetedRangeFilterUIOption extends DataTableRangeFilterOption {
   count: number;
+  key: string;
+  selected: boolean;
+}
+
+export interface FacetedRangeFilterUIProps {
+  commandFilter: (value: string, search: string) => number;
+  labels: FacetedRangeFilterUILabels;
+  onClear: () => void;
+  onToggle: (range: [number, number]) => void;
+  options: FacetedRangeFilterUIOption[];
+  selectedBadgeOptions: SelectedBadgeUIOption[];
+}
+
+export interface SelectedBadgeUIOption
+  extends Pick<DataTableRangeFilterOption, "color" | "icon" | "text"> {
   key: string;
 }
 
-export interface FacetedFilterUIProps {
-  onClear: () => void;
-  onFilter: (value: string, search: string) => number;
-  onToggle: (range: [number, number]) => void;
-  options: FacetedFilterUIOption[];
-  ranges: [number, number][];
-  texts: FacetedFilterUITexts;
-}
-
-interface FacetedFilterUITexts {
-  clear: string;
-  empty: string;
-  title: string;
-  summary: (count: number) => string;
-}
-
-interface SelectedBadgeUIOption
-  extends Omit<FacetedFilterUIOption, "count" | "label" | "range"> {}
-
 export interface SelectedBadgeUIProps {
   options: SelectedBadgeUIOption[];
-  summary: (count: number) => string;
-}
-
-export interface TableHiderUIProps {
-  getTitle: (id: string) => string;
-  ids: string[];
-  isVisible: (id: string) => boolean;
-  onToggle: (id: string) => void;
-  text: string;
+  summary: string;
 }
 
 export interface TableStore {

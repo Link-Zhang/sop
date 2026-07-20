@@ -22,7 +22,9 @@ export default function TodoListItemUI({
         checked={status}
         className="h-6 shrink-0 w-6"
         id={id}
-        onCheckedChange={(checked) => onCheckedChange(Boolean(checked))}
+        onCheckedChange={(checked: boolean) =>
+          onCheckedChange(Boolean(checked))
+        }
       />
       <Label
         className={cn(

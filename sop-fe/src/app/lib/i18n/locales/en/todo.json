@@ -2,10 +2,8 @@
   "empty": "No data, Add one...",
   "error": "Something wrong, please refresh",
   "fields": {
-    "id": "Todo ID",
     "content": "Todo Content",
-    "status": "Todo Status",
-    "date": "Todo Date"
+    "status": "Todo Status"
   },
   "title": "Todo List",
   "validation": {

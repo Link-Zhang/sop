@@ -1,51 +1,46 @@
 import { Controller, useFormContext } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { Field, FieldError, FieldLabel } from "@/shadcn/components/ui/field";
 import { Input } from "@/shadcn/components/ui/input";
 
-const FIELDS = [
-  {
-    key: "systolicBloodPressure" as const,
-    unit: "(mmHg)",
-    placeholder: "120",
-  },
-  {
-    key: "diastolicBloodPressure" as const,
-    unit: "(mmHg)",
-    placeholder: "80",
-  },
-  {
-    key: "heartRate" as const,
-    unit: "(bpm)",
-    placeholder: "80",
-  },
-] as const;
+export interface RowFormField {
+  key: string;
+  name: string;
+  placeholder: string;
+  unit: string;
+}
 
-export default function BloodPressureCreateFields() {
+export interface RowFormFieldsProps {
+  fields: RowFormField[];
+}
+
+export default function RowFormFields({ fields }: RowFormFieldsProps) {
   const { control } = useFormContext();
-  const { t } = useTranslation("blood-pressure");
 
   return (
     <div className="grid flex-1 auto-rows-min gap-6 px-4">
-      {FIELDS.map(({ key, unit, placeholder }) => (
+      {fields.map(({ key, name, placeholder, unit }) => (
         <Controller
+          control={control}
           key={key}
           name={key}
-          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>
-                {t(`fields.${key}`)}
+                {name}
                 {unit}
                 <span className="text-destructive">*</span>
               </FieldLabel>
               <Input
                 {...field}
-                id={field.name}
                 aria-invalid={fieldState.invalid}
+                id={field.name}
+                onChange={(e) => {
+                  const rawValue = e.target.value;
+                  field.onChange(rawValue === "" ? null : Number(rawValue));
+                }}
                 placeholder={placeholder}
                 type="number"
-                value={field.value ?? ""}
+                value={field.value != null ? String(field.value) : ""}
               />
               {fieldState.error && <FieldError errors={[fieldState.error]} />}
             </Field>

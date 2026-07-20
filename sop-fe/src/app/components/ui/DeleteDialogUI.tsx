@@ -22,7 +22,7 @@ export default function DeleteDialogUI({
     <AlertDialog onOpenChange={onOpenChange} open={open}>
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
-          <AlertDialogMedia className="bg-destructive/10 dark:bg-destructive/20 text-destructive">
+          <AlertDialogMedia className="bg-destructive/10 text-destructive">
             <Trash2 />
           </AlertDialogMedia>
           <AlertDialogTitle>{labels.title}</AlertDialogTitle>

@@ -2,10 +2,8 @@
   "empty": "暂无数据，添加一个...",
   "error": "出错了，请刷新页面",
   "fields": {
-    "id": "待办序号",
     "content": "待办事项",
-    "status": "待办状态",
-    "date": "待办日期"
+    "status": "待办状态"
   },
   "title": "待办列表",
   "validation": {

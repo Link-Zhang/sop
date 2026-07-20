@@ -9,7 +9,8 @@
     "ish": "Isolated Systolic",
     "idh": "Isolated Diastolic"
   },
-  "error": "Data Error",
+  "columnHider": "Columns",
+  "error": "Something wrong, please refresh",
   "fields": {
     "systolicBloodPressure": "Systolic Blood Pressure",
     "diastolicBloodPressure": "Diastolic Blood Pressure",
@@ -21,40 +22,48 @@
     "reset": "Reset",
     "summary": "{{count}} selected"
   },
+  "headers": {
+    "date": "Date",
+    "systolicBloodPressure": "SYS",
+    "diastolicBloodPressure": "DIA",
+    "heartRate": "PUL",
+    "impression": "Impression"
+  },
   "heartRateLevels": {
     "low": "Low",
     "normal": "Normal",
     "elevated": "High-Normal",
     "high": "High"
   },
-  "impressionBloodPressure": "Blood Pressure",
-  "impressionHeartRate": "Heart Rate",
-  "hider": "Columns",
-  "title": "Blood Pressure",
-  "titles": {
-    "diastolicBloodPressure": "DIA",
-    "heartRate": "PUL",
-    "impression": "Impression",
-    "measuredAt": "MeasuredAt",
-    "systolicBloodPressure": "SYS"
+  "impressions": {
+    "bloodPressure": "Blood Pressure",
+    "heartRate": "Heart Rate"
   },
+  "title": "BP Table",
   "validation": {
     "diastolicMustBeLessThanSystolic": "Diastolic Blood Pressure must be less than Systolic Blood Pressure",
+    "error": "Data error",
     "max": "{{field}} cannot exceed {{max}}",
     "min": "{{field}} cannot be less than {{min}}",
     "invalidInput": "Invalid input: {{message}}",
     "required": "{{field}} is required"
   },
+  "actions": {
+    "copy": "Copy",
+    "delete": "Delete",
+    "edit": "Edit",
+    "json": "JSON"
+  },
   "create": {
     "error": "Failed to create, please retry",
-    "success": "Create successfully",
     "form": {
       "cancel": "Cancel",
       "description": "Record blood pressure and heart rate.",
       "submit": "Submit",
       "text": "Add",
       "title": "Add Record"
-    }
+    },
+    "success": "Create successfully"
   },
   "read": {
     "error": "Failed to read, please retry",
@@ -62,14 +71,14 @@
   },
   "update": {
     "error": "Failed to update, please retry",
-    "success": "Update successfully",
     "form": {
       "cancel": "Cancel",
       "description": "Update blood pressure and heart rate.",
       "submit": "Submit",
       "text": "Update",
       "title": "Update Record"
-    }
+    },
+    "success": "Update successfully"
   },
   "delete": {
     "dialog": {

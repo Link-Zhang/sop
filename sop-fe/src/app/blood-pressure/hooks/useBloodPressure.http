@@ -7,11 +7,11 @@ POST http://localhost:3001/blood-pressure-measurements
 Content-Type: application/json
 
 {
-  "id": "019d9a95-7c85-757c-96e7-d9b95104c0c1",
-  "systolicBloodPressure": 16,
-  "diastolicBloodPressure": 16,
-  "heartRate": 16,
-  "measuredAt": "2026-04-16T00:00:00Z"
+  "id": "be621291-3bf3-4808-87d1-7e93345c4c80",
+  "systolicBloodPressure": 135,
+  "diastolicBloodPressure": 95,
+  "heartRate": 80,
+  "date": "2026-09-02T00:00:00Z"
 }
 
 ### PATCH
@@ -19,11 +19,11 @@ PATCH http://localhost:3001/blood-pressure-measurements/019d9a95-7c85-757c-96e7-
 Content-Type: application/json
 
 {
-  "systolicBloodPressure": 500,
-  "diastolicBloodPressure":400,
-  "heartRate":400
+  "systolicBloodPressure": 150,
+  "diastolicBloodPressure":120,
+  "heartRate":80
 }
 
 ### DELETE
-DELETE http://localhost:3001/blood-pressure-measurements/019d6bed-eb90-75eb-803e-cc5e6e92d2ee
+DELETE http://localhost:3001/blood-pressure-measurements/019d9a95-7c85-757c-96e7-d9b95104c0c1
 Accept: application/json

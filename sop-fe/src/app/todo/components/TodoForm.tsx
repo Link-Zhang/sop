@@ -34,7 +34,7 @@ export default function TodoForm() {
 
   const handleSubmit = (data: CreateTodo) => {
     form.reset();
-    createTodo({ content: data.content });
+    createTodo(data.content);
   };
 
   return (

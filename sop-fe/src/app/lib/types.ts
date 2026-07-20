@@ -45,26 +45,12 @@ export interface NavLinkUIProps extends ComponentProps<typeof Link> {
   isActive: boolean;
 }
 
-export type OptimisticUpdate<T> = (
-  data: T[] | undefined,
-) => OptimisticUpdateResult<T>;
-
-export type OptimisticUpdateResult<T> = {
-  data: T[];
-  replace: ReplaceUpdater<T>;
-  rollback: RollbackUpdater<T>;
-};
-
-export type ReplaceUpdater<T> = (serverData: T, currentData?: T[]) => T[];
-
-export type RollbackUpdater<T> = (data: T[] | undefined) => T[];
-
 interface ThemeOption {
   label: string;
   value: string;
 }
 
 export interface TitleUIProps {
-  onClick: () => void;
+  onClick?: () => void;
   title: string;
 }

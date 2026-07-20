@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Settings2 } from "lucide-react";
-import type { TableHiderUIProps } from "@/app/data-table/lib/types";
+import type { DataTableColumnHiderUIProps } from "@/app/data-table/lib/types";
 import { hideLastSvgClass } from "@/app/data-table/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import {
@@ -15,34 +15,30 @@ import {
   PopoverTrigger,
 } from "@/shadcn/components/ui/popover";
 
-export default function DataTableHiderUI({
-  getTitle,
-  ids,
-  isVisible,
+export default function DataTableColumnHiderUI({
+  columns,
+  label,
   onToggle,
-  text,
-}: TableHiderUIProps) {
+}: DataTableColumnHiderUIProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">
           <Settings2 />
-          {text}
+          {label}
         </Button>
       </PopoverTrigger>
       <PopoverContent align="start" className="p-0 w-fit">
         <Command>
           <CommandList>
-            {ids.map((id) => (
+            {columns.map(({ id, header, visible }) => (
               <CommandItem
                 className={`flex items-center ${hideLastSvgClass}`}
                 key={id}
                 onSelect={() => onToggle(id)}
               >
-                <div className="border size-4">
-                  {isVisible(id) && <Check />}
-                </div>
-                {getTitle(id)}
+                <div className="border size-4">{visible && <Check />}</div>
+                {header}
               </CommandItem>
             ))}
           </CommandList>

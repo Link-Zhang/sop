@@ -1,25 +1,25 @@
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-import type { ColumnHeaderProps } from "@/app/blood-pressure/lib/types";
+import ColumnHeaderUI from "@/app/data-table/components/ui/ColumnHeaderUI";
 import { useTableStore } from "@/app/data-table/hooks/useTableStore";
-import { Button } from "@/shadcn/components/ui/button";
+import type { ColumnHeaderProps } from "@/app/data-table/lib/types";
 
 export default function ColumnHeader({
   canSort = true,
   id,
+  label,
 }: ColumnHeaderProps) {
-  const { t } = useTranslation("blood-pressure");
   const sorting = useTableStore((s) => s.sorting);
   const setSorting = useTableStore((s) => s.setSorting);
+
   const sortIndex = sorting.findIndex((item) => item.id === id);
   const sortItem = sortIndex !== -1 ? sorting[sortIndex] : undefined;
   const isSorted = sortItem ? (sortItem.desc ? "desc" : "asc") : false;
   const SortIcon =
-    isSorted === "asc"
-      ? ArrowUp
-      : isSorted === "desc"
-        ? ArrowDown
+    isSorted === "desc"
+      ? ArrowDown
+      : isSorted === "asc"
+        ? ArrowUp
         : ArrowUpDown;
   const priority =
     sortIndex !== -1 && sorting.length > 1 ? sortIndex + 1 : undefined;
@@ -38,15 +38,13 @@ export default function ColumnHeader({
     setSorting(next);
   }, [sorting, sortIndex, id, setSorting]);
 
-  if (!canSort) {
-    return <span>{t(`titles.${id}`)}</span>;
-  }
-
   return (
-    <Button className="px-0" onClick={handleToggle} variant="ghost">
-      {t(`titles.${id}`)}
-      <SortIcon />
-      {priority && <sup className="text-[10px]">{priority}</sup>}
-    </Button>
+    <ColumnHeaderUI
+      canSort={canSort}
+      label={label}
+      onClick={handleToggle}
+      priority={priority}
+      sortIcon={SortIcon}
+    />
   );
 }

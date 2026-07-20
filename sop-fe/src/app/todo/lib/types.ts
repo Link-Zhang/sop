@@ -3,7 +3,7 @@ import type { Control } from "react-hook-form";
 import z from "zod";
 import type { DeleteDialogUILabels } from "@/app/lib/types";
 
-export const todoSchema = z.object({
+const todoSchema = z.object({
   id: z.uuidv7(),
   content: z.string().trim().min(1),
   status: z.boolean(),
@@ -12,9 +12,9 @@ export const todoSchema = z.object({
 
 export const createTodoSchema = todoSchema.pick({ content: true });
 
-export type Todo = z.infer<typeof todoSchema>;
-
 export type CreateTodo = z.infer<typeof createTodoSchema>;
+
+export type Todo = z.infer<typeof todoSchema>;
 
 export interface TodoFormUILabels {
   placeholder: string;

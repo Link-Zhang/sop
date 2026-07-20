@@ -1,7 +1,6 @@
-"use client";
-
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/todo");
+  // redirect("/todo");
+  redirect("/blood-pressure");
 }

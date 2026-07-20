@@ -8,5 +8,5 @@ export default function TodoTitle() {
   const { readTodo } = useTodo();
   const { t } = useTranslation("todo");
 
-  return <TitleUI title={t("title")} onClick={() => readTodo()} />;
+  return <TitleUI onClick={() => readTodo()} title={t("title")} />;
 }

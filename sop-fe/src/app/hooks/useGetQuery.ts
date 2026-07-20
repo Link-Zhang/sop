@@ -1,3 +1,5 @@
+"use client";
+
 import { type QueryKey, useQuery } from "@tanstack/react-query";
 import { fetcher, retryHandler } from "@/app/lib/utils";
 

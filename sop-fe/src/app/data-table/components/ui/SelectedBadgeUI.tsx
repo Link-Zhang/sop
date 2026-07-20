@@ -8,15 +8,15 @@ export default function SelectedBadgeUI({
   options,
   summary,
 }: SelectedBadgeUIProps) {
-  const len = options.length;
+  const count = options.length;
 
-  if (!len) return null;
+  if (!count) return null;
 
   return (
     <>
       <Separator className="bg-border h-4 mx-1 w-px" orientation="vertical" />
-      {len > 3 ? (
-        <Badge variant="secondary">{summary(len)}</Badge>
+      {count > 3 ? (
+        <Badge variant="secondary">{summary}</Badge>
       ) : (
         options.map(({ color, key, icon: Icon, text }) => (
           <Badge className={color} key={key} variant="secondary">

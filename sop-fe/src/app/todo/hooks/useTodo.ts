@@ -7,7 +7,7 @@ import useDeleteMutation from "@/app/hooks/useDeleteMutation";
 import useReadMutation from "@/app/hooks/useReadMutation";
 import useUpdateMutation from "@/app/hooks/useUpdateMutation";
 import { TODO_API_URL } from "@/app/lib/apis";
-import type { CreateTodo, Todo } from "@/app/todo/lib/types";
+import type { Todo } from "@/app/todo/lib/types";
 
 export default function useTodo() {
   const { t } = useTranslation("todo");
@@ -16,10 +16,10 @@ export default function useTodo() {
   const updateMutation = useUpdateMutation<Todo>(TODO_API_URL, t);
   const deleteMutation = useDeleteMutation<Todo>(TODO_API_URL, t);
 
-  const createTodo = (input: CreateTodo) => {
+  const createTodo = (content: string) => {
     const item: Todo = {
       id: uuid(),
-      content: input.content.trim(),
+      content: content.trim(),
       status: false,
       date: new Date().toISOString(),
     };

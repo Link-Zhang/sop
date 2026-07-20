@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  type ColumnDef,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -11,10 +10,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import RowCreate from "@/app/blood-pressure/components/RowCreate";
-import DataTableFilter from "@/app/data-table/DataTableFilter";
-import DataTableHider from "@/app/data-table/DataTableHider";
-import DataTablePagination from "@/app/data-table/DataTablePagination";
+import DataTableColumnHider from "@/app/data-table/components/DataTableColumnHider";
+import DataTablePagination from "@/app/data-table/components/DataTablePagination";
+import DataTableRangeFilter from "@/app/data-table/components/DataTableRangeFilter";
 import { useTableStore } from "@/app/data-table/hooks/useTableStore";
+import type { DataTableProps } from "@/app/data-table/lib/types";
 import {
   Table,
   TableBody,
@@ -24,14 +24,11 @@ import {
   TableRow,
 } from "@/shadcn/components/ui/table";
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-}
-
 export default function DataTable<TData, TValue>({
   columns,
   data,
+  rangeFilterMap,
+  t,
 }: DataTableProps<TData, TValue>) {
   const {
     columnFilters,
@@ -43,7 +40,6 @@ export default function DataTable<TData, TValue>({
     setPagination,
     setSorting,
   } = useTableStore();
-
   const table = useReactTable({
     autoResetPageIndex: false,
     columns: columns,
@@ -60,35 +56,35 @@ export default function DataTable<TData, TValue>({
     state: { columnFilters, columnVisibility, pagination, sorting },
   });
 
-  const pageCount = table.getPageCount();
-
-  const rows = table.getRowModel().rows;
-
-  const rowCount = table.getFilteredRowModel().rows.length;
-
   const hideableColumnIds = table
     .getAllColumns()
-    .filter((col) => col.getCanHide())
-    .map((col) => col.id);
-
+    .filter((column) => column.getCanHide())
+    .map((column) => column.id);
   const filterableColumnIds = table
     .getAllColumns()
-    .filter((col) => col.getCanFilter())
-    .map((col) => col.id);
+    .filter((column) => column.getCanFilter())
+    .map((column) => column.id);
+  const filteredRowCount = table.getFilteredRowModel().rows.length;
+  const pageCount = table.getPageCount();
+  const rows = table.getRowModel().rows;
+  const rangeFilterIds = filterableColumnIds.filter((id) =>
+    Object.hasOwn(rangeFilterMap, id),
+  );
 
   const coreRows = table.getCoreRowModel().rows;
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col md:flex-row gap-2">
-        <DataTableFilter
-          ids={filterableColumnIds}
-          onReset={table.resetColumnFilters}
+        <DataTableRangeFilter
+          ids={rangeFilterIds}
           rows={coreRows}
+          map={rangeFilterMap}
+          t={t}
         />
         <div className="flex md:flex items-center gap-2">
-          <DataTableHider ids={hideableColumnIds} />
-          <RowCreate />
+          <DataTableColumnHider ids={hideableColumnIds} t={t} />
+          <RowCreate t={t} />
         </div>
       </div>
       <div className="overflow-hidden rounded-md border">
@@ -124,7 +120,7 @@ export default function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination pageCount={pageCount} rowCount={rowCount} />
+      <DataTablePagination pageCount={pageCount} rowCount={filteredRowCount} />
     </div>
   );
 }

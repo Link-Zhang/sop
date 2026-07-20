@@ -16,6 +16,7 @@
 # idea
 *.swp
 .idea/
+*.iml
 
 # gradle
 .gradle/
@@ -23,3 +24,6 @@ build/
 !gradle/wrapper/
 !gradlew
 !gradlew.bat
+
+# pnpm
+pnpm-lock.yaml

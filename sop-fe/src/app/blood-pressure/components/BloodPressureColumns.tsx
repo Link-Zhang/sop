@@ -2,15 +2,15 @@
 
 import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
-import ColumnHeader from "@/app/blood-pressure/components/ColumnHeader";
-import RowOtherActions from "@/app/blood-pressure/components/RowOtherActions";
+import RowActions from "@/app/blood-pressure/components/RowActions";
 import type { BloodPressure } from "@/app/blood-pressure/lib/types";
 import {
-  getBloodPressureLevel,
-  getHeartRateLevel,
+  getBPLevel,
+  getHRLevel,
   metricColumns,
 } from "@/app/blood-pressure/lib/utils";
-import { multiRangeFilterFn } from "@/app/data-table/lib/utils";
+import ColumnHeader from "@/app/data-table/components/ColumnHeader";
+import { formatDate, isInAnyRange } from "@/app/lib/utils";
 import { Badge } from "@/shadcn/components/ui/badge";
 import { Checkbox } from "@/shadcn/components/ui/checkbox";
 import {
@@ -27,7 +27,7 @@ const columns = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value: boolean) => row.toggleSelected(value)}
       />
     ),
     enableColumnFilter: false,
@@ -39,46 +39,70 @@ const columns = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value: boolean) =>
+          table.toggleAllPageRowsSelected(value)
+        }
       />
     ),
     id: "select",
   }),
-  columnHelper.accessor((row) => row.measuredAt, {
-    cell: (info) => {
-      const d = new Date(info.getValue());
+  columnHelper.accessor((row) => row.date, {
+    cell: ({ getValue }) => {
+      const { i18n } = useTranslation("blood-pressure");
+      const date = getValue();
+      const localDate = formatDate(date, i18n.language);
       return (
         <Tooltip>
           <TooltipTrigger asChild>
-            <span className="cursor-default">{d.toLocaleDateString()}</span>
+            <span className="cursor-default">{localDate}</span>
           </TooltipTrigger>
-          <TooltipContent>{d.toLocaleString()}</TooltipContent>
+          <TooltipContent>{date}</TooltipContent>
         </Tooltip>
       );
     },
     enableColumnFilter: false,
-    header: ({ column }) => (
-      <ColumnHeader canSort={column.getCanSort()} id="measuredAt" />
-    ),
-    id: "measuredAt",
+    header: ({ column }) => {
+      const { t } = useTranslation("blood-pressure");
+      return (
+        <ColumnHeader
+          canSort={column.getCanSort()}
+          id={column.id}
+          label={t(`headers.${column.id}`)}
+        />
+      );
+    },
+    id: "date",
   }),
   ...metricColumns.map(({ fn, id }) =>
     columnHelper.accessor(id, {
-      cell: (info) => {
-        const value = info.getValue();
+      cell: ({ getValue }) => {
+        const { t } = useTranslation("blood-pressure");
+        const value = getValue();
         const level = fn(value);
         const IconComponent = level.icon;
         return (
           <div className="flex items-center gap-2">
             <IconComponent className={cn("h-4 w-4", level.textColor)} />
-            <span>{value}</span>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="cursor-default">{value}</span>
+              </TooltipTrigger>
+              <TooltipContent>{t(level.text)}</TooltipContent>
+            </Tooltip>
           </div>
         );
       },
-      filterFn: multiRangeFilterFn,
-      header: ({ column }) => (
-        <ColumnHeader canSort={column.getCanSort()} id={id} />
-      ),
+      filterFn: isInAnyRange,
+      header: ({ column }) => {
+        const { t } = useTranslation("blood-pressure");
+        return (
+          <ColumnHeader
+            canSort={column.getCanSort()}
+            id={column.id}
+            label={t(`headers.${column.id}`)}
+          />
+        );
+      },
       id,
     }),
   ),
@@ -88,18 +112,22 @@ const columns = [
       const sbp = row.original.systolicBloodPressure;
       const dbp = row.original.diastolicBloodPressure;
       if (sbp <= dbp) {
-        return <span className="text-red-500">{t("error")}</span>;
+        return (
+          <span className="text-red-500">
+            {t("validation.diastolicMustBeLessThanSystolic")}
+          </span>
+        );
       }
       const hr = row.original.heartRate;
-      const hrLevel = getHeartRateLevel(hr);
-      const bpLevel = getBloodPressureLevel(sbp, dbp);
+      const hrLevel = getHRLevel(hr);
+      const bpLevel = getBPLevel(sbp, dbp);
       return (
         <div className="flex items-center gap-2">
-          <span>{t("impressionBloodPressure")}:</span>
+          <span>{t("impressions.bloodPressure")}:</span>
           <Badge variant="outline" className={bpLevel.bgColor}>
             {t(bpLevel.text)}
           </Badge>
-          <span>{t("impressionHeartRate")}:</span>
+          <span>{t("impressions.heartRate")}:</span>
           <Badge variant="outline" className={hrLevel.bgColor}>
             {t(hrLevel.text)}
           </Badge>
@@ -107,13 +135,23 @@ const columns = [
       );
     },
     enableHiding: false,
-    header: ({ column }) => (
-      <ColumnHeader canSort={column.getCanSort()} id="impression" />
-    ),
+    header: ({ column }) => {
+      const { t } = useTranslation("blood-pressure");
+      return (
+        <ColumnHeader
+          canSort={column.getCanSort()}
+          id={column.id}
+          label={t(`headers.${column.id}`)}
+        />
+      );
+    },
     id: "impression",
   }),
   columnHelper.display({
-    cell: ({ row }) => <RowOtherActions row={row} />,
+    cell: ({ row }) => {
+      const { t } = useTranslation("blood-pressure");
+      return <RowActions row={row} t={t} />;
+    },
     enableColumnFilter: false,
     enableHiding: false,
     enableSorting: false,

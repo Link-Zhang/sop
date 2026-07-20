@@ -1,135 +1,83 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { z } from "zod";
-import BloodPressureCreateFields from "@/app/blood-pressure/components/BloodPressureCreateFields";
+import type { TFunction } from "i18next";
+import { Pencil } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
+import RowFormUI, {
+  type RowFormUILabels,
+} from "@/app/blood-pressure/components/ui/RowFormUI";
 import useBloodPressure from "@/app/blood-pressure/hooks/useBloodPressure";
-import { numberField } from "@/app/blood-pressure/lib/utils";
-import { useMediaQuery } from "@/app/data-table/hooks/useMediaQuery";
+import useMediaQuery from "@/app/blood-pressure/hooks/useMediaQuery";
+import type { CreateBloodPressure } from "@/app/blood-pressure/lib/types";
+import {
+  bloodPressureFields,
+  getRowSchema,
+} from "@/app/blood-pressure/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/shadcn/components/ui/drawer";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/shadcn/components/ui/sheet";
 
-export default function RowCreate() {
+export interface RowCreateProps {
+  t: TFunction;
+}
+
+export default function RowCreate({ t }: RowCreateProps) {
+  const [createOpen, setCreateOpen] = useState(false);
+
   const { createBloodPressure } = useBloodPressure();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-  const [open, setOpen] = useState(false);
-  const { t } = useTranslation("blood-pressure");
 
-  const rowSchema = useMemo(
-    () =>
-      z
-        .object({
-          systolicBloodPressure: numberField(
-            t,
-            "systolicBloodPressure",
-            0,
-            299,
-          ),
-          diastolicBloodPressure: numberField(
-            t,
-            "diastolicBloodPressure",
-            0,
-            299,
-          ),
-          heartRate: numberField(t, "heartRate", 40, 180),
-        })
-        .refine(
-          (data) => data.diastolicBloodPressure < data.systolicBloodPressure,
-          {
-            message: t("validation.diastolicMustBeLessThanSystolic"),
-            path: ["diastolicBloodPressure"],
-          },
-        ),
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  const createLabels: RowFormUILabels = useMemo(
+    () => ({
+      cancel: t("create.form.cancel"),
+      description: t("create.form.description"),
+      submit: t("create.form.submit"),
+      title: t("create.form.title"),
+    }),
     [t],
   );
 
-  const form = useForm({
+  const rowSchema = useMemo(() => getRowSchema(t), [t]);
+
+  const createForm = useForm<CreateBloodPressure>({
     resolver: zodResolver(rowSchema),
   });
 
-  const onSubmit = async (data: z.infer<typeof rowSchema>) => {
-    await createBloodPressure(
+  useEffect(() => {
+    if (createOpen) {
+      createForm.reset();
+    }
+  }, [createOpen, createForm]);
+
+  const handleCreate = (data: CreateBloodPressure) => {
+    createBloodPressure(
       data.systolicBloodPressure,
       data.diastolicBloodPressure,
       data.heartRate,
     );
-    setOpen(false);
-    form.reset();
+    setCreateOpen(false);
+    createForm.reset();
   };
 
-  const {
-    Container,
-    Trigger,
-    Content,
-    Header,
-    Title,
-    Description,
-    Footer,
-    Close,
-  } = isDesktop
-    ? {
-        Container: Sheet,
-        Trigger: SheetTrigger,
-        Content: SheetContent,
-        Header: SheetHeader,
-        Title: SheetTitle,
-        Description: SheetDescription,
-        Footer: SheetFooter,
-        Close: SheetClose,
-      }
-    : {
-        Container: Drawer,
-        Trigger: DrawerTrigger,
-        Content: DrawerContent,
-        Header: DrawerHeader,
-        Title: DrawerTitle,
-        Description: DrawerDescription,
-        Footer: DrawerFooter,
-        Close: DrawerClose,
-      };
+  const fields = bloodPressureFields.map((field) => ({
+    ...field,
+    name: t(`fields.${field.key}`),
+  }));
 
   return (
-    <Container open={open} onOpenChange={setOpen}>
-      <Trigger asChild>
-        <Button>{t("create.form.text")}</Button>
-      </Trigger>
-      <Content>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Header>
-            <Title>{t("create.form.title")}</Title>
-            <Description>{t("create.form.description")}</Description>
-          </Header>
-          <FormProvider {...form}>
-            <BloodPressureCreateFields />
-          </FormProvider>
-          <Footer>
-            <Button type="submit">{t("create.form.submit")}</Button>
-            <Close asChild>
-              <Button variant="outline">{t("create.form.cancel")}</Button>
-            </Close>
-          </Footer>
-        </form>
-      </Content>
-    </Container>
+    <>
+      <Button onClick={() => setCreateOpen(true)} type="button">
+        <Pencil />
+        {t("create.form.text")}
+      </Button>
+      <RowFormUI
+        form={createForm}
+        isDesktop={isDesktop}
+        labels={createLabels}
+        onOpenChange={setCreateOpen}
+        onSubmit={createForm.handleSubmit(handleCreate)}
+        open={createOpen}
+        fields={fields}
+      />
+    </>
   );
 }

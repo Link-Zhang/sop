@@ -9,101 +9,17 @@ import {
   HeartMinus,
   HeartPlus,
   HeartPulse,
+  PanelBottomDashed,
+  PanelTopDashed,
   WavesArrowUp,
 } from "lucide-react";
 import z from "zod";
-import type { FacetedFilterOption } from "@/app/data-table/lib/types";
+import {
+  type Level,
+  updateBloodPressureSchema,
+} from "@/app/blood-pressure/lib/types";
 
-// todo
-export const getBloodPressureLevel = (sbp: number, dbp: number) => {
-  const [sLevel, dLevel] = [
-    getSystolicBloodPressureLevel(sbp),
-    getDiastolicBloodPressureLevel(dbp),
-  ];
-  return bloodPressureLevels.indexOf(sLevel) >=
-    bloodPressureLevels.indexOf(dLevel)
-    ? sLevel
-    : dLevel;
-};
-
-export const getDiastolicBloodPressureLevel = (dbp: number) => {
-  return (
-    bloodPressureLevels.find((level) => dbp < level.dbpLimit) ||
-    bloodPressureLevels[bloodPressureLevels.length - 1]
-  );
-};
-
-export const getHeartRateLevel = (hr: number) => {
-  return (
-    heartRateLevels.find((level) => hr < level.limit) ||
-    heartRateLevels[heartRateLevels.length - 1]
-  );
-};
-
-export const getLevelOptions = (id: string): FacetedFilterOption[] => {
-  if (id === "heartRate") {
-    return heartRateLevels.map((level, index, arr) => {
-      const lower = index === 0 ? 0 : arr[index - 1].limit;
-      const upper = level.limit;
-      const rangeText =
-        upper === Infinity ? `≥ ${lower}` : `[${lower}, ${upper})`;
-      return {
-        color: level.textColor,
-        icon: level.icon,
-        label: `${rangeText}`,
-        range: [lower, upper] as [number, number],
-        text: level.text,
-      };
-    });
-  }
-
-  const isSBP = id === "systolicBloodPressure";
-  return bloodPressureLevels.map((level, index, arr) => {
-    const lower = isSBP
-      ? index === 0
-        ? 0
-        : arr[index - 1].sbpLimit
-      : index === 0
-        ? 0
-        : arr[index - 1].dbpLimit;
-    const upper = isSBP ? level.sbpLimit : level.dbpLimit;
-    const rangeText =
-      upper === Infinity ? `≥ ${lower}` : `[${lower}, ${upper})`;
-    return {
-      color: level.textColor,
-      icon: level.icon,
-      label: `${rangeText}`,
-      range: [lower, upper] as [number, number],
-      text: level.text,
-    };
-  });
-};
-
-export const getSystolicBloodPressureLevel = (sbp: number) => {
-  return (
-    bloodPressureLevels.find((level) => sbp < level.sbpLimit) ||
-    bloodPressureLevels[bloodPressureLevels.length - 1]
-  );
-};
-
-export const numberField = (
-  t: TFunction,
-  key: string,
-  min: number,
-  max: number,
-) => {
-  const field = t(`fields.${key}`);
-
-  return z.preprocess(
-    (val) => (val === "" ? undefined : Number(val)),
-    z
-      .number(t("validation.required", { field }))
-      .min(min, t("validation.min", { field, min }))
-      .max(max, t("validation.max", { field, max })),
-  );
-};
-
-const bloodPressureLevels = [
+export const bloodPressureLevels = [
   {
     bgColor: "bg-blue-500",
     dbpLimit: 60,
@@ -154,7 +70,7 @@ const bloodPressureLevels = [
   },
 ];
 
-const heartRateLevels = [
+export const heartRateLevels = [
   {
     bgColor: "bg-blue-500",
     icon: HeartMinus,
@@ -185,17 +101,146 @@ const heartRateLevels = [
   },
 ];
 
+const ishLevel = {
+  bgColor: "bg-gray-500",
+  dbpLimit: 90,
+  icon: PanelTopDashed,
+  sbpLimit: 140,
+  text: "bloodPressureLevels.ish",
+  textColor: "text-gray-500",
+};
+
+const idhLevel = {
+  bgColor: "bg-stone-500",
+  dbpLimit: 90,
+  icon: PanelBottomDashed,
+  sbpLimit: 140,
+  text: "bloodPressureLevels.idh",
+  textColor: "text-stone-500",
+};
+
+const buildRangeFilterOptions = (
+  levels: Level[],
+  key: (typeof metricColumns)[number]["key"],
+) =>
+  levels.map((level, index, array) => ({
+    color: level.textColor,
+    icon: level.icon,
+    label: `[${index ? array[index - 1][key] : 0}, ${index === array.length - 1 ? "∞" : level[key]})`,
+    range: [
+      index ? array[index - 1][key] : 0,
+      index === array.length - 1 ? Infinity : level[key],
+    ] as [number, number],
+    text: level.text,
+  }));
+
+const getLevel = <T>(
+  levels: T[],
+  value: number,
+  getLimit: (item: T) => number,
+): T =>
+  levels.find((level) => value < getLimit(level)) ?? levels[levels.length - 1];
+
+const getSBPLevel = (sbp: number) =>
+  getLevel(bloodPressureLevels, sbp, (level) => level.sbpLimit);
+
+const getDBPLevel = (dbp: number) =>
+  getLevel(bloodPressureLevels, dbp, (level) => level.dbpLimit);
+
+export const getBPLevel = (sbp: number, dbp: number) => {
+  const s = getSBPLevel(sbp);
+  const d = getDBPLevel(dbp);
+  if (sbp >= ishLevel.sbpLimit && dbp < ishLevel.dbpLimit) return ishLevel;
+  if (sbp < idhLevel.sbpLimit && dbp >= idhLevel.dbpLimit) return idhLevel;
+  return bloodPressureLevels.indexOf(s) >= bloodPressureLevels.indexOf(d)
+    ? s
+    : d;
+};
+
+export const getHRLevel = (hr: number) =>
+  getLevel(heartRateLevels, hr, (level) => level.limit);
+
+// todo: fix it
 export const metricColumns = [
   {
-    fn: getSystolicBloodPressureLevel,
+    fn: getSBPLevel,
     id: "systolicBloodPressure",
+    key: "sbpLimit",
+    levels: bloodPressureLevels,
   },
   {
-    fn: getDiastolicBloodPressureLevel,
+    fn: getDBPLevel,
     id: "diastolicBloodPressure",
+    key: "dbpLimit",
+    levels: bloodPressureLevels,
   },
   {
-    fn: getHeartRateLevel,
+    fn: getHRLevel,
     id: "heartRate",
+    key: "limit",
+    levels: heartRateLevels,
   },
 ] as const;
+
+export const getRangeFilterOptionsMap = () => {
+  const [sbp, dbp, hr] = metricColumns;
+  return {
+    systolicBloodPressure: buildRangeFilterOptions(sbp.levels, sbp.key),
+    diastolicBloodPressure: buildRangeFilterOptions(dbp.levels, dbp.key),
+    heartRate: buildRangeFilterOptions(hr.levels, hr.key),
+  };
+};
+
+export const bloodPressureFields = [
+  {
+    key: "systolicBloodPressure" as const,
+    unit: "(mmHg)",
+    placeholder: "120",
+  },
+  {
+    key: "diastolicBloodPressure" as const,
+    unit: "(mmHg)",
+    placeholder: "80",
+  },
+  {
+    key: "heartRate" as const,
+    unit: "(bpm)",
+    placeholder: "80",
+  },
+];
+
+const i18nNumberField = (
+  baseSchema: z.ZodNumber,
+  fieldKey: string,
+  t: TFunction,
+) => {
+  const fieldLabel = t(`fields.${fieldKey}`);
+  let schema = z.number(t("validation.required", { field: fieldLabel }));
+  const { maxValue: max, minValue: min } = baseSchema;
+  if (max !== null)
+    schema = schema.max(max, t("validation.max", { field: fieldLabel, max }));
+  if (min !== null)
+    schema = schema.min(min, t("validation.min", { field: fieldLabel, min }));
+  return schema;
+};
+
+export const getRowSchema = (t: TFunction) => {
+  const baseShape = updateBloodPressureSchema.shape;
+  const i18nShape = Object.fromEntries(
+    Object.entries(baseShape).map(([key, schema]) => {
+      if (schema instanceof z.ZodNumber) {
+        return [key, i18nNumberField(schema, key, t)];
+      }
+      return [key, schema];
+    }),
+  ) as typeof baseShape;
+  return z
+    .object(i18nShape)
+    .refine(
+      (data) => data.diastolicBloodPressure < data.systolicBloodPressure,
+      {
+        message: t("validation.diastolicMustBeLessThanSystolic"),
+        path: ["diastolicBloodPressure"],
+      },
+    );
+};
