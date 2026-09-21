@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { useCallback } from "react";
 import ColumnHeaderUI from "@/app/data-table/components/ui/ColumnHeaderUI";

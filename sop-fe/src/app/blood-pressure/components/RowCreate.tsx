@@ -7,12 +7,12 @@ import RowFormUI, {
   type RowFormUILabels,
 } from "@/app/blood-pressure/components/ui/RowFormUI";
 import useBloodPressure from "@/app/blood-pressure/hooks/useBloodPressure";
-import useMediaQuery from "@/app/blood-pressure/hooks/useMediaQuery";
 import type { CreateBloodPressure } from "@/app/blood-pressure/lib/types";
 import {
   bloodPressureFields,
   getRowSchema,
 } from "@/app/blood-pressure/lib/utils";
+import useMediaQuery from "@/app/hooks/useMediaQuery";
 import { Button } from "@/shadcn/components/ui/button";
 
 export interface RowCreateProps {

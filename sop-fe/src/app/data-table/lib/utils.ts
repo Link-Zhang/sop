@@ -9,4 +9,4 @@ export const clampValue = (value: number, min: number, max: number): number => {
 
 export const hideLastSvgClass = "[&>svg:last-child]:hidden";
 
-export const pageSizeOptions = [2, 3, 7, 14, 28];
+export const pageSizeOptions = [3, 7, 14, 28];

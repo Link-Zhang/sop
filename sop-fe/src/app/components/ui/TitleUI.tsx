@@ -1,3 +1,5 @@
+"use client";
+
 import type { TitleUIProps } from "@/app/lib/types";
 
 export default function TitleUI({ onClick, title }: TitleUIProps) {

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type { NavLinkUIProps } from "@/app/lib/types";
 import { cn } from "@/shadcn/lib/utils";

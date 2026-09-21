@@ -148,19 +148,19 @@ const getDBPLevel = (dbp: number) =>
   getLevel(bloodPressureLevels, dbp, (level) => level.dbpLimit);
 
 export const getBPLevel = (sbp: number, dbp: number) => {
-  const s = getSBPLevel(sbp);
-  const d = getDBPLevel(dbp);
   if (sbp >= ishLevel.sbpLimit && dbp < ishLevel.dbpLimit) return ishLevel;
   if (sbp < idhLevel.sbpLimit && dbp >= idhLevel.dbpLimit) return idhLevel;
-  return bloodPressureLevels.indexOf(s) >= bloodPressureLevels.indexOf(d)
-    ? s
-    : d;
+  const s = getSBPLevel(sbp);
+  const d = getDBPLevel(dbp);
+  const sIndex = bloodPressureLevels.indexOf(s);
+  const dIndex = bloodPressureLevels.indexOf(d);
+  if (sIndex === 0 || dIndex === 0) return bloodPressureLevels[0];
+  return sIndex >= dIndex ? s : d;
 };
 
 export const getHRLevel = (hr: number) =>
   getLevel(heartRateLevels, hr, (level) => level.limit);
 
-// todo: fix it
 export const metricColumns = [
   {
     fn: getSBPLevel,

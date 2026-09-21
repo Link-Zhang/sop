@@ -1,3 +1,5 @@
+"use client";
+
 import { Trash2 } from "lucide-react";
 import type { DeleteDialogUIProps } from "@/app/lib/types";
 import {

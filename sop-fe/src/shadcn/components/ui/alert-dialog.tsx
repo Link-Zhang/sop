@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
+import { cn } from "cn"
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui"
 
-import { cn } from "@/shadcn/lib/utils"
 import { Button } from "@/shadcn/components/ui/button"
 
 function AlertDialog({

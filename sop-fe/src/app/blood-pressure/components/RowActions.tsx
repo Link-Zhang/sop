@@ -14,7 +14,6 @@ import RowFormUI, {
   type RowFormUILabels,
 } from "@/app/blood-pressure/components/ui/RowFormUI";
 import useBloodPressure from "@/app/blood-pressure/hooks/useBloodPressure";
-import useMediaQuery from "@/app/blood-pressure/hooks/useMediaQuery";
 import type {
   BloodPressure,
   CreateBloodPressure,
@@ -25,6 +24,8 @@ import {
   getRowSchema,
 } from "@/app/blood-pressure/lib/utils";
 import DeleteDialogUI from "@/app/components/ui/DeleteDialogUI";
+import JsonDialogUI from "@/app/components/ui/JsonDialogUI";
+import useMediaQuery from "@/app/hooks/useMediaQuery";
 import type { DeleteDialogUILabels } from "@/app/lib/types";
 import { Button } from "@/shadcn/components/ui/button";
 import {
@@ -44,6 +45,7 @@ export default function RowActions<TData>({
   row,
   t,
 }: DataTableRowActionsProps<TData>) {
+  const [jsonOpen, setJsonOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
   const [updateOpen, setUpdateOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -148,7 +150,9 @@ export default function RowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem
-            onSelect={() => alert(JSON.stringify(rowData, null, 2))}
+            onSelect={() => {
+              setJsonOpen(true);
+            }}
           >
             <FileBraces />
             {t("actions.json")}
@@ -180,6 +184,7 @@ export default function RowActions<TData>({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <JsonDialogUI data={rowData} onOpenChange={setJsonOpen} open={jsonOpen} />
       <RowFormUI
         form={createForm}
         isDesktop={isDesktop}

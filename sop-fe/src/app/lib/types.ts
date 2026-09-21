@@ -22,6 +22,12 @@ export interface DeleteDialogUIProps {
   open: boolean;
 }
 
+export interface JsonDialogUIProps {
+  data: unknown;
+  onOpenChange: (open: boolean) => void;
+  open: boolean;
+}
+
 export interface LanguageSwitcherUIProps {
   onValueChange: (value: string) => Promise<void>;
   tooltipText: string;

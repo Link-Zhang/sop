@@ -1,3 +1,5 @@
+"use client";
+
 import type { LayoutHeaderUIProps } from "@/app/lib/types";
 import { cn } from "@/shadcn/lib/utils";
 

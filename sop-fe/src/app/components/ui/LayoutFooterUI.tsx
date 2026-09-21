@@ -1,3 +1,5 @@
+"use client";
+
 import type { LayoutFooterUIProps } from "@/app/lib/types";
 import { cn } from "@/shadcn/lib/utils";
 
