@@ -1,3 +1,5 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Row } from "@tanstack/react-table";
 import type { TFunction } from "i18next";

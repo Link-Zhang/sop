@@ -1,12 +1,13 @@
+"use client";
+
 import type { ComponentProps } from "react";
 import { FormProvider, type UseFormReturn } from "react-hook-form";
-import RowFormFields, {
-  type RowFormField,
-} from "@/app/blood-pressure/components/RowFormFields";
 import type {
   CreateBloodPressure,
   UpdateBloodPressure,
 } from "@/app/blood-pressure/lib/types";
+import RowFormFields from "@/app/data-table/components/RowFormFields";
+import type { RowFormField } from "@/app/data-table/lib/types";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   Drawer,

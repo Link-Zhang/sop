@@ -1,17 +1,9 @@
+"use client";
+
 import { Controller, useFormContext } from "react-hook-form";
+import type { RowFormFieldsProps } from "@/app/data-table/lib/types";
 import { Field, FieldError, FieldLabel } from "@/shadcn/components/ui/field";
 import { Input } from "@/shadcn/components/ui/input";
-
-export interface RowFormField {
-  key: string;
-  name: string;
-  placeholder: string;
-  unit: string;
-}
-
-export interface RowFormFieldsProps {
-  fields: RowFormField[];
-}
 
 export default function RowFormFields({ fields }: RowFormFieldsProps) {
   const { control } = useFormContext();

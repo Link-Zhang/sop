@@ -134,6 +134,17 @@ export interface FacetedRangeFilterUIProps {
   selectedBadgeOptions: SelectedBadgeUIOption[];
 }
 
+export interface RowFormField {
+  key: string;
+  name: string;
+  placeholder: string;
+  unit: string;
+}
+
+export interface RowFormFieldsProps {
+  fields: RowFormField[];
+}
+
 export interface SelectedBadgeUIOption
   extends Pick<DataTableRangeFilterOption, "color" | "icon" | "text"> {
   key: string;

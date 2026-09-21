@@ -1,3 +1,5 @@
+"use client";
+
 import DeleteDialogUI from "@/app/components/ui/DeleteDialogUI";
 import type { TodoListItemUIProps } from "@/app/todo/lib/types";
 import { Button } from "@/shadcn/components/ui/button";

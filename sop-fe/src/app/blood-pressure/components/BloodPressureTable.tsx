@@ -2,6 +2,7 @@
 
 import { useTranslation } from "react-i18next";
 import columns from "@/app/blood-pressure/components/BloodPressureColumns";
+import { BloodPressureTableSkeleton } from "@/app/blood-pressure/components/ui/BloodPressureSkeletons";
 import BloodPressureError from "@/app/blood-pressure/error";
 import type { BloodPressure } from "@/app/blood-pressure/lib/types";
 import { getRangeFilterOptionsMap } from "@/app/blood-pressure/lib/utils";
@@ -19,8 +20,7 @@ export default function BloodPressureTable() {
 
   if (error) return <BloodPressureError error={error} />;
 
-  // todo
-  if (isPending) return;
+  if (isPending) return <BloodPressureTableSkeleton />;
 
   // todo
   if (!data?.length) return;
