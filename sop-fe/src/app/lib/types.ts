@@ -1,62 +1,28 @@
-import type Link from "next/link";
-import type { ComponentProps, ReactNode } from "react";
+import type { ReactNode } from "react";
+import type { NAMESPACES } from "@/app/lib/configs";
+import type { LANGUAGE_CODES, THEME_MODES } from "@/app/lib/utils";
 
-export interface AppearanceSwitcherUIProps {
-  onValueChange: (value: string) => void;
-  options: readonly ThemeOption[];
-  tooltipText: string;
-  value: string;
-}
-
-export interface DeleteDialogUILabels {
-  cancel: string;
-  confirm: string;
-  description: string;
+export type ConfirmDialogOptions = {
+  cancel?: string;
+  confirm?: string;
+  description?: string;
+  destructive?: boolean;
+  icon?: ReactNode;
   title: string;
-}
+};
 
-export interface DeleteDialogUIProps {
-  labels: DeleteDialogUILabels;
-  onConfirm: () => void;
-  onOpenChange: (open: boolean) => void;
+export type ConfirmFn = (options: ConfirmDialogOptions) => Promise<boolean>;
+
+export type ConfirmState = {
   open: boolean;
-}
+  options: ConfirmDialogOptions;
+  resolve: (result: boolean) => void;
+};
 
-export interface JsonDialogUIProps {
-  data: unknown;
-  onOpenChange: (open: boolean) => void;
-  open: boolean;
-}
+export type Language = (typeof LANGUAGE_CODES)[number];
 
-export interface LanguageSwitcherUIProps {
-  onValueChange: (value: string) => Promise<void>;
-  tooltipText: string;
-  value: string;
-}
+export type Namespace = (typeof NAMESPACES)[number];
 
-export interface LayoutFooterUIProps {
-  author: string;
-  className?: string;
-  copyright: string;
-  year: number;
-}
+export type SearchableRow = { getValue: (columnId: string) => unknown };
 
-export interface LayoutHeaderUIProps {
-  className?: string;
-  leftNav?: ReactNode;
-  rightNav?: ReactNode;
-}
-
-export interface NavLinkUIProps extends ComponentProps<typeof Link> {
-  isActive: boolean;
-}
-
-interface ThemeOption {
-  label: string;
-  value: string;
-}
-
-export interface TitleUIProps {
-  onClick?: () => void;
-  title: string;
-}
+export type ThemeMode = (typeof THEME_MODES)[number];

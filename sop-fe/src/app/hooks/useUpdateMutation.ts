@@ -5,33 +5,42 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { fetcher } from "@/app/lib/utils";
 
 export default function useUpdateMutation<T extends { id: string }>(
   url: string,
-  t: TFunction,
   queryKey: QueryKey = [url],
 ) {
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: async ({
+    mutationFn: ({
       id,
       updates,
     }: {
       id: string;
       updates: Omit<Partial<T>, "id">;
-    }) => fetcher.patch<T>(`${url}/${encodeURIComponent(id)}`, updates),
+    }) =>
+      toast
+        .promise(
+          fetcher.patch<T>(`${url}/${encodeURIComponent(id)}`, updates),
+          {
+            error: t("update.error"),
+            loading: t("update.loading"),
+            success: t("update.success"),
+          },
+        )
+        .unwrap(),
     onError: (_err, _variables, onMutateResult) => {
-      if (onMutateResult) {
-        const previous = onMutateResult as T;
+      const previous = onMutateResult as T | undefined;
+      if (previous) {
         queryClient.setQueryData(queryKey, (items: T[] = []) =>
           items.map((item) => (item.id === previous.id ? previous : item)),
         );
       }
-      toast.error(t("update.error"));
     },
     onMutate: async (variables) => {
       await queryClient.cancelQueries(
@@ -48,12 +57,9 @@ export default function useUpdateMutation<T extends { id: string }>(
       );
       return previous;
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (data, variables) =>
       queryClient.setQueryData(queryKey, (items: T[] = []) =>
         items.map((item) => (item.id === variables.id ? data : item)),
-      );
-      toast.success(t("update.success"));
-      return data;
-    },
+      ),
   });
 }

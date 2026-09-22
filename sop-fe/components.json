@@ -12,8 +12,8 @@
   "menuAccent": "bold",
   "registries": {},
   "rsc": true,
-  "rtl": true,
-  "style": "radix-vega",
+  "rtl": false,
+  "style": "base-vega",
   "tailwind": {
     "baseColor": "neutral",
     "config": "",

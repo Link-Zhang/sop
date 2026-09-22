@@ -1,7 +1,15 @@
 import https from "node:https";
-import type { Row } from "@tanstack/react-table";
 import axios, { type AxiosError } from "axios";
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/app/lib/i18n/i18n";
+import i18n from "i18next";
+import {
+  DATE_OPTIONS,
+  LANGUAGES,
+  NS,
+  PAGE_SIZES,
+  THEMES,
+  UTC_DATE_REGEX,
+} from "@/app/lib/configs";
+import type { SearchableRow } from "@/app/lib/types";
 
 const client = axios.create({
   headers: {
@@ -19,31 +27,66 @@ export const fetcher = {
   get: <T>(url: string) => client.get<T>(url).then((res) => res.data),
   patch: <T, D = unknown>(url: string, data?: D) =>
     client.patch<T>(url, data).then((res) => res.data),
-  // put: <T, D = unknown>(url: string, data?: D) =>
-  //   client.put<T>(url, data).then((res) => res.data),
   delete: <T>(url: string) => client.delete<T>(url).then((res) => res.data),
 };
 
-export const formatDate = (date: string | Date, language: string): string => {
+export const formatDate = (
+  date: string | Date,
+  language: string,
+  options: Intl.DateTimeFormatOptions = DATE_OPTIONS,
+): string => {
   const locale =
-    SUPPORTED_LOCALES.find((item) => item.code === language)?.locale ??
-    DEFAULT_LOCALE;
-  return new Intl.DateTimeFormat(locale).format(new Date(date));
+    LANGUAGES.find((item) => item.code === language)?.locale ??
+    LANGUAGE_DEFAULT_LOCALE;
+  return new Intl.DateTimeFormat(locale, options).format(new Date(date));
 };
 
-export const getCurrentYear = () => new Date().getFullYear();
-
-export const isInAnyRange = <TData>(
-  row: Row<TData>,
+export const globalFilterFn = (
+  row: SearchableRow,
   columnId: string,
-  filterValue: [number, number][],
-): boolean => {
-  const value = row.getValue<number>(columnId);
-  return filterValue.some(([min, max]) => min <= value && value < max);
+  filterValue: unknown,
+) => {
+  const keyword = String(filterValue ?? "")
+    .trim()
+    .toLowerCase();
+  if (!keyword) return true;
+  const value = row.getValue(columnId);
+  if (value == null || value === "") return false;
+  const text =
+    typeof value === "string" && UTC_DATE_REGEX.test(value)
+      ? String(
+          formatDate(new Date(value), i18n.language, {
+            ...DATE_OPTIONS,
+            year: "numeric",
+          }),
+        )
+      : String(value);
+  return text.toLowerCase().includes(keyword);
 };
 
+export const isActive = (pathname: string, value: string) =>
+  value === "/" ? pathname === "/" : `${pathname}/`.startsWith(value);
+
+export const makeKeys = (n: number) =>
+  Array.from({ length: n }, () => crypto.randomUUID());
+
+export const LANGUAGE_CODES = LANGUAGES.map((lang) => lang.code);
+
+export const LANGUAGE_DEFAULT_CODE = LANGUAGES[1].code;
+
+export const LANGUAGE_DEFAULT_LOCALE = LANGUAGES[1].locale;
+
+export const NS_DEFAULT = [NS[0], NS[1]] as const;
+
+export const PAGE_SIZE_DEFAULT = PAGE_SIZES[1];
 export const retryHandler = (failureCount: number, error: unknown) => {
   const status = (error as AxiosError).response?.status;
   if (status && 400 <= status && status < 500) return false;
   return failureCount <= 2;
 };
+
+export const THEME_DEFAULT_ICON = THEMES[0].icon;
+
+export const THEME_DEFAULT_MODE = THEMES[0].mode;
+
+export const THEME_MODES = THEMES.map((t) => t.mode);
