@@ -19,17 +19,22 @@ export default function useDeleteMutation<
 
   return useMutation({
     mutationFn: ({ id }: { id: string }) =>
-      fetcher.delete(`${url}/${encodeURIComponent(id)}`),
+      toast
+        .promise(fetcher.delete<T>(`${url}/${encodeURIComponent(id)}`), {
+          error: t("delete.error"),
+          loading: t("delete.loading"),
+          success: t("delete.success"),
+        })
+        .unwrap(),
     onError: (_err, _variables, onMutateResult) => {
-      if (onMutateResult) {
-        const previous = onMutateResult as T;
+      const previous = onMutateResult as T | undefined;
+      if (previous) {
         queryClient.setQueryData(queryKey, (items: T[] = []) =>
           [...items.filter((item) => item.id !== previous.id), previous].sort(
             (a, b) => a.date.localeCompare(b.date),
           ),
         );
       }
-      toast.error(t("delete.error"));
     },
     onMutate: async (variables) => {
       await queryClient.cancelQueries(
@@ -43,10 +48,6 @@ export default function useDeleteMutation<
         items.filter((item) => item.id !== variables.id),
       );
       return previous;
-    },
-    onSuccess: (data) => {
-      toast.success(t("delete.success"));
-      return data;
     },
   });
 }

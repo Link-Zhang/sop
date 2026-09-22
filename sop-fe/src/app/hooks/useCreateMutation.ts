@@ -17,12 +17,18 @@ export default function useCreateMutation<T extends { id: string }>(
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ item }: { item: T }) => fetcher.post<T>(url, item),
+    mutationFn: ({ item }: { item: T }) =>
+      toast
+        .promise(fetcher.post<T>(url, item), {
+          error: t("create.error"),
+          loading: t("create.loading"),
+          success: t("create.success"),
+        })
+        .unwrap(),
     onError: (_err, variables) => {
       queryClient.setQueryData(queryKey, (items: T[] = []) =>
         items.filter((item) => item.id !== variables.item.id),
       );
-      toast.error(t("create.error"));
     },
     onMutate: async (variables) => {
       await queryClient.cancelQueries(
@@ -34,12 +40,9 @@ export default function useCreateMutation<T extends { id: string }>(
         variables.item,
       ]);
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (data, variables) =>
       queryClient.setQueryData(queryKey, (items: T[] = []) =>
         items.map((item) => (item.id === variables.item.id ? data : item)),
-      );
-      toast.success(t("create.success"));
-      return data;
-    },
+      ),
   });
 }

@@ -1,0 +1,13 @@
+{
+  "app.404": "This page could not be found",
+  "app.author": "Link Zhang",
+  "app.copyright": "Copyright",
+  "app.language.tip": "Language",
+  "app.tab.bp": "BP",
+  "app.tab.home": "Home",
+  "app.tab.todo": "Todo",
+  "app.theme.auto": "Auto",
+  "app.theme.dark": "Dark",
+  "app.theme.light": "Light",
+  "app.theme.tip": "Appearance"
+}

@@ -9,7 +9,7 @@ import type { TFunction } from "i18next";
 import { toast } from "sonner";
 import { fetcher } from "@/app/lib/utils";
 
-export default function useReadMutation<T>(
+export default function useReadMutation<T extends { id: string }[]>(
   url: string,
   t: TFunction,
   queryKey: QueryKey = [url],
@@ -17,14 +17,19 @@ export default function useReadMutation<T>(
   const queryClient = useQueryClient();
 
   return useMutation<T, Error>({
-    mutationFn: () => fetcher.get<T>(url),
-    onError: () => {
-      toast.error(t("read.error"));
-    },
-    onSuccess: (data) => {
-      queryClient.setQueryData(queryKey, data);
-      toast.success(t("read.success"));
-      return data;
-    },
+    mutationFn: () =>
+      toast
+        .promise(fetcher.get<T>(url), {
+          error: t("read.error"),
+          loading: t("read.loading"),
+          success: t("read.success"),
+        })
+        .unwrap(),
+    onSuccess: (data) =>
+      queryClient.setQueryData<T>(queryKey, (old) => {
+        if (!old) return data;
+        const ids = new Set(data.map((i) => i.id));
+        return [...data, ...old.filter((i) => !ids.has(i.id))] as T;
+      }),
   });
 }

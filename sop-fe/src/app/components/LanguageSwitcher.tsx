@@ -1,32 +1,33 @@
 "use client";
 
+import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcherUI from "@/app/components/ui/LanguageSwitcherUI";
-import {
-  LOCAL_STORAGE_SYNC_KEY,
-  type SupportedLanguages,
-} from "@/app/lib/i18n/i18n";
+import Flag from "react-world-flags";
+import DisabledIconButton from "@/app/components/DisabledIconButton";
+import Switcher from "@/app/components/Switcher";
+import { LANGUAGES } from "@/app/lib/configs";
+import type { Language } from "@/app/lib/types";
+
+const LANGUAGE_ITEMS = LANGUAGES.map(({ code, nation, native }) => ({
+  icon: <Flag className="h-4 w-6" code={nation} />,
+  label: native,
+  value: code,
+}));
 
 export default function LanguageSwitcher() {
-  const { i18n, ready, t } = useTranslation("language");
+  const { i18n, t } = useTranslation();
 
-  if (!ready) {
-    return null;
+  if (!i18n) {
+    return <DisabledIconButton icon={<Languages />} />;
   }
 
-  const handleValueChange = async (value: string) => {
-    const lng = value as SupportedLanguages;
-    i18n.changeLanguage(lng).then(() => {
-      document.documentElement.lang = lng;
-      localStorage.setItem(LOCAL_STORAGE_SYNC_KEY, Date.now().toString());
-    });
-  };
-
   return (
-    <LanguageSwitcherUI
-      onValueChange={handleValueChange}
-      tooltipText={t("tip")}
-      value={i18n.language}
+    <Switcher
+      items={LANGUAGE_ITEMS}
+      onValueChange={(language) => i18n.changeLanguage(language as Language)}
+      tip={t("app.language.tip")}
+      triggerIcon={<Languages />}
+      value={i18n.resolvedLanguage ?? i18n.language}
     />
   );
 }
