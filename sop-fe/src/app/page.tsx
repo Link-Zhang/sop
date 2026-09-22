@@ -1,6 +1,9 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import { useTranslation } from "react-i18next";
 
 export default function Page() {
-  // redirect("/todo");
-  redirect("/blood-pressure");
+  const { t } = useTranslation();
+
+  return <h1>{t("app.author")}</h1>;
 }

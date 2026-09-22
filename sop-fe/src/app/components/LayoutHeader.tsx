@@ -1,27 +1,15 @@
-"use client";
-
-import { useTranslation } from "react-i18next";
-import { AppearanceSwitcher } from "@/app/components/AppearanceSwitcher";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
-import NavLink from "@/app/components/NavLink";
-import LayoutHeaderUI from "@/app/components/ui/LayoutHeaderUI";
+import Tabulator from "@/app/components/Tabulator";
+import ThemeSwitcher from "@/app/components/ThemeSwitcher";
 
 export default function LayoutHeader() {
-  const { t } = useTranslation("default");
-
-  const leftNav = (
-    <>
-      <NavLink href="/todo">{t("todo")}</NavLink>
-      <NavLink href="/blood-pressure">{t("bloodPressure")}</NavLink>
-    </>
+  return (
+    <header className="flex items-center justify-between px-4 py-3 sticky top-0 z-50">
+      <Tabulator />
+      <div className="flex items-center gap-2">
+        <ThemeSwitcher />
+        <LanguageSwitcher />
+      </div>
+    </header>
   );
-
-  const rightNav = (
-    <>
-      <AppearanceSwitcher />
-      <LanguageSwitcher />
-    </>
-  );
-
-  return <LayoutHeaderUI leftNav={leftNav} rightNav={rightNav} />;
 }

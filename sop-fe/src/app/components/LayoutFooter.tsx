@@ -1,19 +1,13 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import LayoutFooterUI from "@/app/components/ui/LayoutFooterUI";
-import { getCurrentYear } from "@/app/lib/utils";
 
 export default function LayoutFooter() {
-  const { t } = useTranslation("default");
-
-  const year = getCurrentYear();
+  const { t } = useTranslation();
 
   return (
-    <LayoutFooterUI
-      author={"Link Zhang"}
-      copyright={t("copyright")}
-      year={year}
-    />
+    <footer className="text-center text-sm">
+      {t("app.copyright")} © {new Date().getFullYear()} {t("app.author")}
+    </footer>
   );
 }

@@ -1,12 +1,11 @@
 "use client";
 
-import { Languages } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Flag from "react-world-flags";
-import useLanguage from "@/app/hooks/useLanguage";
-import { LANGUAGES } from "@/app/lib/configs";
-import type { Language } from "@/app/lib/types";
+import useTheme from "@/app/hooks/useTheme";
+import { THEMES } from "@/app/lib/configs";
+import type { ThemeMode } from "@/app/lib/types";
+import { THEME_DEFAULT_ICON } from "@/app/lib/utils";
 import { Button } from "@/shadcn/components/ui/button";
 import {
   DropdownMenu,
@@ -21,18 +20,21 @@ import {
   TooltipTrigger,
 } from "@/shadcn/components/ui/tooltip";
 
-export default function LanguageSwitcher() {
-  const i18n = useLanguage();
+export default function ThemeSwitcher() {
   const [open, setOpen] = useState(false);
+  const { mounted, setTheme, theme } = useTheme();
   const { t } = useTranslation();
 
-  if (!i18n) {
+  if (!mounted) {
     return (
       <Button disabled size="icon" variant="outline">
-        <Languages />
+        <THEME_DEFAULT_ICON />
       </Button>
     );
   }
+
+  const CurrentIcon =
+    THEMES.find(({ mode }) => mode === theme)?.icon ?? THEME_DEFAULT_ICON;
 
   return (
     <DropdownMenu onOpenChange={setOpen} open={open}>
@@ -42,24 +44,24 @@ export default function LanguageSwitcher() {
             <TooltipTrigger render={<Button size="icon" variant="outline" />} />
           }
         >
-          <Languages />
+          <CurrentIcon />
         </DropdownMenuTrigger>
         <TooltipContent side="bottom">
-          <p>{t("app.language.tip")}</p>
+          <p>{t("app.theme.tip")}</p>
         </TooltipContent>
       </Tooltip>
       <DropdownMenuContent className="min-w-fit w-fit">
         <DropdownMenuRadioGroup
-          onValueChange={(language: Language) => {
-            i18n.changeLanguage(language);
+          onValueChange={(mode: ThemeMode) => {
+            setTheme(mode);
             setOpen(false);
           }}
-          value={i18n.resolvedLanguage ?? i18n.language}
+          value={theme}
         >
-          {LANGUAGES.map(({ code, nation, native }) => (
-            <DropdownMenuRadioItem key={code} value={code}>
-              <Flag className="h-4 w-6" code={nation} />
-              {native}
+          {THEMES.map(({ icon: Icon, label, mode }) => (
+            <DropdownMenuRadioItem key={mode} value={mode}>
+              <Icon />
+              {t(label)}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>

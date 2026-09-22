@@ -13,4 +13,5 @@ pnpm install
 pnpm dev
 ```
 
+pnpm dlx shadcn@4.21.0 add XXX
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
