@@ -1,19 +1,13 @@
-"use client";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useState } from "react";
 import TodoForm from "@/app/todo/components/TodoForm";
 import TodoList from "@/app/todo/components/TodoList";
 import TodoTitle from "@/app/todo/components/TodoTitle";
 
 export default function TodoPage() {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <div className="flex flex-col max-w-2xl mx-auto w-full gap-4">
       <TodoTitle />
       <TodoForm />
       <TodoList />
-    </QueryClientProvider>
+    </div>
   );
 }

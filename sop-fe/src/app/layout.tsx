@@ -1,38 +1,41 @@
 import "@/app/globals.css";
-import { ThemeProvider } from "next-themes";
+
+import { cn } from "cn";
 import type { ReactNode } from "react";
+import ConfirmProvider from "@/app/components/ConfirmProvider";
+import LanguageProvider from "@/app/components/LanguageProvider";
 import LayoutFooter from "@/app/components/LayoutFooter";
 import LayoutHeader from "@/app/components/LayoutHeader";
-import I18nextProviderWrapper from "@/app/components/wrapper/I18nextProviderWrapper";
-import ToasterWrapper from "@/app/components/wrapper/ToasterWrapper";
-import { Jetbrains_Mono } from "@/app/fonts";
-import { DEFAULT_LANGUAGE } from "@/app/lib/i18n/i18n";
+import QueryProvider from "@/app/components/QueryProvider";
+import ThemeProvider from "@/app/components/ThemeProvider";
+import ToasterWrapper from "@/app/components/ToasterWrapper";
+import { JETBRAINS_MONO } from "@/app/lib/configs";
+import { LANGUAGE_DEFAULT_CODE } from "@/app/lib/utils";
 import { TooltipProvider } from "@/shadcn/components/ui/tooltip";
-import { cn } from "@/shadcn/lib/utils";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang={DEFAULT_LANGUAGE} suppressHydrationWarning>
-      <body
-        className={cn(
-          "antialiased flex flex-col min-h-screen",
-          Jetbrains_Mono.variable,
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
-          enableSystem
-        >
-          <I18nextProviderWrapper>
-            <TooltipProvider>
-              <LayoutHeader />
-              <main className="flex-grow px-4 py-3">{children}</main>
-              <LayoutFooter />
-              <ToasterWrapper />
-            </TooltipProvider>
-          </I18nextProviderWrapper>
+    <html
+      className={cn("antialiased font-mono", JETBRAINS_MONO.variable)}
+      lang={LANGUAGE_DEFAULT_CODE}
+      suppressHydrationWarning
+    >
+      <body className="bg-background flex flex-col h-dvh overflow-hidden text-foreground">
+        <ThemeProvider>
+          <LanguageProvider>
+            <QueryProvider>
+              <TooltipProvider>
+                <ConfirmProvider>
+                  <LayoutHeader />
+                  <main className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3 w-full">
+                    {children}
+                  </main>
+                  <LayoutFooter />
+                  <ToasterWrapper />
+                </ConfirmProvider>
+              </TooltipProvider>
+            </QueryProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

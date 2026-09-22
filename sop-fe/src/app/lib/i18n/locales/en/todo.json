@@ -1,38 +1,24 @@
 {
-  "empty": "No data, Add one...",
-  "error": "Something wrong, please refresh",
-  "fields": {
-    "content": "Todo Content",
-    "status": "Todo Status"
-  },
+  "create.error": "Create failed",
+  "create.loading": "Creating",
+  "create.success": "Create succeeded",
+  "delete.error": "Delete failed",
+  "delete.loading": "Deleting",
+  "delete.success": "Delete succeeded",
+  "dialog.delete.cancel": "Cancel",
+  "dialog.delete.confirm": "Confirm",
+  "dialog.delete.description": "This item will be permanently deleted.",
+  "dialog.delete.title": "Are you absolutely sure?",
+  "field.content": "Todo Content",
+  "form.placeholder": "Please enter {{field}}",
+  "form.required": "{{field}} is required",
+  "form.submit": "Add",
+  "list.empty": "No Data",
+  "read.error": "Read failed",
+  "read.loading": "Reading",
+  "read.sucwcess": "Read succeeded",
   "title": "Todo List",
-  "validation": {
-    "required": "{{field}} is required"
-  },
-  "create": {
-    "error": "Failed to create, please retry",
-    "form": {
-      "placeholder": "Please enter {{field}}...",
-      "submit": "Add"
-    },
-    "success": "Create successfully"
-  },
-  "read": {
-    "error": "Failed to read, please retry",
-    "success": "Read successfully"
-  },
-  "update": {
-    "error": "Failed to update, please retry",
-    "success": "Update successfully"
-  },
-  "delete": {
-    "dialog": {
-      "cancel": "Cancel",
-      "confirm": "Confirm",
-      "description": "This action cannot be undone. And this will permanently delete the data.",
-      "title": "Are you absolutely sure to delete the item?"
-    },
-    "error": "Failed to delete, please retry",
-    "success": "Delete successfully"
-  }
+  "update.error": "Update failed",
+  "update.loading": "Updating",
+  "update.success": "Update succeeded"
 }

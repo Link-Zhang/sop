@@ -1,28 +1,26 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import useGetQuery from "@/app/hooks/useGetQuery";
-import { TODO_API_URL } from "@/app/lib/apis";
+import useReadQuery from "@/app/hooks/useReadQuery";
+import { API_TODO } from "@/app/lib/configs";
 import TodoListItem from "@/app/todo/components/TodoListItem";
-import { TodoListSkeleton } from "@/app/todo/components/ui/TodoSkeletons";
-import TodoError from "@/app/todo/error";
+import { TodoListSkeleton } from "@/app/todo/components/TodoSkeletons";
 import type { Todo } from "@/app/todo/lib/types";
+import { ItemGroup } from "@/shadcn/components/ui/item";
 
 export default function TodoList() {
-  const { data = [], error, isPending } = useGetQuery<Todo[]>(TODO_API_URL);
+  const { data = [], isPending } = useReadQuery<Todo[]>(API_TODO);
   const { t } = useTranslation("todo");
-
-  if (error) return <TodoError error={error} />;
 
   if (isPending) return <TodoListSkeleton />;
 
+  if (!data.length) return <div className="text-center">{t("list.empty")}</div>;
+
   return (
-    <ul className="max-w-2xl mb-4 mx-auto space-y-4">
-      {!data.length ? (
-        <li className="text-center">{t("empty")}</li>
-      ) : (
-        data.map((todo) => <TodoListItem key={todo.id} todo={todo} />)
-      )}
-    </ul>
+    <ItemGroup>
+      {data.map((todo) => (
+        <TodoListItem key={todo.id} todo={todo} />
+      ))}
+    </ItemGroup>
   );
 }
