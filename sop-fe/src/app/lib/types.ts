@@ -1,62 +1,23 @@
-import type Link from "next/link";
-import type { ComponentProps, ReactNode } from "react";
+import type { ReactNode } from "react";
+import type { NAMESPACES } from "@/app/lib/configs";
+import type { LANGUAGE_CODES, THEME_MODES } from "@/app/lib/utils";
 
-export interface AppearanceSwitcherUIProps {
-  onValueChange: (value: string) => void;
-  options: readonly ThemeOption[];
-  tooltipText: string;
+export type Language = (typeof LANGUAGE_CODES)[number];
+
+export type Namespace = (typeof NAMESPACES)[number];
+
+type SwitcherItem = {
   value: string;
-}
-
-export interface DeleteDialogUILabels {
-  cancel: string;
-  confirm: string;
-  description: string;
-  title: string;
-}
-
-export interface DeleteDialogUIProps {
-  labels: DeleteDialogUILabels;
-  onConfirm: () => void;
-  onOpenChange: (open: boolean) => void;
-  open: boolean;
-}
-
-export interface JsonDialogUIProps {
-  data: unknown;
-  onOpenChange: (open: boolean) => void;
-  open: boolean;
-}
-
-export interface LanguageSwitcherUIProps {
-  onValueChange: (value: string) => Promise<void>;
-  tooltipText: string;
-  value: string;
-}
-
-export interface LayoutFooterUIProps {
-  author: string;
-  className?: string;
-  copyright: string;
-  year: number;
-}
-
-export interface LayoutHeaderUIProps {
-  className?: string;
-  leftNav?: ReactNode;
-  rightNav?: ReactNode;
-}
-
-export interface NavLinkUIProps extends ComponentProps<typeof Link> {
-  isActive: boolean;
-}
-
-interface ThemeOption {
+  icon: ReactNode;
   label: string;
-  value: string;
-}
+};
 
-export interface TitleUIProps {
-  onClick?: () => void;
-  title: string;
-}
+export type SwitcherProps = {
+  items: SwitcherItem[];
+  onValueChange: (value: string) => void;
+  tip: string;
+  triggerIcon: ReactNode;
+  value: string;
+};
+
+export type ThemeMode = (typeof THEME_MODES)[number];
