@@ -1,9 +1,7 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  const { t } = useTranslation();
-
-  return <h1>{t("app.author")}</h1>;
+  return redirect("/todo");
 }

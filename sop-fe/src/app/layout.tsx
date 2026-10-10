@@ -6,6 +6,7 @@ import LanguageProvider from "@/app/components/LanguageProvider";
 import LayoutFooter from "@/app/components/LayoutFooter";
 import LayoutHeader from "@/app/components/LayoutHeader";
 import ThemeProvider from "@/app/components/ThemeProvider";
+import ToasterWrapper from "@/app/components/ToasterWrapper";
 import { JETBRAINS_MONO } from "@/app/lib/configs";
 import { LANGUAGE_DEFAULT_CODE } from "@/app/lib/utils";
 import { TooltipProvider } from "@/shadcn/components/ui/tooltip";
@@ -26,6 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 {children}
               </main>
               <LayoutFooter />
+              <ToasterWrapper />
             </TooltipProvider>
           </LanguageProvider>
         </ThemeProvider>

@@ -21,3 +21,8 @@ export type SwitcherProps = {
 };
 
 export type ThemeMode = (typeof THEME_MODES)[number];
+
+export type TitleProps = {
+  onClick?: () => void;
+  title: string;
+};
