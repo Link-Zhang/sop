@@ -1,0 +1,20 @@
+{
+  "bpLevel": {
+    "low": "Low",
+    "normal": "Normal",
+    "elevated": "High-Normal",
+    "high": "Grade 1(Mild)",
+    "veryHigh": "Grade 2(Moderate)",
+    "severe": "Grade 3(Severe)",
+    "ish": "Isolated Systolic",
+    "idh": "Isolated Diastolic"
+  },
+  "hrLevel": {
+    "low": "Low",
+    "normal": "Normal",
+    "elevated": "High-Normal",
+    "high": "High"
+  },
+
+  "title": "BP Table"
+}

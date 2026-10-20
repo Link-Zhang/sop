@@ -1,0 +1,23 @@
+{
+  "create.error": "创建失败",
+  "create.loading": "创建中",
+  "create.success": "创建成功",
+  "delete.error": "删除失败",
+  "delete.loading": "删除中",
+  "delete.success": "删除成功",
+  "dialog.delete.cancel": "取消",
+  "dialog.delete.confirm": "确认",
+  "dialog.delete.description": "此项将被永久删除。",
+  "dialog.delete.title": "您确定要删除此项吗？",
+  "empty": "暂无数据",
+  "form.placeholder": "请输入{{field}}",
+  "form.required": "{{field}}为必填项",
+  "form.submit": "添加",
+  "read.error": "读取失败",
+  "read.loading": "读取中",
+  "read.success": "读取成功",
+
+  "update.error": "更新失败",
+  "update.loading": "更新中",
+  "update.success": "更新成功"
+}

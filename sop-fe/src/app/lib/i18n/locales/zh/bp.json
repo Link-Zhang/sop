@@ -1,0 +1,19 @@
+{
+  "bpLevel": {
+    "low": "低血压",
+    "normal": "理想",
+    "elevated": "正常高值",
+    "high": "1级高血压(轻度)",
+    "veryHigh": "2级高血压(中度)",
+    "severe": "3级高血压(重度)",
+    "ish": "单纯收缩期高血压",
+    "idh": "单纯舒张期高血压"
+  },
+  "hrLevel": {
+    "low": "过缓",
+    "normal": "理想",
+    "elevated": "正常高值",
+    "high": "过速"
+  },
+  "title": "血压表格"
+}

@@ -1,0 +1,100 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
+import { columns } from "@/app/bp/components/BPColumns";
+import { BPTableSkeleton } from "@/app/bp/components/BPSkeletons";
+import type { BP } from "@/app/bp/lib/types";
+import useReadQuery from "@/app/hooks/useReadQuery";
+import { useAppTable } from "@/app/hooks/useTable";
+import { API_BP } from "@/app/lib/configs";
+import { PAGE_SIZE_DEFAULT } from "@/app/lib/utils";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/shadcn/components/ui/table";
+
+export default function BPTable() {
+  const { data = [], isPending } = useReadQuery<BP[]>(API_BP);
+  const table = useAppTable({
+    columns,
+    data,
+    initialState: {
+      pagination: { pageIndex: 0, pageSize: PAGE_SIZE_DEFAULT },
+    },
+  });
+  const { t } = useTranslation("bp");
+
+  if (isPending) return <BPTableSkeleton columns={columns.length} />;
+
+  return (
+    <table.AppTable>
+      <div className="flex items-center justify-between">
+        <table.GlobalSearch />
+        <table.ColumnVisibility />
+      </div>
+      <div className="border rounded-md">
+        <Table className="table-fixed w-full">
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow className="border-b" key={headerGroup.id}>
+                {headerGroup.headers
+                  .filter((header) => header.column.getIsVisible())
+                  .map((header) => (
+                    <table.AppHeader header={header} key={header.id}>
+                      {(h) => (
+                        <TableHead
+                          className="border-r relative"
+                          colSpan={header.colSpan}
+                          key={header.id}
+                          style={{
+                            width: h.getSize(),
+                          }}
+                        >
+                          <h.FlexRender />
+                          <h.ColumnResize />
+                        </TableHead>
+                      )}
+                    </table.AppHeader>
+                  ))}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.length === 0 ? (
+              <TableRow className="border-b">
+                <TableCell
+                  className="text-center"
+                  colSpan={table.getVisibleLeafColumns().length}
+                >
+                  {t("empty")}
+                </TableCell>
+              </TableRow>
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <TableRow className="border-b" key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      className="border-r"
+                      key={cell.id}
+                      style={{
+                        width: cell.column.getSize(),
+                      }}
+                    >
+                      <table.FlexRender cell={cell} />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <table.Pagination />
+      <pre>{JSON.stringify(table.state, null, 2)}</pre>
+    </table.AppTable>
+  );
+}

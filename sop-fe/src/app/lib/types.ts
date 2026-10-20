@@ -30,6 +30,14 @@ export type Language = (typeof LANGUAGE_CODES)[number];
 
 export type Namespace = (typeof NAMESPACES)[number];
 
+export type SortableItemProps = {
+  checked: boolean;
+  id: string;
+  index: number;
+  label: string;
+  onCheckedChange: (checked: boolean) => void;
+};
+
 type SwitcherItem = {
   value: string;
   icon: ReactNode;

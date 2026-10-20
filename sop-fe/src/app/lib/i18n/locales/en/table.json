@@ -1,0 +1,9 @@
+{
+  "column.field.date": "Date",
+  "column.field.dbp": "DBP",
+  "column.field.sbp": "SBP",
+  "column.field.hr": "HR",
+  "column.settings": "Settings",
+  "search.placeholder": "Search",
+  "search.result": "result(s)"
+}

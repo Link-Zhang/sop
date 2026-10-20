@@ -2,6 +2,8 @@
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { SKELETON_NUMBER } from "@/app/lib/configs";
+import { makeKeys } from "@/app/lib/utils";
 import {
   Item,
   ItemActions,
@@ -23,25 +25,22 @@ export function TodoTitleSkeleton() {
 }
 
 export function TodoListSkeleton() {
-  const ids = useMemo(
-    () => Array.from({ length: 5 }, () => crypto.randomUUID()),
-    [],
-  );
+  const ids = useMemo(() => makeKeys(SKELETON_NUMBER), []);
 
   return (
     <ItemGroup>
       {ids.map((id) => (
-        <Item key={id} size="sm" variant="outline">
+        <Item className="flex-nowrapr" key={id} size="sm" variant="outline">
           <ItemMedia>
-            <Skeleton className="rounded-sm size-4 shrink-0" />
+            <Skeleton className="rounded-sm size-4" />
           </ItemMedia>
-          <ItemContent>
-            <ItemTitle>
-              <Skeleton className="h-5 max-w-full w-40" />
+          <ItemContent className="min-w-0">
+            <ItemTitle className="w-full">
+              <Skeleton className="h-5 w-full" />
             </ItemTitle>
           </ItemContent>
-          <ItemActions>
-            <Skeleton className="h-8 shrink-0 w-32" />
+          <ItemActions className="shrink-0">
+            <Skeleton className="h-6 w-20" />
           </ItemActions>
         </Item>
       ))}

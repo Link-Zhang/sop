@@ -1,0 +1,22 @@
+{
+  "create.error": "Create failed",
+  "create.loading": "Creating",
+  "create.success": "Create succeeded",
+  "delete.error": "Delete failed",
+  "delete.loading": "Deleting",
+  "delete.success": "Delete succeeded",
+  "dialog.delete.cancel": "Cancel",
+  "dialog.delete.confirm": "Confirm",
+  "dialog.delete.description": "This item will be permanently deleted.",
+  "dialog.delete.title": "Are you absolutely sure?",
+  "empty": "No Data",
+  "form.placeholder": "Please enter {{field}}",
+  "form.required": "{{field}} is required",
+  "form.submit": "Add",
+  "read.error": "Read failed",
+  "read.loading": "Reading",
+  "read.success": "Read succeeded",
+  "update.error": "Update failed",
+  "update.loading": "Updating",
+  "update.success": "Update succeeded"
+}
