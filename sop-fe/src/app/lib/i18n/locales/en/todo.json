@@ -1,24 +1,4 @@
 {
-  "create.error": "Create failed",
-  "create.loading": "Creating",
-  "create.success": "Create succeeded",
-  "delete.error": "Delete failed",
-  "delete.loading": "Deleting",
-  "delete.success": "Delete succeeded",
-  "dialog.delete.cancel": "Cancel",
-  "dialog.delete.confirm": "Confirm",
-  "dialog.delete.description": "This item will be permanently deleted.",
-  "dialog.delete.title": "Are you absolutely sure?",
   "field.content": "Todo Content",
-  "form.placeholder": "Please enter {{field}}",
-  "form.required": "{{field}} is required",
-  "form.submit": "Add",
-  "list.empty": "No Data",
-  "read.error": "Read failed",
-  "read.loading": "Reading",
-  "read.sucwcess": "Read succeeded",
-  "title": "Todo List",
-  "update.error": "Update failed",
-  "update.loading": "Updating",
-  "update.success": "Update succeeded"
+  "title": "Todo List"
 }

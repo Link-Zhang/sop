@@ -5,16 +5,16 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { fetcher } from "@/app/lib/utils";
 
 export default function useReadMutation<T extends { id: string }[]>(
   url: string,
-  t: TFunction,
   queryKey: QueryKey = [url],
 ) {
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   return useMutation<T, Error>({
     mutationFn: () =>

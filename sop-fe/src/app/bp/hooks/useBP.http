@@ -1,0 +1,29 @@
+### GET
+GET http://localhost:3001/bp
+Accept: application/json
+
+### POST
+POST http://localhost:3001/bp
+Content-Type: application/json
+
+{
+  "id": "01a15d47-3506-73b9-a6d8-d348404492b8",
+  "sbp": 90,
+  "dbp": 60,
+  "hr": 60,
+  "date": "2026-10-02T00:00:00Z"
+}
+
+### PATCH
+PATCH http://localhost:3001/bp/01a15c8f-9fb6-771e-b0cd-8b49dac5936b
+Content-Type: application/json
+
+{
+  "sbp": 140,
+  "dbp":90,
+  "hr":100
+}
+
+### DELETE
+DELETE http://localhost:3001/bp/01a15c8f-9fb6-771e-b0cd-8b49dac5936b
+Accept: application/json

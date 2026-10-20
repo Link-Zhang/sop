@@ -1,0 +1,22 @@
+{
+  "header.field.date": "Date",
+  "header.field.dbp": "DBP",
+  "header.field.sbp": "SBP",
+  "header.field.hr": "HR",
+  "header.pin": "Pin",
+  "header.sort.asc": "ASC",
+  "header.sort.desc": "DESC",
+  "table.copy.description": "Copy to record blood pressure and heart rate.",
+  "table.copy.title": "Copy to Add Record",
+  "table.create.description": "Record blood pressure and heart rate.",
+  "table.create.title": "Add Record",
+  "table.delete.batch": "Batch Delete",
+  "table.field.placeholder": "Please enter {{field}}",
+  "table.field.required": "{{field}} is required",
+  "table.field.scope": "{{field}} must be between {{min}} and {{max}}",
+  "table.field.lt": "{{field1}} must be less than {{field2}}",
+  "table.search.placeholder": "Search",
+  "table.search.result": " result(s)",
+  "table.update.description": "Update blood pressure and heart rate.",
+  "table.update.title": "Update Record"
+}

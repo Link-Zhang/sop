@@ -1,0 +1,22 @@
+{
+  "header.field.date": "日期",
+  "header.field.dbp": "舒张压",
+  "header.field.sbp": "收缩压",
+  "header.field.hr": "心率",
+  "header.pin": "固定",
+  "header.sort.asc": "升序",
+  "header.sort.desc": "降序",
+  "table.copy.description": "复制记录血压和心率。",
+  "table.copy.title": "复制新增记录",
+  "table.create.description": "记录血压和心率。",
+  "table.create.title": "新增记录",
+  "table.delete.batch": "批量删除",
+  "table.field.placeholder": "请输入{{field}}",
+  "table.field.required": "{{field}}为必填项",
+  "table.field.scope": "{{field}}必须在{{min}}到{{max}}之间",
+  "table.field.lt": "{{field1}}必须小于{{field2}}",
+  "table.search.placeholder": "搜索",
+  "table.search.result": "个结果",
+  "table.update.description": "更新血压和心率。",
+  "table.update.title": "编辑记录"
+}
