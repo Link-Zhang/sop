@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import DisabledIconButton from "@/app/components/DisabledIconButton";
-import Switcher from "@/app/components/Switcher";
+import DisabledIconButton from "@/app/components/app/DisabledIconButton";
+import Switcher from "@/app/components/app/Switcher";
 import useTheme from "@/app/hooks/useTheme";
 import { THEMES } from "@/app/lib/configs";
 import type { ThemeMode } from "@/app/lib/types";

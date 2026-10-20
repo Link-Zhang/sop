@@ -3,8 +3,8 @@
 import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Flag from "react-world-flags";
-import DisabledIconButton from "@/app/components/DisabledIconButton";
-import Switcher from "@/app/components/Switcher";
+import DisabledIconButton from "@/app/components/app/DisabledIconButton";
+import Switcher from "@/app/components/app/Switcher";
 import { LANGUAGES } from "@/app/lib/configs";
 import type { Language } from "@/app/lib/types";
 

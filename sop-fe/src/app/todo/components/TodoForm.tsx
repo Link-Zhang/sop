@@ -9,7 +9,7 @@ import { Field, FieldError } from "@/shadcn/components/ui/field";
 import { Input } from "@/shadcn/components/ui/input";
 
 const requiredValidator = ({ value }: { value: string }) =>
-  value.trim() ? undefined : "form.required";
+  value.trim() ? undefined : "table.field.required";
 
 export default function TodoForm() {
   const { createTodo } = useTodo();
@@ -30,6 +30,7 @@ export default function TodoForm() {
       className="flex gap-3 items-start"
       onSubmit={(e) => {
         e.preventDefault();
+        e.stopPropagation();
         void form.handleSubmit();
       }}
     >
@@ -41,11 +42,12 @@ export default function TodoForm() {
             <Field className="flex-1 min-w-0" data-invalid={isInvalid}>
               <Input
                 aria-invalid={isInvalid}
+                className="placeholder:text-sm"
                 id={field.name}
                 name={field.name}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                placeholder={t("form.placeholder", { field: label })}
+                placeholder={t("table.field.placeholder", { field: label })}
                 value={field.state.value}
               />
               {isInvalid && (
@@ -64,7 +66,7 @@ export default function TodoForm() {
       </form.Field>
       <Button disabled={!canSubmit} type="submit">
         <Edit />
-        {t("form.submit")}
+        {t("create.trigger")}
       </Button>
     </form>
   );

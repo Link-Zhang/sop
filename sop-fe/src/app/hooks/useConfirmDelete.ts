@@ -1,21 +1,22 @@
 "use client";
 
-import type { TFunction } from "i18next";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import useConfirmContext from "@/app/hooks/useConfirmContext";
 import type { ConfirmDialogOptions } from "@/app/lib/types";
 
-export default function useConfirmDelete(t: TFunction) {
+export default function useConfirmDelete() {
   const ctx = useConfirmContext();
+  const { t } = useTranslation();
 
   return useCallback(
     (overrides?: Partial<ConfirmDialogOptions>) =>
       ctx({
-        cancel: t("dialog.delete.cancel"),
-        confirm: t("dialog.delete.confirm"),
-        description: t("dialog.delete.description"),
+        cancel: t("cancel"),
+        confirm: t("confirm"),
+        description: t("delete.description"),
         destructive: true,
-        title: t("dialog.delete.title"),
+        title: t("delete.title"),
         ...overrides,
       }),
     [ctx, t],

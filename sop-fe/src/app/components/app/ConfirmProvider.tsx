@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode, useCallback, useState } from "react";
-import ConfirmDialog from "@/app/components/ConfirmDialog";
+import ConfirmDialog from "@/app/components/app/ConfirmDialog";
 import { ConfirmContext } from "@/app/hooks/useConfirmContext";
 import type { ConfirmFn, ConfirmState } from "@/app/lib/types";
 

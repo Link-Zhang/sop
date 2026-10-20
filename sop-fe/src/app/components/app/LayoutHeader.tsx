@@ -1,6 +1,6 @@
-import LanguageSwitcher from "@/app/components/LanguageSwitcher";
-import Tabulator from "@/app/components/Tabulator";
-import ThemeSwitcher from "@/app/components/ThemeSwitcher";
+import LanguageSwitcher from "@/app/components/app/LanguageSwitcher";
+import Tabulator from "@/app/components/app/Tabulator";
+import ThemeSwitcher from "@/app/components/app/ThemeSwitcher";
 
 export default function LayoutHeader() {
   return (
