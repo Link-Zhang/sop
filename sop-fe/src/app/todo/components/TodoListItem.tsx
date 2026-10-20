@@ -25,27 +25,30 @@ export default function TodoListItem({ todo }: { todo: Todo }) {
   const confirmDelete = useConfirmDelete(t);
 
   return (
-    <Item size="sm" variant="outline">
+    <Item className="flex-nowrap" size="sm" variant="outline">
       <ItemMedia>
         <Checkbox
           checked={status}
           onCheckedChange={() => updateTodo(id, { status: !status })}
         />
       </ItemMedia>
-      <ItemContent>
+      <ItemContent className="min-w-0">
         <ItemTitle
-          className={cn(status && "italic line-through text-muted-foreground")}
+          className={cn(
+            "w-full",
+            status && "italic line-through text-muted-foreground",
+          )}
         >
-          {content}
+          <span className="min-w-0 truncate">{content}</span>
         </ItemTitle>
       </ItemContent>
-      <ItemActions>
+      <ItemActions className="shrink-0">
         <Button
           className="text-destructive"
           onClick={async () => {
             if (await confirmDelete({ icon: <Trash2 /> })) deleteTodo(id);
           }}
-          size="sm"
+          size="xs"
           variant="ghost"
         >
           <Trash2 />

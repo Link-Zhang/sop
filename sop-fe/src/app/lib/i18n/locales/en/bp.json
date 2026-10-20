@@ -1,0 +1,28 @@
+{
+  "bpLevel": {
+    "low": "Low",
+    "normal": "Normal",
+    "elevated": "High-Normal",
+    "high": "Grade 1(Mild)",
+    "veryHigh": "Grade 2(Moderate)",
+    "severe": "Grade 3(Severe)",
+    "ish": "Isolated Systolic",
+    "idh": "Isolated Diastolic"
+  },
+  "field": {
+    "sbp": "Systolic Blood Pressure",
+    "dbp": "Diastolic Blood Pressure",
+    "hr": "Heart Rate"
+  },
+  "header.date": "Date",
+  "header.dbp": "DIA",
+  "header.hr": "PUL",
+  "header.sbp": "SYS",
+  "hrLevel": {
+    "low": "Low",
+    "normal": "Normal",
+    "elevated": "High-Normal",
+    "high": "High"
+  },
+  "title": "BP Table"
+}

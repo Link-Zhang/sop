@@ -1,6 +1,13 @@
 import type { ReactNode } from "react";
-import type { NAMESPACES } from "@/app/lib/configs";
+import type { COLUMN_VARIANTS, NAMESPACES } from "@/app/lib/configs";
 import type { LANGUAGE_CODES, THEME_MODES } from "@/app/lib/utils";
+
+export type ColumnMeta = {
+  // facetOptions?: ReadonlyArray<FacetOption>
+  filterVariant?: ColumnVariant;
+};
+
+export type ColumnVariant = (typeof COLUMN_VARIANTS)[number];
 
 export type ConfirmDialogOptions = {
   cancel?: string;

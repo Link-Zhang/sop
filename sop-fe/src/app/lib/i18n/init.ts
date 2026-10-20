@@ -6,7 +6,11 @@ import resourcesToBackend from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
 import { I18N_KEY, NAMESPACES } from "@/app/lib/configs";
 import type { Language, Namespace } from "@/app/lib/types";
-import { LANGUAGE_CODES, LANGUAGE_DEFAULT_CODE } from "@/app/lib/utils";
+import {
+  LANGUAGE_CODES,
+  LANGUAGE_DEFAULT_CODE,
+  NS_DEFAULT,
+} from "@/app/lib/utils";
 
 let i18nInitPromise: Promise<typeof i18n> | null = null;
 
@@ -30,6 +34,7 @@ export default async function init(): Promise<typeof i18n> {
             order: ["localStorage", "navigator", "htmlTag"],
           },
           fallbackLng: LANGUAGE_DEFAULT_CODE,
+          fallbackNS: NS_DEFAULT,
           interpolation: { escapeValue: false },
           load: "languageOnly",
           nonExplicitSupportedLngs: true,

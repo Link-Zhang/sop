@@ -1,13 +1,15 @@
 import { Moon, Sun, SunMoon } from "lucide-react";
 import { JetBrains_Mono } from "next/font/google";
 
-// export const API_BP =
-//   "https://linkzhang.duckdns.org:31540/blood-pressure-measurements" as const;
+export const API_BP = "https://linkzhang.duckdns.org:31540/bp" as const;
+// export const API_BP = "https://linkzhang.duckdns.org:31540/todos" as const;
 
-export const API_TODO = "https://linkzhang.duckdns.org:31540/todos" as const;
+export const API_TODO = "https://linkzhang.duckdns.org:31540/todo" as const;
+
+export const COLUMN_VARIANTS = ["date", "range", "select", "text"] as const;
 
 export const DATE_OPTIONS = {
-  year: "numeric",
+  year: "2-digit",
   month: "2-digit",
   day: "2-digit",
 } as const satisfies Intl.DateTimeFormatOptions;
@@ -24,7 +26,11 @@ export const LANGUAGES = [
   { code: "zh", locale: "zh-CN", nation: "cn", native: "中文" },
 ] as const;
 
-export const NAMESPACES = ["todo", "translation"] as const;
+export const NS = ["crud", "translation"] as const;
+
+export const NAMESPACES = [...NS, "bp", "todo"] as const;
+
+export const SKELETON_NUMBER = 5;
 
 export const TABS = [
   // { label: "app.tab.home", path: "/" },

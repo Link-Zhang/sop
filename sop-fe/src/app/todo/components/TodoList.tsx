@@ -14,7 +14,7 @@ export default function TodoList() {
 
   if (isPending) return <TodoListSkeleton />;
 
-  if (!data.length) return <div className="text-center">{t("list.empty")}</div>;
+  if (!data.length) return <div className="text-center">{t("empty")}</div>;
 
   return (
     <ItemGroup>
