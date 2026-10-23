@@ -3,9 +3,9 @@
 import { useTranslation } from "react-i18next";
 import columns from "@/app/bp/components/BPColumns";
 import { BPTableSkeleton } from "@/app/bp/components/BPSkeletons";
-import { useAppTable } from "@/app/bp/hooks/useTable";
 import type { BP } from "@/app/bp/lib/types";
 import useReadQuery from "@/app/hooks/useReadQuery";
+import { useAppTable } from "@/app/hooks/useTable";
 import { API_BP } from "@/app/lib/configs";
 import {
   Table,
@@ -18,19 +18,20 @@ import {
 
 export default function BPTable() {
   const { data = [], isPending } = useReadQuery<BP[]>(API_BP);
+  const table = useAppTable({
+    columns,
+    data,
+  });
   const { t } = useTranslation("bp");
-  const table = useAppTable(
-    {
-      columns,
-      data,
-    },
-    (state) => state,
-  );
 
   if (isPending) return <BPTableSkeleton columns={columns.length} />;
 
   return (
     <table.AppTable>
+      <div className="flex items-center justify-between">
+        <table.GlobalSearch />
+        <div>B</div>
+      </div>
       <div className="border rounded-md">
         <Table className="table-fixed w-full">
           <TableHeader>

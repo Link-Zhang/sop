@@ -1,3 +1,5 @@
+"use client";
+
 import {
   columnFacetingFeature,
   columnFilteringFeature,
@@ -17,6 +19,7 @@ import {
   filterFn_includesString,
   filterFn_inDateRange,
   filterFn_inNumberRange,
+  globalFilteringFeature,
   metaHelper,
   rowPaginationFeature,
   rowSortingFeature,
@@ -25,7 +28,8 @@ import {
   sortFn_text,
   tableFeatures,
 } from "@tanstack/react-table";
-import ResizeHandle from "@/app/bp/components/dt/header/ResizeHandle";
+import GlobalSearch from "@/app/components/table/GlobalSearch";
+import ResizeHandle from "@/app/components/table/ResizeHandle";
 import type { ColumnMeta } from "@/app/lib/types";
 
 const features = tableFeatures({
@@ -35,8 +39,9 @@ const features = tableFeatures({
   facetedMinMaxValues: createFacetedMinMaxValues(),
   facetedUniqueValues: createFacetedUniqueValues(),
 
-  // filter
+  // filter + global filter
   columnFilteringFeature,
+  globalFilteringFeature,
   filteredRowModel: createFilteredRowModel(),
   filterFns: {
     equalsString: filterFn_equalsString,
@@ -80,14 +85,18 @@ export const {
   useHeaderContext,
   useTableContext,
 } = createTableHook({
-  columnResizeMode: "onChange" as const,
+  columnResizeMode: "onChange",
   defaultColumn: {
     maxSize: 400,
     minSize: 60,
     size: 120,
   },
   features: features,
+  globalFilterFn: "includesString",
   headerComponents: {
     ResizeHandle,
+  },
+  tableComponents: {
+    GlobalSearch,
   },
 });

@@ -39,7 +39,7 @@ export function BPTableSkeleton({
           <TableRow>
             {colKeys.map((ck) => (
               <TableHead key={ck}>
-                <Skeleton className="h-4 max-w-24 w-full" />
+                <Skeleton className="h-4 max-w-sm w-full" />
               </TableHead>
             ))}
           </TableRow>
@@ -49,7 +49,7 @@ export function BPTableSkeleton({
             <TableRow key={rk}>
               {colKeys.map((ck) => (
                 <TableCell key={ck}>
-                  <Skeleton className="h-4 max-w-16 w-full" />
+                  <Skeleton className="h-4 max-w-3xs w-full" />
                 </TableCell>
               ))}
             </TableRow>

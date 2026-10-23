@@ -16,6 +16,8 @@
   "read.error": "Read failed",
   "read.loading": "Reading",
   "read.success": "Read succeeded",
+  "search.placeholder": "Search",
+  "search.result": "result(s)",
   "update.error": "Update failed",
   "update.loading": "Updating",
   "update.success": "Update succeeded"

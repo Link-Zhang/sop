@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { createAppColumnHelper } from "@/app/bp/hooks/useTable";
 import type { BP } from "@/app/bp/lib/types";
+import { createAppColumnHelper } from "@/app/hooks/useTable";
 import { Checkbox } from "@/shadcn/components/ui/checkbox";
 
 const columnHelper = createAppColumnHelper<BP>();

@@ -16,6 +16,8 @@
   "read.error": "读取失败",
   "read.loading": "读取中",
   "read.success": "读取成功",
+  "search.placeholder": "搜索",
+  "search.result": "条结果",
   "update.error": "更新失败",
   "update.loading": "更新中",
   "update.success": "更新成功"
