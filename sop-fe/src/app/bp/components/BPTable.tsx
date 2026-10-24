@@ -1,12 +1,13 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import columns from "@/app/bp/components/BPColumns";
+import { columns } from "@/app/bp/components/BPColumns";
 import { BPTableSkeleton } from "@/app/bp/components/BPSkeletons";
 import type { BP } from "@/app/bp/lib/types";
 import useReadQuery from "@/app/hooks/useReadQuery";
 import { useAppTable } from "@/app/hooks/useTable";
 import { API_BP } from "@/app/lib/configs";
+import { PAGE_SIZE_DEFAULT } from "@/app/lib/utils";
 import {
   Table,
   TableBody,
@@ -21,6 +22,9 @@ export default function BPTable() {
   const table = useAppTable({
     columns,
     data,
+    initialState: {
+      pagination: { pageIndex: 0, pageSize: PAGE_SIZE_DEFAULT },
+    },
   });
   const { t } = useTranslation("bp");
 
@@ -51,7 +55,7 @@ export default function BPTable() {
                           }}
                         >
                           <h.FlexRender />
-                          <h.ResizeHandle />
+                          <h.Resize />
                         </TableHead>
                       )}
                     </table.AppHeader>
@@ -86,6 +90,7 @@ export default function BPTable() {
           </TableBody>
         </Table>
       </div>
+      <table.Pagination />
       <pre data-testid="table-state">
         {JSON.stringify(table.state, null, 2)}
       </pre>

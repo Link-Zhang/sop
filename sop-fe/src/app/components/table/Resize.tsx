@@ -4,7 +4,7 @@ import { Subscribe } from "@tanstack/react-table";
 import { cn } from "cn";
 import { useHeaderContext, useTableContext } from "@/app/hooks/useTable";
 
-export default function ResizeHandle() {
+export default function Resize() {
   const header = useHeaderContext();
   const table = useTableContext();
 

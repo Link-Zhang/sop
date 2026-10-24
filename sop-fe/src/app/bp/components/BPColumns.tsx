@@ -8,14 +8,27 @@ import { Checkbox } from "@/shadcn/components/ui/checkbox";
 const columnHelper = createAppColumnHelper<BP>();
 
 //  todo: fix it
-const columns = columnHelper.columns([
+export const columns = columnHelper.columns([
   columnHelper.display({
-    cell: () => <Checkbox />,
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(checked: boolean) => row.toggleSelected(checked)}
+      />
+    ),
     enableHiding: false,
     enableResizing: false,
-    enableSorting: false,
-    header: "Select",
+    // enableSorting: false,
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(checked: boolean) =>
+          table.toggleAllPageRowsSelected(checked)
+        }
+      />
+    ),
     id: "select",
+    size: 32,
   }),
   columnHelper.accessor("sbp", {
     cell: (info) => info.renderValue(),
@@ -42,10 +55,8 @@ const columns = columnHelper.columns([
     cell: () => <Checkbox />,
     enableHiding: false,
     enableResizing: false,
-    enableSorting: false,
+    // enableSorting: false,
     header: "Actions",
     id: "actions",
   }),
 ]);
-
-export default columns;

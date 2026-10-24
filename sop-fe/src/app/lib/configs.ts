@@ -26,9 +26,11 @@ export const LANGUAGES = [
   { code: "zh", locale: "zh-CN", nation: "cn", native: "中文" },
 ] as const;
 
-export const NS = ["crud", "translation"] as const;
+export const NS = ["crud", "table", "translation"] as const;
 
 export const NAMESPACES = [...NS, "bp", "todo"] as const;
+
+export const PAGE_SIZES = [3, 7, 14, 28];
 
 export const SKELETON_NUMBER = 5;
 

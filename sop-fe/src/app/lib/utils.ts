@@ -1,6 +1,12 @@
 import https from "node:https";
 import axios, { type AxiosError } from "axios";
-import { DATE_OPTIONS, LANGUAGES, NS, THEMES } from "@/app/lib/configs";
+import {
+  DATE_OPTIONS,
+  LANGUAGES,
+  NS,
+  PAGE_SIZES,
+  THEMES,
+} from "@/app/lib/configs";
 
 const client = axios.create({
   headers: {
@@ -44,7 +50,9 @@ export const LANGUAGE_DEFAULT_CODE = LANGUAGES[0].code;
 
 export const LANGUAGE_DEFAULT_LOCALE = LANGUAGES[0].locale;
 
-export const NS_DEFAULT = NS[0];
+export const NS_DEFAULT = [NS[0], NS[1]] as const;
+
+export const PAGE_SIZE_DEFAULT = PAGE_SIZES[1];
 
 export const retryHandler = (failureCount: number, error: unknown) => {
   const status = (error as AxiosError).response?.status;
