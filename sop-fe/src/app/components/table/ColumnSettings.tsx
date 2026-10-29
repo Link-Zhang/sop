@@ -62,9 +62,10 @@ export default function ColumnSettings() {
                         index={index}
                         key={column.id}
                         label={t(`column.field.${column.id}`)}
-                        onCheckedChange={(value) =>
-                          column.toggleVisibility(value)
-                        }
+                        onCheckedChange={(value) => {
+                          if (!value) column.clearSorting();
+                          column.toggleVisibility(value);
+                        }}
                       />
                     ))}
                   </DragDropProvider>

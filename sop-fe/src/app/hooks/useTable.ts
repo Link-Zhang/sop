@@ -3,6 +3,7 @@
 import {
   columnFilteringFeature,
   columnOrderingFeature,
+  columnPinningFeature,
   columnResizingFeature,
   columnSizingFeature,
   columnVisibilityFeature,
@@ -20,6 +21,7 @@ import {
   sortFn_text,
   tableFeatures,
 } from "@tanstack/react-table";
+import ColumnHeader from "@/app/components/table/ColumnHeader";
 import ColumnResize from "@/app/components/table/ColumnResize";
 import ColumnSettings from "@/app/components/table/ColumnSettings";
 import GlobalSearch from "@/app/components/table/GlobalSearch";
@@ -53,7 +55,7 @@ const features = tableFeatures({
   columnOrderingFeature,
 
   // pin
-  // columnPinningFeature,
+  columnPinningFeature,
 
   // size
   columnSizingFeature,
@@ -79,6 +81,7 @@ export const {
   useHeaderContext,
   useTableContext,
 } = createTableHook({
+  autoResetPageIndex: false,
   columnResizeMode: "onChange",
   // defaultColumn: {
   //   maxSize: 400,
@@ -88,10 +91,11 @@ export const {
   features: features,
   globalFilterFn: "includesString",
   headerComponents: {
+    ColumnHeader,
     ColumnResize,
   },
   tableComponents: {
-    ColumnVisibility: ColumnSettings,
+    ColumnSettings,
     GlobalSearch,
     Pagination,
   },

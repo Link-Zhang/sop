@@ -1,8 +1,12 @@
 {
+  "column.asc": "ASC",
+  "column.desc": "DESC",
   "column.field.date": "Date",
   "column.field.dbp": "DBP",
   "column.field.sbp": "SBP",
   "column.field.hr": "HR",
+  "column.hide": "Hide",
+  "column.pin": "Pin",
   "column.settings": "Settings",
   "search.placeholder": "Search",
   "search.result": "result(s)"

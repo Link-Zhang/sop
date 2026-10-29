@@ -1,6 +1,5 @@
 "use client";
 
-import { useTranslation } from "react-i18next";
 import type { BP } from "@/app/bp/lib/types";
 import { createAppColumnHelper } from "@/app/hooks/useTable";
 import { Checkbox } from "@/shadcn/components/ui/checkbox";
@@ -18,7 +17,7 @@ export const columns = columnHelper.columns([
     ),
     enableHiding: false,
     enableResizing: false,
-    // enableSorting: false,
+    enableSorting: false,
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -28,34 +27,33 @@ export const columns = columnHelper.columns([
       />
     ),
     id: "select",
-    size: 32,
+    // size: 32,
+  }),
+  columnHelper.accessor("date", {
+    cell: (info) => info.renderValue(),
+    header: ({ header }) => <header.ColumnHeader />,
+    // size: 64,
   }),
   columnHelper.accessor("sbp", {
     cell: (info) => info.renderValue(),
-    header: () => {
-      const { t } = useTranslation("bp");
-      return t("column.field.sbp");
-    },
+    header: ({ header }) => <header.ColumnHeader />,
+    // size: 64,
   }),
   columnHelper.accessor("dbp", {
     cell: (info) => info.renderValue(),
-    header: () => {
-      const { t } = useTranslation("bp");
-      return t("column.field.dbp");
-    },
+    header: ({ header }) => <header.ColumnHeader />,
+    // size: 64,
   }),
   columnHelper.accessor("hr", {
     cell: (info) => info.renderValue(),
-    header: () => {
-      const { t } = useTranslation("bp");
-      return t("column.field.hr");
-    },
+    header: ({ header }) => <header.ColumnHeader />,
+    // size: 48,
   }),
   columnHelper.display({
     cell: () => <Checkbox />,
     enableHiding: false,
     enableResizing: false,
-    // enableSorting: false,
+    enableSorting: false,
     header: "Actions",
     id: "actions",
   }),

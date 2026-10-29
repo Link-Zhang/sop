@@ -23,6 +23,7 @@ export default function BPTable() {
     columns,
     data,
     initialState: {
+      columnPinning: { start: ["select"], end: ["actions"] },
       pagination: { pageIndex: 0, pageSize: PAGE_SIZE_DEFAULT },
     },
   });
@@ -32,9 +33,9 @@ export default function BPTable() {
 
   return (
     <table.AppTable>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center">
         <table.GlobalSearch />
-        <table.ColumnVisibility />
+        <table.ColumnSettings />
       </div>
       <div className="border rounded-md">
         <Table className="table-fixed w-full">
