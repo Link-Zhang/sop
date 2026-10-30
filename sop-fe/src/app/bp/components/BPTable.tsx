@@ -5,7 +5,7 @@ import { columns } from "@/app/bp/components/BPColumns";
 import { BPTableSkeleton } from "@/app/bp/components/BPSkeletons";
 import type { BP } from "@/app/bp/lib/types";
 import useReadQuery from "@/app/hooks/useReadQuery";
-import { useAppTable } from "@/app/hooks/useTable";
+import { getPinStyles, useAppTable } from "@/app/hooks/useTable";
 import { API_BP } from "@/app/lib/configs";
 import { PAGE_SIZE_DEFAULT } from "@/app/lib/utils";
 import {
@@ -23,7 +23,7 @@ export default function BPTable() {
     columns,
     data,
     initialState: {
-      columnPinning: { start: ["select"], end: ["actions"] },
+      columnPinning: { start: ["select"], end: [] },
       pagination: { pageIndex: 0, pageSize: PAGE_SIZE_DEFAULT },
     },
   });
@@ -34,11 +34,10 @@ export default function BPTable() {
   return (
     <table.AppTable>
       <div className="flex items-center">
-        <table.GlobalSearch />
-        <table.ColumnSettings />
+        <table.TableSearch />
       </div>
-      <div className="border rounded-md">
-        <Table className="table-fixed w-full">
+      <div className="border overflow-hidden rounded-md">
+        <Table className="mb-2 table-fixed w-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow className="border-b" key={headerGroup.id}>
@@ -48,15 +47,12 @@ export default function BPTable() {
                     <table.AppHeader header={header} key={header.id}>
                       {(h) => (
                         <TableHead
-                          className="border-r relative"
-                          colSpan={header.colSpan}
-                          key={header.id}
-                          style={{
-                            width: h.getSize(),
-                          }}
+                          className="px-0 py-0 relative text-center [&>[role=checkbox]]:mx-auto"
+                          colSpan={h.colSpan}
+                          style={getPinStyles(h.column)}
                         >
                           <h.FlexRender />
-                          <h.ColumnResize />
+                          <h.HeaderResize />
                         </TableHead>
                       )}
                     </table.AppHeader>
@@ -76,17 +72,22 @@ export default function BPTable() {
               </TableRow>
             ) : (
               table.getRowModel().rows.map((row) => (
-                <TableRow className="border-b" key={row.id}>
+                <TableRow
+                  className="border-b"
+                  data-state={row.getIsSelected() ? "selected" : undefined}
+                  key={row.id}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      className="border-r"
-                      key={cell.id}
-                      style={{
-                        width: cell.column.getSize(),
-                      }}
-                    >
-                      <table.FlexRender cell={cell} />
-                    </TableCell>
+                    <table.AppCell cell={cell} key={cell.id}>
+                      {(c) => (
+                        <TableCell
+                          className="px-0 py-0 text-center [&>[role=checkbox]]:mx-auto"
+                          style={getPinStyles(c.column)}
+                        >
+                          <c.FlexRender />
+                        </TableCell>
+                      )}
+                    </table.AppCell>
                   ))}
                 </TableRow>
               ))
@@ -94,7 +95,7 @@ export default function BPTable() {
           </TableBody>
         </Table>
       </div>
-      <table.Pagination />
+      <table.TablePagination />
       <pre>{JSON.stringify(table.state, null, 2)}</pre>
     </table.AppTable>
   );

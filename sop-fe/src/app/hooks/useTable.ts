@@ -1,5 +1,6 @@
 "use client";
 
+import type { Column, RowData } from "@tanstack/react-table";
 import {
   columnFilteringFeature,
   columnOrderingFeature,
@@ -21,11 +22,14 @@ import {
   sortFn_text,
   tableFeatures,
 } from "@tanstack/react-table";
-import ColumnHeader from "@/app/components/table/ColumnHeader";
-import ColumnResize from "@/app/components/table/ColumnResize";
-import ColumnSettings from "@/app/components/table/ColumnSettings";
-import GlobalSearch from "@/app/components/table/GlobalSearch";
-import Pagination from "@/app/components/table/Pagination";
+import type { CSSProperties } from "react";
+import CellActions from "@/app/components/table/CellActions";
+import HeaderContent from "@/app/components/table/HeaderContent";
+import HeaderResize from "@/app/components/table/HeaderResize";
+import HeaderSelect from "@/app/components/table/HeaderSelect";
+import HeaderSettings from "@/app/components/table/HeaderSettings";
+import TablePagination from "@/app/components/table/TablePagination";
+import TableSearch from "@/app/components/table/TableSearch";
 
 const features = tableFeatures({
   // bucketed faceting
@@ -74,6 +78,26 @@ const features = tableFeatures({
   columnVisibilityFeature,
 });
 
+export const getPinStyles = <TData extends RowData>(
+  column: Column<typeof features, TData>,
+): CSSProperties => {
+  const pinned = column.getIsPinned();
+  const isEnd = pinned === "end";
+  const isStart = pinned === "start";
+
+  return {
+    backgroundColor: pinned ? "var(--background)" : undefined,
+    boxShadow: !column.getIsLastColumn("end")
+      ? "inset -1px 0 0 0 var(--border)"
+      : undefined,
+    insetInlineEnd: isEnd ? `${column.getAfter("end")}px` : undefined,
+    insetInlineStart: isStart ? `${column.getStart("start")}px` : undefined,
+    position: pinned ? "sticky" : "relative",
+    width: column.getSize(),
+    zIndex: pinned ? 1 : 0,
+  };
+};
+
 export const {
   createAppColumnHelper,
   useAppTable,
@@ -82,21 +106,23 @@ export const {
   useTableContext,
 } = createTableHook({
   autoResetPageIndex: false,
+  cellComponents: {
+    CellActions,
+  },
   columnResizeMode: "onChange",
-  // defaultColumn: {
-  //   maxSize: 400,
-  //   minSize: 60,
-  //   size: 120,
-  // },
+  defaultColumn: {
+    size: 120,
+  },
   features: features,
   globalFilterFn: "includesString",
   headerComponents: {
-    ColumnHeader,
-    ColumnResize,
+    HeaderContent,
+    HeaderResize,
+    HeaderSelect,
+    HeaderSettings,
   },
   tableComponents: {
-    ColumnSettings,
-    GlobalSearch,
-    Pagination,
+    TablePagination,
+    TableSearch,
   },
 });

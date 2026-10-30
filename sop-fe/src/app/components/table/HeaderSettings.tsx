@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
 
-export default function ColumnSettings() {
+export default function HeaderSettings() {
   const table = useTableContext();
   const { t } = useTranslation();
 
@@ -23,48 +23,50 @@ export default function ColumnSettings() {
       {(columnVisibility) => (
         <Subscribe source={table.atoms.columnOrder}>
           {(columnOrder) => {
-            const fullOrder = columnOrder.length
+            const effectiveColumnOrder = columnOrder.length
               ? columnOrder
-              : table.getAllColumns().map((c) => c.id);
-            const hideableColumns = fullOrder.flatMap((id) => {
+              : table.getAllColumns().map(({ id }) => id);
+            const manageableColumns = effectiveColumnOrder.flatMap((id) => {
               const column = table.getColumn(id);
-              return column?.getCanHide() ? [column] : [];
+              if (!column) return [];
+              const canHide = column.getCanHide();
+              const isPinned = column.getIsPinned() !== false;
+              return canHide && !isPinned ? [column] : [];
             });
 
             return (
               <DropdownMenu>
                 <DropdownMenuTrigger
                   render={
-                    <Button variant="outline">
+                    <Button className="px-0 py-0 w-full" variant="ghost">
                       <Settings2 />
-                      {t("column.settings")}
                     </Button>
                   }
                 />
-                <DropdownMenuContent className="w-fit">
+                <DropdownMenuContent align="end" className="w-fit">
                   <DragDropProvider
                     onDragEnd={(event) => {
                       if (event.canceled) return;
-                      const ids = hideableColumns.map((c) => c.id);
-                      const queue = [...move(ids, event)];
-                      const hideable = new Set(ids);
+                      const ids = manageableColumns.map(({ id }) => id);
+                      const reordered = [...move(ids, event)];
+                      const idSet = new Set(ids);
                       table.setColumnOrder(
-                        fullOrder.map((id) =>
-                          hideable.has(id) ? (queue.shift() ?? id) : id,
+                        effectiveColumnOrder.map((id) =>
+                          idSet.has(id) ? (reordered.shift() ?? id) : id,
                         ),
                       );
                     }}
                   >
-                    {hideableColumns.map((column, index) => (
+                    {manageableColumns.map((column, index) => (
                       <SortableItem
                         checked={columnVisibility[column.id] ?? true}
                         id={column.id}
                         index={index}
                         key={column.id}
-                        label={t(`column.field.${column.id}`)}
-                        onCheckedChange={(value) => {
-                          if (!value) column.clearSorting();
-                          column.toggleVisibility(value);
+                        label={t(`header.field.${column.id}`)}
+                        onCheckedChange={(visible) => {
+                          if (!visible) column.clearSorting();
+                          column.toggleVisibility(visible);
                         }}
                       />
                     ))}

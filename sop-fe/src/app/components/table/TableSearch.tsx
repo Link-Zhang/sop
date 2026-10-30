@@ -10,19 +10,24 @@ import {
   InputGroupInput,
 } from "@/shadcn/components/ui/input-group";
 
-export default function GlobalSearch() {
+export default function TableSearch() {
   const table = useTableContext();
   const { t } = useTranslation();
 
   return (
     <Subscribe source={table.atoms.globalFilter}>
-      {() => {
-        const filter = table.atoms.globalFilter.get() ?? "";
+      {(globalFilter) => {
+        const count = table.getFilteredRowModel().rows.length;
+        const filter = typeof globalFilter === "string" ? globalFilter : "";
+
         return (
-          <InputGroup className="max-w-3xs">
+          <InputGroup>
             <InputGroupInput
-              onChange={(e) => table.setGlobalFilter(e.target.value)}
-              placeholder={t("search.placeholder")}
+              onChange={(e) => {
+                table.setGlobalFilter(e.target.value);
+                table.firstPage();
+              }}
+              placeholder={t("table.search.placeholder")}
               value={filter}
             />
             <InputGroupAddon>
@@ -31,7 +36,8 @@ export default function GlobalSearch() {
             {filter && (
               <InputGroupAddon align="inline-end">
                 <span className="text-muted-foreground">
-                  {table.getFilteredRowModel().rows.length} {t("search.result")}
+                  {count}
+                  {t("table.search.result")}
                 </span>
               </InputGroupAddon>
             )}

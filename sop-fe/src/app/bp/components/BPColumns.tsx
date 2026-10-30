@@ -18,43 +18,37 @@ export const columns = columnHelper.columns([
     enableHiding: false,
     enableResizing: false,
     enableSorting: false,
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(checked: boolean) =>
-          table.toggleAllPageRowsSelected(checked)
-        }
-      />
-    ),
+    header: ({ header }) => <header.HeaderSelect />,
     id: "select",
-    // size: 32,
+    size: 36,
   }),
   columnHelper.accessor("date", {
     cell: (info) => info.renderValue(),
-    header: ({ header }) => <header.ColumnHeader />,
-    // size: 64,
+    header: ({ header }) => <header.HeaderContent />,
+    size: 200,
   }),
   columnHelper.accessor("sbp", {
     cell: (info) => info.renderValue(),
-    header: ({ header }) => <header.ColumnHeader />,
-    // size: 64,
+    header: ({ header }) => <header.HeaderContent />,
+    minSize: 116,
   }),
   columnHelper.accessor("dbp", {
     cell: (info) => info.renderValue(),
-    header: ({ header }) => <header.ColumnHeader />,
-    // size: 64,
+    header: ({ header }) => <header.HeaderContent />,
+    minSize: 116,
   }),
   columnHelper.accessor("hr", {
     cell: (info) => info.renderValue(),
-    header: ({ header }) => <header.ColumnHeader />,
-    // size: 48,
+    header: ({ header }) => <header.HeaderContent />,
+    minSize: 104,
   }),
   columnHelper.display({
-    cell: () => <Checkbox />,
+    cell: ({ cell }) => <cell.CellActions />,
     enableHiding: false,
     enableResizing: false,
     enableSorting: false,
-    header: "Actions",
+    header: ({ header }) => <header.HeaderSettings />,
     id: "actions",
+    size: 36,
   }),
 ]);

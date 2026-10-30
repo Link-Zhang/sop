@@ -1,13 +1,13 @@
 {
-  "column.asc": "ASC",
-  "column.desc": "DESC",
-  "column.field.date": "Date",
-  "column.field.dbp": "DBP",
-  "column.field.sbp": "SBP",
-  "column.field.hr": "HR",
-  "column.hide": "Hide",
-  "column.pin": "Pin",
-  "column.settings": "Settings",
-  "search.placeholder": "Search",
-  "search.result": "result(s)"
+  "header.field.date": "Date",
+  "header.field.dbp": "DBP",
+  "header.field.sbp": "SBP",
+  "header.field.hr": "HR",
+  "header.hide": "Hide",
+  "header.pin": "Pin",
+  "header.settings": "Settings",
+  "header.sort.asc": "ASC",
+  "header.sort.desc": "DESC",
+  "table.search.placeholder": "Search",
+  "table.search.result": " result(s)"
 }

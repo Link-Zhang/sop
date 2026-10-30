@@ -1,13 +1,13 @@
 {
-  "column.asc": "升序",
-  "column.desc": "降序",
-  "column.field.date": "日期",
-  "column.field.dbp": "舒张压",
-  "column.field.sbp": "收缩压",
-  "column.field.hr": "心率",
-  "column.hide": "隐藏",
-  "column.pin": "固定",
-  "column.settings": "设置",
-  "search.placeholder": "搜索",
-  "search.result": "个结果"
+  "header.field.date": "日期",
+  "header.field.dbp": "舒张压",
+  "header.field.sbp": "收缩压",
+  "header.field.hr": "心率",
+  "header.hide": "隐藏",
+  "header.pin": "固定",
+  "header.settings": "设置",
+  "header.sort.asc": "升序",
+  "header.sort.desc": "降序",
+  "table.search.placeholder": "搜索",
+  "table.search.result": "个结果"
 }

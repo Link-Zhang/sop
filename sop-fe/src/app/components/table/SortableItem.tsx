@@ -3,7 +3,7 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 import { Grip } from "lucide-react";
 import { useRef, useState } from "react";
-import type { SortableItemProps } from "@/app/lib/types";
+import type { ColumnSortableItemProps } from "@/app/lib/types";
 import { Button } from "@/shadcn/components/ui/button";
 import { DropdownMenuCheckboxItem } from "@/shadcn/components/ui/dropdown-menu";
 import { Separator } from "@/shadcn/components/ui/separator";
@@ -14,7 +14,7 @@ export default function SortableItem({
   index,
   label,
   onCheckedChange,
-}: SortableItemProps) {
+}: ColumnSortableItemProps) {
   const handleRef = useRef<HTMLButtonElement | null>(null);
   const [element, setElement] = useState<Element | null>(null);
   const { isDragging } = useSortable({ element, handle: handleRef, id, index });

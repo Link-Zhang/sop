@@ -20,14 +20,14 @@ import {
   SelectValue,
 } from "@/shadcn/components/ui/select";
 
-export default function Pagination() {
+export default function TablePagination() {
   const [pageInput, setPageInput] = useState<string | null>(null);
   const table = useTableContext();
 
   return (
     <Subscribe source={table.atoms.pagination}>
-      {() => {
-        const { pageIndex, pageSize } = table.atoms.pagination.get();
+      {(pagination) => {
+        const { pageIndex, pageSize } = pagination;
         const pageCount = table.getPageCount();
         if (pageCount === 0) return null;
         const goToPage = (page: number) =>

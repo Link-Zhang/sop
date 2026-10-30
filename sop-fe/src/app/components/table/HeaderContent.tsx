@@ -1,7 +1,7 @@
 "use client";
 
 import { Subscribe } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, EyeOff, Pin } from "lucide-react";
+import { ArrowDown, ArrowUp, Pin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useHeaderContext, useTableContext } from "@/app/hooks/useTable";
 import { Button } from "@/shadcn/components/ui/button";
@@ -9,20 +9,14 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
 
-export default function ColumnHeader() {
-  const header = useHeaderContext();
+export default function HeaderContent() {
+  const { column } = useHeaderContext();
   const table = useTableContext();
   const { t } = useTranslation();
-
-  const column = header.column;
-  const canHide = column.getCanHide();
-  const canPin = column.getCanPin();
-  const canSort = column.getCanSort();
 
   return (
     <Subscribe source={table.atoms.sorting}>
@@ -31,48 +25,50 @@ export default function ColumnHeader() {
           {(pinning) => {
             const idx = sorting.findIndex((s) => s.id === column.id);
             const cur = sorting[idx];
-            const pinned = !!pinning.start?.includes(column.id);
-            const toggle = (desc: boolean) =>
-              cur?.desc === desc
+            const pinned = pinning.start?.includes(column.id) ?? false;
+            const asc = cur?.desc === false;
+            const desc = cur?.desc === true;
+            const canPin = column.getCanPin();
+            const toggle = (d: boolean) =>
+              cur?.desc === d
                 ? column.clearSorting()
-                : column.toggleSorting(desc, true);
+                : column.toggleSorting(d, true);
 
             return (
               <DropdownMenu>
                 <DropdownMenuTrigger
                   render={
-                    <Button variant="ghost">
-                      {t(`column.field.${column.id}`)}
-                      {cur && (cur.desc ? <ArrowDown /> : <ArrowUp />)}
-                      {sorting.length > 1 && cur && (
+                    <Button className="px-0 py-0 w-full" variant="ghost">
+                      {pinned && <Pin />}
+                      {t(`header.field.${column.id}`)}
+                      {asc && <ArrowUp />}
+                      {desc && <ArrowDown />}
+                      {cur && sorting.length > 1 && (
                         <sup className="text-[10px]">{idx + 1}</sup>
                       )}
-                      {pinned && <Pin />}
                     </Button>
                   }
                 />
-                <DropdownMenuContent className="w-fit">
-                  {canSort && (
+                <DropdownMenuContent align="center" className="w-fit">
+                  {column.getCanSort() && (
                     <>
                       <DropdownMenuCheckboxItem
-                        checked={cur?.desc === false}
+                        checked={asc}
                         closeOnClick
                         onCheckedChange={() => toggle(false)}
                       >
-                        <ArrowUp /> {t("column.asc")}
+                        <ArrowUp /> {t("header.sort.asc")}
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
-                        checked={!!cur?.desc}
+                        checked={desc}
                         closeOnClick
                         onCheckedChange={() => toggle(true)}
                       >
-                        <ArrowDown /> {t("column.desc")}
+                        <ArrowDown /> {t("header.sort.desc")}
                       </DropdownMenuCheckboxItem>
+                      {canPin && <DropdownMenuSeparator />}
                     </>
                   )}
-
-                  {canSort && (canPin || canHide) && <DropdownMenuSeparator />}
-
                   {canPin && (
                     <DropdownMenuCheckboxItem
                       checked={pinned}
@@ -81,21 +77,8 @@ export default function ColumnHeader() {
                         column.pin(checked ? "start" : false)
                       }
                     >
-                      <Pin /> {t("column.pin")}
+                      <Pin /> {t("header.pin")}
                     </DropdownMenuCheckboxItem>
-                  )}
-
-                  {canPin && canHide && <DropdownMenuSeparator />}
-
-                  {canHide && (
-                    <DropdownMenuItem
-                      onClick={() => {
-                        column.clearSorting();
-                        column.toggleVisibility();
-                      }}
-                    >
-                      <EyeOff /> {t("column.hide")}
-                    </DropdownMenuItem>
                   )}
                 </DropdownMenuContent>
               </DropdownMenu>
