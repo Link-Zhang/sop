@@ -16,7 +16,7 @@ export default function TableBatchDelete() {
     <Subscribe source={table.atoms.rowSelection}>
       {(rowSelection) => (
         <Button
-          variant="destructive"
+          className="btn-destructive-compat"
           disabled={Object.values(rowSelection).filter(Boolean).length < 2}
           onClick={async () => {
             if (!(await confirmDelete({ icon: <Trash /> }))) return;
@@ -29,6 +29,7 @@ export default function TableBatchDelete() {
               });
             table.resetRowSelection();
           }}
+          variant="destructive"
         >
           <Trash /> {t("table.delete.batch")}
         </Button>

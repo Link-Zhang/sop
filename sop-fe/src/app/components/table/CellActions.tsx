@@ -65,7 +65,13 @@ export default function CellActions() {
         {actions.map(({ icon, label, onClick, separator, variant }) => (
           <Fragment key={label}>
             {separator && <DropdownMenuSeparator />}
-            <DropdownMenuItem onClick={onClick} variant={variant}>
+            <DropdownMenuItem
+              className={
+                variant === "destructive" ? "menu-destructive-compat" : ""
+              }
+              onClick={onClick}
+              variant={variant}
+            >
               {icon} {label}
             </DropdownMenuItem>
           </Fragment>

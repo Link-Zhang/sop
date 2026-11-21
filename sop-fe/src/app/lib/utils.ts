@@ -35,7 +35,12 @@ export const formatDate = (
   const locale =
     LANGUAGES.find((item) => item.code === language)?.locale ??
     LANGUAGE_DEFAULT_LOCALE;
-  return new Intl.DateTimeFormat(locale, options).format(new Date(date));
+  return new Intl.DateTimeFormat(locale, options)
+    .formatToParts(new Date(date))
+    .map((part) =>
+      part.type === "literal" ? part.value.replace(/\//g, "-") : part.value,
+    )
+    .join("");
 };
 
 export const isActive = (pathname: string, value: string) =>

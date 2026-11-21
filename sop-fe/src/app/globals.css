@@ -113,3 +113,19 @@
     @apply font-mono;
   }
 }
+
+.btn-destructive-compat {
+  background-color: #fee2e2;
+}
+
+.dark .btn-destructive-compat {
+  background-color: #2c1414;
+}
+
+.menu-destructive-compat[data-highlighted] {
+  background-color: #fee2e2;
+}
+
+.dark .menu-destructive-compat[data-highlighted] {
+  background-color: #2c1414;
+}

@@ -42,6 +42,7 @@ export default function ConfirmDialog({
         <AlertDialogFooter>
           <AlertDialogCancel>{cancel}</AlertDialogCancel>
           <AlertDialogAction
+            className={destructive ? "btn-destructive-compat" : ""}
             onClick={(event) => {
               event.preventDefault();
               onConfirm();
