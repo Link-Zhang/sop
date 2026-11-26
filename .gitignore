@@ -1,29 +1,32 @@
-# Compiled class file
-*.class
+# env
+!.env.example
+.env*
 
-# Log file
-*.log
-
-# Package Files
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# idea
-*.swp
-.idea/
+# ide
 *.iml
+*.ipr
+*.iws
+*.swp
+.DS_Store
+.idea/
+Thumbs.db
 
-# gradle
-.gradle/
+# sop-be
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.log
+*.war
+target/
+
+# sop-fe
+*.pem
+*.tsbuildinfo
+.next/
+.vercel
 build/
-!gradle/wrapper/
-!gradlew
-!gradlew.bat
-
-# pnpm
-pnpm-lock.yaml
+coverage/
+dist/
+next-env.d.ts
+node_modules/
+out/
