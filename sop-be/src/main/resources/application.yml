@@ -1,0 +1,56 @@
+logging:
+  level:
+    cn.sh.lz: info
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: sop-be
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 2
+      pool-name: sop-be-hikari
+    password: P0rUn@C@6e2@
+    url: ${DB_URL:jdbc:postgresql://10.0.0.254:31854/postgres}
+    username: postgres
+
+  jackson:
+    default-leniency: false
+    deserialization:
+      fail-on-unknown-properties: true
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: UTC
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.batch_size: 20
+        jdbc.time_zone: UTC
+        order_inserts: true
+        order_updates: true
+    show-sql: false
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  default-produces-media-type: application/json
+  swagger-ui:
+    display-request-duration: true
+    operations-sorter: method
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    try-it-out-enabled: false

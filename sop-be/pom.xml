@@ -27,6 +27,7 @@
         <log4j2.version>2.26.1</log4j2.version>
         <!-- 1.2.12 -->
         <logback.version>1.2.13</logback.version>
+        <lombok.version>1.18.48</lombok.version>
         <postgresql.version>42.7.15</postgresql.version>
         <!-- 1.30 -->
         <snakeyaml.version>2.7</snakeyaml.version>
@@ -38,6 +39,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -63,6 +69,12 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${springdoc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.f4b6a3</groupId>
+            <artifactId>uuid-creator</artifactId>
+            <version>5.3.7</version>
         </dependency>
     </dependencies>
 

@@ -1,0 +1,27 @@
+### GET
+GET http://localhost:3001/todo
+Accept: application/json
+
+### GET
+GET http://localhost:3001/todo/01a21db4-bb49-7583-87f2-41aca5998381
+Accept: application/json
+
+### POST
+POST http://localhost:3001/todo
+Content-Type: application/json
+
+{
+  "content": "Study"
+}
+
+### PATCH
+PATCH http://localhost:3001/todo/01a21db4-bb49-7583-87f2-41aca599838100
+Content-Type: application/json
+
+{
+  "status": true
+}
+
+### DELETE
+DELETE http://localhost:3001/todo/01a21db4-bb49-7583-87f2-41aca5998381
+Accept: application/json

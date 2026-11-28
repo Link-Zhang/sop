@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 
 export const API_BP = "https://linkzhang.duckdns.org:31540/bp" as const;
 
+// export const API_TODO = "https://linkzhang.duckdns.org:31540/todo" as const;
 export const API_TODO = "https://linkzhang.duckdns.org:31540/todo" as const;
 
 // export const COLUMN_VARIANTS = ["date", "range", "select", "text"] as const;

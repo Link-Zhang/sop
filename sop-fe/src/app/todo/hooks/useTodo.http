@@ -1,20 +1,21 @@
 ### GET
-GET http://localhost:3001/todos/
+GET http://localhost:8080/api/todos
+Accept: application/json
+
+### GET
+GET http://localhost:8080/api/todos/01a22210-088e-7c21-abc0-2f24d0cd8d68
 Accept: application/json
 
 ### POST
-POST http://localhost:3001/todos
+POST http://localhost:8080/api/todos
 Content-Type: application/json
 
 {
-  "id": "019f4631-26c5-7005-9ac2-0e743318ba18",
-  "content": "Study",
-  "status": false,
-  "date": "2026-07-09T09:24:14.150Z"
+  "content": "restful"
 }
 
 ### PATCH
-PATCH http://localhost:3001/todos/019f4631-26c5-7005-9ac2-0e743318ba18
+PATCH http://localhost:8080/api/todos/01a22210-088e-7c21-abc0-2f24d0cd8d68
 Content-Type: application/json
 
 {
@@ -22,5 +23,5 @@ Content-Type: application/json
 }
 
 ### DELETE
-DELETE http://localhost:3001/todos/019f4631-26c5-7005-9ac2-0e743318ba18
+DELETE http://localhost:8080/api/todos/01a22210-088e-7c21-abc0-2f24d0cd8d68
 Accept: application/json
